@@ -1,13 +1,335 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root{
+  /* colors */
+  --main-purple:#9168A2;
+  --main-purple-dark:#845B97;
+  --main-white:#FFFFFF;
+  --main-grey-bold:#707070;
+  --main-grey-light:#B8B8B8;
+  --border-black:#707070;
+  --main-violet:#CAB8D2;
+
+  /* font-size  rem*/
+  --xs-font:0.3rem;
+  --sm-font:0.7rem;
+  --md-font:1rem;
+  --lg-font:1.8rem;
+  --xl-font:3rem;
+  --xxl-font:4rem;
+
+  /* font size pexel */
+
+  --xxl-fs:48px;
+
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+*{
+  margin:0;
+  padding:0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+main{
+  /* width: clamp(400px, 100%, 717px); */
+  scroll-behavior: smooth;
+  
+}
+
+aside{
+
+}
+
+.hero-container{
+  width:100%;
+  height:100vh;
+  display:flex;
+  align-items: center;
+}
+
+.hero-header{
+  width:100%;
+}
+.hero-header h1{
+  /* width:max-content; */
+  position:relative;
+  text-align: center;
+  color:var(--main-grey-bold);
+  font-weight: 400;
+}
+
+.hero-header h1 span{
+  font-size: var(--xxl-font);
+  display: inline-block;
+  height:100%;
+  position:relative;
+}
+.hero-header h1 span:after{
+  font-size: var(--md-font);
+  content:"TM";
+  position:absolute;
+  top:0;
+  right:-10px;
+  
+}
+
+.hero-header h4 span{
+  display: inline-block;
+  height: 100%;
+  width:330px;
+  text-align: left;
+  color:var(--main-grey-light);
+}
+/* .hero-header h1 sup{
+  font-size: var(--sm-font);
+  display: inline-block;
+  height:100%;
+  position:ab'
+
+} */
+
+
+
+/* for pricing  */
+
+
+.pricing-section{
+  width:100%;
+  /* height:100vh; */
+  padding-top:50px;
+}
+
+.pricing-header{
+  width:100%;
+  color:var(--main-grey-bold);
+  font-weight: 400;
+  text-align: left;
+  padding:0 30px;
+  font-weight: var(--xxl-fs);
+}
+
+.pricing-header span{
+  text-decoration: Underline;
+  text-decoration-color: var(--main-grey-light) ;
+}
+
+.pricing-sub-header{
+  width:100%;
+  color:var(--main-grey-bold);
+  font-weight: 400;
+  text-align: left;
+  padding:0 30px;
+  font-size:var(--sm-font);
+}
+
+
+/* for pricing card  */
+
+.pricing-card-cnt{
+  width:100%;
+  display: flex;
+  position: relative;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  padding:50px 0;
+  gap:5%;
+
+}
+
+.pricing-card{
+    width:225px;
+    height:363px;
+    position: relative;
+    flex-shrink: 0;
+    border: solid 2px var(--border-black);
+    margin:20px 0px;
+    padding:0px 10px;
+    
+
+}
+
+.pricing-card::before {
+  content: " "; 
+  background:var(--main-purple-dark) ;
+  position: absolute;
+  top:-10px;
+  width:20px;
+  left:-20px;
+  height:363px;
+}
+.pricing-card::after {
+  content: " "; 
+  background:var(--main-purple-dark) ;
+  position: absolute;
+  left:-20px;
+  height:20px;
+  top:-20px;
+  width:225px;
+}
+.pricing-card-heading{
+  border-bottom: solid 2px var(--main-grey-light);
+  width:100%;
+  height:20%;
+}
+
+.more-pricing-option{
+  width:100%;
+  /* height:400px; */
+  text-align: left;
+}
+
+.pricing-card-title{
+  width:70%;
+  color:var(--main-grey-light);
+  font-size: var(--lg-font);
+  font-weight:400;
+  text-align:left;
+  height:100%;
+  display: inline-flex;
+  align-items: center;
+}
+
+.pricing-card-price{
+  width:30%;
+  display: inline-flex;
+  padding:0 10px 0 0;
+  color:var(--main-grey-light);
+
+}
+
+.pricing-card-content{
+  width:100%;
+  height:60%;
+}
+.additional-feature{
+  width:100%;
+  height: 22%;
+  margin-top:2%;
+}
+
+.feature-title{
+  width:60%;
+  height:100%;
+  display:inline-flex;
+  align-items:center;
+  justify-content: flex-start;
+  color:var(--main-grey-light);
+  font-size:calc(var(--md-font) - 5px);
+  flex-wrap: wrap;
+  text-align:left
+}
+.feature-price {
+  width:40%;
+  height:100%;
+  display:inline-flex;
+  align-items:center;
+  justify-content: flex-start;
+  color:var(--main-grey-light);
+}
+
+.order-btn-cnt{
+  width:100%;
+  height:20%;
+  
+}
+.order-btn-cnt a{
+  display:inline-grid;
+  width:60%;
+  height:80%;
+  padding:auto;
+  text-align:center;
+  place-items: center;
+  color:var(--main-purple-dark);
+  background:var(--main-violet);
+  
+
+}
+.more-pricing-option-heading{
+  width:100%;
+  color:var(--main-grey-bold);
+  font-size: var(--lg-font);
+  text-align: left;
+  padding:0 20px;
+  text-decoration: underline;
+  text-decoration-color: var(--main-grey-bold);
+}
+
+.more-pricing-option-sub-heading{
+  width:100%;
+  color:var(--main-grey-bold);
+  font-size: calc(var(--lg-font) - 10px);
+  text-align: left;
+  padding:0 20px;
+  
+
+}
+.more-pricing-option ul{
+  text-align: left;
+  padding:20px 40px;
+
+}
+.more-pricing-option ul li{
+  width:100%;
+  text-align: left;
+  list-style:circle;
+  color:var(--main-grey-bold);
+  padding:5px 0;
+
+}
+
+.more-pricing-option ul li a{
+  text-decoration: Underline;
+  text-decoration-color: var(--main-grey-bold);
+  color:inherit;
+}
+
+.email-us-cnt form{
+  width:100%;
+  padding:0 20px;
+}
+.email-us-cnt form label {
+  display: inline-block;
+  width:100%;
+  text-align:left;
+  padding:10px 0;
+  
+}
+.email-us-cnt form input {
+  display: inline-block;
+  width:100%;
+  text-align:left;
+  border:none;
+  outline:none;
+  border-bottom: solid 2px var(--main-grey-bold);
+}
+.email-us-cnt form textarea {
+  display: inline-block;
+  width:100%;
+  height:100px;
+  text-align:left;
+  border:none;
+  outline:none;
+  border-bottom: solid 2px var(--main-grey-bold);
+  resize:none;
+  position:relative;
+}
+
+.submit-box{
+  height:40px;
+  width:100%;
+  text-align:right;
+}
+.submit-box button{
+  height:100%;
+  padding:5px 20px;
+  border:none;
+  outline:none;
+  color:var(--main-purple-dark);
+  background: var(--main-violet);
+
+}
+
+.more-pricing-option .more-pricing-option-list {
+  max-width: 400px;
 }
