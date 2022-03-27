@@ -25,9 +25,11 @@
 *{
   margin:0;
   padding:0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Poppins";
   box-sizing: border-box;
   scroll-behavior: smooth;
+  font-family: 'Poppins';
+  /* letter-spacing: -0.5px; */
 }
 
 main{
@@ -49,6 +51,14 @@ aside{
 
 .hero-header{
   width:100%;
+}
+
+svg{
+  width: 100%;
+}
+tspan{
+  text-decoration: underline;
+  letter-spacing: -9px;
 }
 .hero-header h1{
   /* width:max-content; */
@@ -100,12 +110,15 @@ aside{
 }
 
 .pricing-header{
+  letter-spacing: -3px;
+  font-size: 50px;
   width:100%;
   color:var(--main-grey-bold);
   font-weight: 400;
   text-align: left;
   padding:0 30px;
   font-weight: var(--xxl-fs);
+  display: inline;
 }
 
 .pricing-header span{

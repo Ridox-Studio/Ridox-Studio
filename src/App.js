@@ -5,16 +5,19 @@ import Nav from './Nav.js';
 import Hero from './Hero.js';
 import Pricing from './Pricing.js';
 import Clients from './Clients.js';
+import Contact from './Contact.js';
+
 
 function App() {
   return (
     <div className="App">
-      <Nav></Nav>
+      <Nav />
       <main>
 
-      <Hero></Hero>
-      <Pricing></Pricing>
-      <Clients></Clients>
+      <Hero />
+      <Pricing />
+      <Clients />
+      <Contact />
       </main>
     </div>
   );
