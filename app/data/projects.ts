@@ -41,7 +41,7 @@ export const PROJECTS: Project[] = [
     title: "Cilbup",
     subtitle: "Anonymous messaging and tipping for creators",
     description:
-      "Cilbup — \"public\" reversed — lets anyone send a creator an anonymous message, and optionally attach a tip to get priority attention. Tips settle in USD so earnings hold their value in markets where the local currency does not, while a fan pays however suits them — crypto or fiat. Creators get a dashboard for messages, earnings and analytics, and it installs as a PWA, so the people it is built for get an app without an app store.",
+      "Cilbup — \"public\" reversed — lets anyone send a creator an anonymous message, and attach a tip to get priority attention. Fans pay with crypto or fiat; creators earn in USD, on a platform that installs to a phone without an app store.",
     coverImage: "/projects/cilbup.png",
     techStack: ["Next.js", "React 19", "TypeScript", "PWA", "Prisma", "MongoDB", "Redis", "Chainrails"],
     status: "live",
@@ -184,9 +184,9 @@ export const PROJECTS: Project[] = [
     slug: "netcart",
     category: "client",
     title: "Netcart",
-    subtitle: "One marketplace system across three surfaces",
+    subtitle: "One marketplace, four audiences, built end to end",
     description:
-      "A marketplace and delivery platform built end to end: a Flutter app for customers, an operations portal for fleet, escalations, analytics and fraud controls, and the API underneath both — auth, catalogue, cart, orders, payments, withdrawals and earnings. Email, storage and payment providers sit behind adapters, so none of them is load-bearing.",
+      "Customers ordering, stores selling, couriers delivering and admins running the whole thing — each with their own surface, over a single API. Built from an empty repository to a system that handles catalogue, orders, payments, earnings and payouts.",
     coverImage: "/projects/netcart.png",
     techStack: [
       "Flutter",
@@ -202,7 +202,7 @@ export const PROJECTS: Project[] = [
     year: 2026,
     featured: true,
     highlights: [
-      { label: "Surfaces", value: "App · Portal · API" },
+      { label: "Audiences", value: "Customers · Stores · Couriers · Admin" },
       { label: "Provider adapters", value: "Email · Storage · Payments" },
       { label: "API contract", value: "OpenAPI" },
     ],
@@ -225,7 +225,12 @@ export const PROJECTS: Project[] = [
       {
         title: "A separate surface for the people delivering",
         detail:
-          "Shoppers get their own flow — available, claimed, active, history — with an online toggle, rather than a customer app with extra buttons bolted on.",
+          "Couriers get their own flow — available, claimed, active, history — with an online toggle and shift tracking, rather than a customer app with extra buttons bolted on.",
+      },
+      {
+        title: "Stores are tenants, not rows in a table",
+        detail:
+          "Each store carries its own catalogue, promotions and earnings, and courier companies group riders under their own umbrella. Four groups of people use this system and none of them sees the others' screens.",
       },
       {
         title: "Operations, not just a dashboard",
