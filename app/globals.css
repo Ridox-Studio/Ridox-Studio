@@ -1,0 +1,270 @@
+@import "tailwindcss";
+
+/* ============================================================
+   RIDOX STUDIO — Design Tokens
+   Every value derives from the Variant 7 logo HSL source.
+   Amber hsl(33, 95%, 52%) — Oxidation.  Indigo hsl(258, 89%, 62%) — Reduction.
+   ============================================================ */
+
+:root {
+  /* === AMBER SCALE (Oxidation Energy) === */
+  --amber-50: hsl(33, 95%, 95%);
+  --amber-100: hsl(33, 95%, 88%);
+  --amber-200: hsl(33, 95%, 76%);
+  --amber-300: hsl(33, 95%, 64%);
+  --amber-400: hsl(33, 95%, 52%); /* PRIMARY (logo value) */
+  --amber-500: hsl(33, 95%, 44%);
+  --amber-600: hsl(33, 95%, 36%);
+  --amber-glow: hsla(33, 95%, 52%, 0.25);
+  --amber-ghost: hsla(33, 95%, 52%, 0.08);
+
+  /* === INDIGO SCALE (Reduction Depth) === */
+  --indigo-50: hsl(258, 89%, 95%);
+  --indigo-100: hsl(258, 89%, 85%);
+  --indigo-200: hsl(258, 89%, 74%);
+  --indigo-300: hsl(258, 89%, 62%); /* PRIMARY (logo value) */
+  --indigo-400: hsl(258, 89%, 52%);
+  --indigo-500: hsl(258, 89%, 42%);
+  --indigo-600: hsl(258, 89%, 30%);
+  --indigo-glow: hsla(258, 89%, 62%, 0.25);
+  --indigo-ghost: hsla(258, 89%, 62%, 0.08);
+
+  /* === SURFACES === */
+  --bg-void: hsl(258, 40%, 4%);
+  --bg-deep: hsl(258, 35%, 7%);
+  --bg-card: hsl(258, 30%, 10%);
+  --bg-elevated: hsl(258, 25%, 14%);
+  --bg-surface: hsl(258, 20%, 18%);
+
+  /* === TEXT === */
+  --text-primary: hsl(258, 60%, 96%);
+  --text-secondary: hsl(258, 30%, 68%);
+  --text-tertiary: hsl(258, 20%, 45%);
+
+  /* === BORDERS === */
+  --border-subtle: hsla(258, 40%, 25%, 0.5);
+  --border-visible: hsla(258, 40%, 35%, 0.7);
+
+  /* === SEMANTIC === */
+  --success: hsl(152, 70%, 48%);
+  --error: hsl(0, 80%, 58%);
+  --warning: var(--amber-400);
+
+  /* === GRADIENTS === */
+  --gradient-brand: linear-gradient(135deg, var(--amber-400), var(--indigo-300));
+  --gradient-amber-fade: linear-gradient(180deg, var(--amber-ghost), transparent);
+  --gradient-indigo-fade: linear-gradient(180deg, var(--indigo-ghost), transparent);
+  --gradient-slash: linear-gradient(
+    135deg,
+    var(--amber-400) 0%,
+    var(--amber-400) 48%,
+    transparent 48%,
+    transparent 52%,
+    var(--indigo-300) 52%,
+    var(--indigo-300) 100%
+  );
+
+  /* Cursor spotlight defaults — overwritten per-element on mousemove */
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+}
+
+/* ============================================================
+   Tailwind v4 theme mapping (replaces the v3 tailwind.config.ts)
+   ============================================================ */
+
+@theme inline {
+  --color-amber-50: var(--amber-50);
+  --color-amber-100: var(--amber-100);
+  --color-amber-200: var(--amber-200);
+  --color-amber-300: var(--amber-300);
+  --color-amber-400: var(--amber-400);
+  --color-amber-500: var(--amber-500);
+  --color-amber-600: var(--amber-600);
+  --color-amber-glow: var(--amber-glow);
+  --color-amber-ghost: var(--amber-ghost);
+
+  --color-indigo-50: var(--indigo-50);
+  --color-indigo-100: var(--indigo-100);
+  --color-indigo-200: var(--indigo-200);
+  --color-indigo-300: var(--indigo-300);
+  --color-indigo-400: var(--indigo-400);
+  --color-indigo-500: var(--indigo-500);
+  --color-indigo-600: var(--indigo-600);
+  --color-indigo-glow: var(--indigo-glow);
+  --color-indigo-ghost: var(--indigo-ghost);
+
+  --color-surface-void: var(--bg-void);
+  --color-surface-deep: var(--bg-deep);
+  --color-surface-card: var(--bg-card);
+  --color-surface-elevated: var(--bg-elevated);
+  --color-surface-surface: var(--bg-surface);
+
+  --color-content-primary: var(--text-primary);
+  --color-content-secondary: var(--text-secondary);
+  --color-content-tertiary: var(--text-tertiary);
+
+  --color-edge-subtle: var(--border-subtle);
+  --color-edge-visible: var(--border-visible);
+
+  --color-success: var(--success);
+  --color-error: var(--error);
+
+  --font-display: var(--font-display), system-ui, sans-serif;
+  --font-body: var(--font-body), system-ui, sans-serif;
+  --font-mono: var(--font-mono), monospace;
+
+  --breakpoint-sm: 40rem; /* 640px */
+  --breakpoint-md: 48rem; /* 768px */
+  --breakpoint-lg: 64rem; /* 1024px */
+  --breakpoint-xl: 80rem; /* 1280px */
+
+  --ease-redox: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-snap: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+
+* {
+  min-width: 0;
+}
+
+html {
+  background-color: var(--bg-deep);
+  color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display), system-ui, sans-serif;
+  text-wrap: balance;
+}
+
+::selection {
+  background: var(--amber-400);
+  color: var(--bg-void);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--amber-glow), 0 0 0 4px var(--amber-400);
+  border-radius: 2px;
+}
+
+/* Anchor targets clear the floating trigger / viewport edge */
+[id] {
+  scroll-margin-top: 6rem;
+}
+
+/* Lenis smooth scroll — required rules */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ============================================================
+   Type scale (Section 3.2)
+   ============================================================ */
+
+.type-hero {
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+}
+
+.type-section {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+
+.type-card {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+@media (min-width: 48rem) {
+  .type-card {
+    font-size: 1.5rem;
+  }
+}
+
+.type-body {
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+@media (min-width: 48rem) {
+  .type-body {
+    font-size: 1rem;
+  }
+}
+
+.type-caption {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+@media (min-width: 48rem) {
+  .type-caption {
+    font-size: 0.8125rem;
+  }
+}
+
+.type-overline {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 48rem) {
+  .type-overline {
+    font-size: 0.6875rem;
+  }
+}
+
+/* ============================================================
+   Reduced motion — global kill switch for decorative animation
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
