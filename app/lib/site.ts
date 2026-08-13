@@ -49,6 +49,12 @@ export const SITE = {
   },
   /** Country-level: the studio works across Nigeria, not from one city. */
   location: "Nigeria",
+  /**
+   * Verifiable, not asserted: the first commit in this very repository is
+   * dated 2022-03-11. The studio then went quiet for four years and was
+   * relaunched in 2026 — the founding year stands, the receipts are public.
+   */
+  founded: 2022,
   email: "hello@ridoxstudio.com",
 } as const;
 

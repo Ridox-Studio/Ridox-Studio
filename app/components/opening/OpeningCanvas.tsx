@@ -46,6 +46,7 @@ const VERTICAL_WORDS =
 const pad = (value: number) => String(value).padStart(2, "0");
 
 const CANVAS_META = [
+  { label: "Established", value: String(SITE.founded) },
   { label: "Capabilities", value: pad(SERVICES.length) },
   { label: "Products", value: pad(getProjectsByCategory("studio").length) },
   { label: "Engagements", value: pad(getWorkProjects().length) },

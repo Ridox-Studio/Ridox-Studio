@@ -83,6 +83,7 @@ const organizationSchema = {
   // street address it does not have would be worse than claiming none.
   address: { "@type": "PostalAddress", addressCountry: "NG" },
   areaServed: "Worldwide",
+  foundingDate: String(SITE.founded),
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer service",
