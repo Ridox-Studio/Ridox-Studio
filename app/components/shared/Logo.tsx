@@ -19,7 +19,7 @@ type LogoProps = {
   /**
    * `static` — resting mark.
    * `duality` — the two blocks slide past each other through the slash channel.
-   * `pulse` — blocks rest, seed dots breathe.
+   * `pulse` — blocks hold position and breathe in opposition.
    */
   animation?: "static" | "duality" | "pulse";
   /** Travel distance for the duality slide, in viewBox units. */
@@ -45,12 +45,19 @@ export function Logo({
   const sliding = animation === "duality";
   const pulsing = animation === "pulse";
 
-  const seedPulse = pulsing
-    ? {
-        animate: { opacity: [1, 0.45, 1], scale: [1, 1.18, 1] },
-        transition: { duration: 2.4, ease: "easeInOut" as const, repeat: Infinity },
-      }
-    : {};
+  // The two blocks breathe out of phase — the reaction idling, not decoration.
+  const pulseFor = (phase: number, base: number) =>
+    pulsing
+      ? {
+          animate: { opacity: [base, base * 0.55, base] },
+          transition: {
+            duration: 2.4,
+            ease: "easeInOut" as const,
+            repeat: Infinity,
+            delay: phase,
+          },
+        }
+      : {};
 
   return (
     <svg
@@ -75,6 +82,7 @@ export function Logo({
           fill={AMBER}
           animate={sliding ? duality.amber.animate : undefined}
           transition={sliding ? duality.amber.transition : undefined}
+          {...pulseFor(0, 1)}
         />
         <motion.path
           d={INDIGO_BLOCK}
@@ -82,10 +90,8 @@ export function Logo({
           opacity={0.9}
           animate={sliding ? duality.indigo.animate : undefined}
           transition={sliding ? duality.indigo.transition : undefined}
+          {...pulseFor(1.2, 0.9)}
         />
-        {/* Seed drops stay anchored while the blocks move — Section 6.1 */}
-        <motion.circle cx="36" cy="36" r="3.5" fill={INDIGO} {...seedPulse} />
-        <motion.circle cx="64" cy="64" r="3.5" fill={AMBER} {...seedPulse} />
       </g>
     </svg>
   );

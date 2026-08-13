@@ -18,13 +18,27 @@ export const MAGNETIC_SPRING: Transition = {
   mass: 0.1,
 };
 
-/** The logo's diagonal cut angle, expressed as clip-path polygons. */
+/**
+ * The logo's diagonal cut angle, expressed as clip-path polygons.
+ *
+ * The two halves share the exact same edge (62% at the top, 38% at the bottom)
+ * so that closed means *sealed* — no seam, nothing showing through. The slash
+ * channel only opens up as the halves travel apart, which is the whole point
+ * of the effect.
+ */
 export const SLASH = {
   /** Left/amber half of a viewport split along the logo's diagonal. */
-  amberHalf: "polygon(0% 0%, 62% 0%, 38% 100%, 0% 100%)",
-  /** Right/indigo half — mirrors amberHalf across the slash channel. */
-  indigoHalf: "polygon(64% 0%, 100% 0%, 100% 100%, 40% 100%)",
+  amberHalf: "polygon(0% 0%, 62.2% 0%, 38.2% 100%, 0% 100%)",
+  /** Right/indigo half — overlaps amberHalf by a hair so no seam can show. */
+  indigoHalf: "polygon(61.8% 0%, 100% 0%, 100% 100%, 37.8% 100%)",
 } as const;
+
+/**
+ * Unit direction of the slash edge, used to slide the two closed halves past
+ * each other *along* their shared edge. Moving along the edge keeps the seal
+ * intact; moving across it would crack the door open mid-load.
+ */
+export const SLASH_AXIS = { x: -0.36, y: 0.93 } as const;
 
 /**
  * Section entrance — 0.8s, triggered at 20% viewport intersection (Section 11.4).

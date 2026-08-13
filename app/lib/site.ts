@@ -13,8 +13,9 @@ export const SITE = {
   email: "hello@ridoxstudio.com",
 } as const;
 
-/** Section 5.2 — 4 items, no dropdowns, no sub-menus. */
+/** Section 5.2 — 5 items max, no dropdowns, no sub-menus. */
 export const NAV_ITEMS = [
+  { label: "Home", href: "/", zone: "neutral" },
   { label: "Work", href: "/work", zone: "indigo" },
   { label: "Studio", href: "/studio", zone: "amber" },
   { label: "Process", href: "/process", zone: "indigo" },

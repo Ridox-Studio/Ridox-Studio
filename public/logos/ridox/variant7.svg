@@ -12,9 +12,5 @@
     
     <!-- Right Polygon Block (Indigo) -->
     <path d="M 56,22 L 78,22 L 78,78 L 30,78 Z" fill="hsl(258, 89%, 62%)" opacity="0.9" />
-
-    <!-- Seed Drops of Contrasting Energy (Japanese Dual-Reaction Concept) -->
-    <circle cx="36" cy="36" r="3.5" fill="hsl(258, 89%, 62%)" />
-    <circle cx="64" cy="64" r="3.5" fill="hsl(33, 95%, 52%)" />
   </g>
 </svg>

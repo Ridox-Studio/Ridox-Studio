@@ -167,9 +167,11 @@ const config = {
 
 | Role | Font | Weight Range | Usage |
 |---|---|---|---|
-| Display / Headings | **Plus Jakarta Sans** (Google Fonts) | 700–900 | All headings, hero text, section titles |
-| Body | **Inter** (Google Fonts) | 400–600 | Paragraphs, descriptions, UI labels |
-| Mono / Code / Tags | **JetBrains Mono** (Google Fonts) | 400–500 | Tech stack pills, code snippets, status labels |
+| Display / Headings | **Archivo** (Google Fonts, variable `wght` + `wdth`) | 700–900 at `wdth` 110–125 | All headings, hero text, section titles |
+| Body | **Inter** (Google Fonts, variable) | 400–600 | Paragraphs, descriptions, UI labels |
+| Accent / Tags / Status | **Bitcount Prop Single** (Google Fonts) | 400–500 | Tech stack pills, overlines, status labels, preloader text |
+
+Archivo is set at its widest (`font-variation-settings: "wdth" 125`) with short leading for headings — the wide, heavy, tight-set masthead voice. Bitcount Prop Single is the accent voice only; it never carries headings or body copy.
 
 ### 3.2 Type Scale
 

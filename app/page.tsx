@@ -1,69 +1,144 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+import { ArrowUpRight } from "lucide-react";
+import { OpeningCanvas } from "@/app/components/opening/OpeningCanvas";
+import { VelocityMarquee } from "@/app/components/marquee/VelocityMarquee";
+import { ProjectDeck } from "@/app/components/projects/ProjectDeck";
+import { HorizontalScroll } from "@/app/components/services/HorizontalScroll";
+import { ProcessTimeline } from "@/app/components/process/ProcessTimeline";
+import { ContactSection } from "@/app/components/contact/ContactSection";
+import { Footer } from "@/app/components/footer/Footer";
+import { Container, SectionHeader } from "@/app/components/shared/SectionHeader";
+import { Reveal } from "@/app/components/shared/Reveal";
+import { TransitionLink } from "@/app/components/transitions/TransitionLink";
+import { MARQUEE_LINES, PROCESS_STEPS, SERVICES } from "@/app/data/content";
+import { getFeatured } from "@/app/data/projects";
+import { SITE } from "@/app/lib/site";
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: `${SITE.name} — Software Systems Engineered at the Reaction Point`,
+  description: SITE.description,
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: `${SITE.name} — Software Systems Engineered at the Reaction Point`,
+    description:
+      "Software engineering agency balancing design energy with engineering depth.",
+    url: SITE.url,
+    // og:image comes from app/opengraph-image.tsx (Section 14.4)
+  },
+  twitter: {
+    title: `${SITE.name} — Software Systems Engineered at the Reaction Point`,
+    description:
+      "Software engineering agency balancing design energy with engineering depth.",
+  },
+};
+
+const linkClass =
+  "inline-flex w-fit items-center gap-2 font-mono text-xs tracking-[0.15em] uppercase transition-colors";
+
+export default function HomePage() {
+  const clientWork = getFeatured("client", 3);
+  const studioWork = getFeatured("studio", 2);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+    <main className="flex w-full flex-col">
+      <OpeningCanvas />
+
+      <VelocityMarquee top={MARQUEE_LINES.first} bottom={MARQUEE_LINES.second} />
+
+      <section data-zone="indigo" className="flex w-full flex-col gap-8 py-8">
+        <Container>
+          <Reveal>
+            <SectionHeader
+              overline="Client work"
+              accent="indigo"
+              title="Systems built under real constraints"
+              lede="Three engagements where the brief was not 'make it pretty' but 'make it hold'."
+              action={
+                <TransitionLink
+                  href="/work"
+                  label="Work"
+                  className={`${linkClass} text-indigo-300 hover:text-indigo-200`}
+                >
+                  View all work
+                  <ArrowUpRight size={14} aria-hidden="true" />
+                </TransitionLink>
+              }
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+          </Reveal>
+        </Container>
+        <Container>
+          <ProjectDeck projects={clientWork} />
+        </Container>
+      </section>
+
+      <VelocityMarquee top={MARQUEE_LINES.second} bottom={MARQUEE_LINES.first} />
+
+      <section data-zone="amber" className="flex w-full flex-col gap-8 py-8">
+        <Container>
+          <Reveal>
+            <SectionHeader
+              overline="Studio products"
+              accent="amber"
+              title="What we build when nobody is paying us"
+              lede="Tools born out of our own engagements, sharpened until they were worth releasing."
+              action={
+                <TransitionLink
+                  href="/studio"
+                  label="Studio"
+                  className={`${linkClass} text-amber-400 hover:text-amber-300`}
+                >
+                  Explore studio
+                  <ArrowUpRight size={14} aria-hidden="true" />
+                </TransitionLink>
+              }
+            />
+          </Reveal>
+        </Container>
+        <Container>
+          <ProjectDeck projects={studioWork} />
+        </Container>
+      </section>
+
+      <section data-zone="indigo" className="flex w-full flex-col gap-8 py-14">
+        <Container>
+          <Reveal>
+            <SectionHeader
+              overline="Capabilities"
+              accent="indigo"
+              title="Five surfaces, one system"
+              lede="We do not sell isolated deliverables. Every capability below exists because the others need it."
+            />
+          </Reveal>
+        </Container>
+        <HorizontalScroll services={SERVICES} />
+      </section>
+
+      <section data-zone="amber" className="flex w-full flex-col gap-8 py-14">
+        <Container className="gap-8">
+          <Reveal>
+            <SectionHeader
+              overline="The process"
+              accent="amber"
+              title="How an engagement actually runs"
+              lede="Four phases, each with a written artefact you keep whether or not we continue."
+              action={
+                <TransitionLink
+                  href="/process"
+                  label="Process"
+                  className={`${linkClass} text-amber-400 hover:text-amber-300`}
+                >
+                  Read the full process
+                  <ArrowUpRight size={14} aria-hidden="true" />
+                </TransitionLink>
+              }
+            />
+          </Reveal>
+          <ProcessTimeline steps={PROCESS_STEPS} />
+        </Container>
+      </section>
+
+      <ContactSection />
+      <Footer />
+    </main>
   );
 }

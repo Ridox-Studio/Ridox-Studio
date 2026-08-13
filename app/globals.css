@@ -110,9 +110,11 @@
   --color-success: var(--success);
   --color-error: var(--error);
 
-  --font-display: var(--font-display), system-ui, sans-serif;
-  --font-body: var(--font-body), system-ui, sans-serif;
-  --font-mono: var(--font-mono), monospace;
+  /* Sources are the next/font variables set on <html> — deliberately named
+     differently from these tokens so they cannot resolve to themselves. */
+  --font-display: var(--font-archivo), system-ui, sans-serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-bitcount), ui-monospace, monospace;
 
   --breakpoint-sm: 40rem; /* 640px */
   --breakpoint-md: 48rem; /* 768px */
@@ -141,7 +143,7 @@ html {
 body {
   background-color: var(--bg-deep);
   color: var(--text-primary);
-  font-family: var(--font-body), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-synthesis-weight: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -152,7 +154,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-display), system-ui, sans-serif;
+  font-family: var(--font-archivo), system-ui, sans-serif;
   text-wrap: balance;
 }
 
@@ -190,25 +192,61 @@ html.lenis body {
    Type scale (Section 3.2)
    ============================================================ */
 
+/* The opening canvas wordmark — sized to span the viewport, not to sit in it. */
+.type-mega {
+  font-size: clamp(4rem, 19vw, 17rem);
+  font-weight: 900;
+  font-variation-settings: "wdth" 125;
+  letter-spacing: -0.045em;
+  line-height: 0.78;
+}
+
+/* STUDIO sits under RIDOX as an outline, so the lockup reads as one block
+   without doubling the visual weight. */
+.type-mega-outline {
+  color: transparent;
+  -webkit-text-stroke: clamp(1px, 0.22vw, 3px) var(--amber-400);
+}
+
+/* Right-edge vertical word strip on the opening canvas. */
+@keyframes ridox-vscroll {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+.v-marquee {
+  writing-mode: vertical-rl;
+  animation: ridox-vscroll 28s linear infinite;
+}
+
+/* Headings run Archivo at its widest (wdth 125) with short leading — the wide,
+   heavy, tight-set masthead voice. */
 .type-hero {
   font-size: clamp(3.5rem, 8vw, 7rem);
   font-weight: 900;
-  letter-spacing: -0.03em;
-  line-height: 0.9;
+  font-variation-settings: "wdth" 125;
+  letter-spacing: -0.02em;
+  line-height: 0.82;
 }
 
 .type-section {
   font-size: clamp(2rem, 4vw, 3.5rem);
   font-weight: 800;
-  letter-spacing: -0.025em;
-  line-height: 1.05;
+  font-variation-settings: "wdth" 118;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
 }
 
 .type-card {
   font-size: 1.25rem;
   font-weight: 700;
+  font-variation-settings: "wdth" 110;
   letter-spacing: -0.01em;
-  line-height: 1.2;
+  line-height: 1.1;
 }
 
 @media (min-width: 48rem) {
@@ -255,13 +293,34 @@ html.lenis body {
 }
 
 /* ============================================================
+   Form controls
+   ============================================================ */
+
+/* Native select arrows sit hard against the border and ignore the dark theme,
+   so the control draws its own chevron with room to breathe. */
+.field-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239b90c2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M6 9l6 6 6-6'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.125rem;
+  padding-inline-end: 3rem;
+}
+
+.field-select:focus {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a78bfa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M6 9l6 6 6-6'/></svg>");
+}
+
+/* ============================================================
    Reduced motion — global kill switch for decorative animation
    ============================================================ */
 
+/* Scoped to :not([data-motion="full"]) so a reader who explicitly asks for the
+   full experience is not overridden by the OS setting. */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  :root:not([data-motion="full"]) *,
+  :root:not([data-motion="full"]) *::before,
+  :root:not([data-motion="full"]) *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
