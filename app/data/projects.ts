@@ -131,6 +131,11 @@ export const PROJECTS: Project[] = [
           "We found a withdrawal path that could pay out cash-funded credits — money the platform never actually held. Rather than patch it, we removed custody entirely. The safest way to handle someone else's money is not to.",
       },
       {
+        title: "Infrastructure, not an intermediary",
+        detail:
+          "We run the system a school operates on. The school keeps its own payment account, its own banking relationship and its own relationship with parents. If we disappeared tomorrow, none of a school's money would be sitting anywhere it could not reach.",
+      },
+      {
         title: "Money is an append-only ledger",
         detail:
           "Wallet movements are recorded as entries that are never edited or deleted, and balances are derived from them. A fee dispute can be traced rather than argued.",
