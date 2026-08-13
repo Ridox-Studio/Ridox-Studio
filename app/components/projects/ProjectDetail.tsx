@@ -7,7 +7,6 @@ import { Reveal, RevealGroup, RevealItem } from "@/app/components/shared/Reveal"
 import { ProjectImage } from "@/app/components/shared/ProjectImage";
 import { ContactSection } from "@/app/components/contact/ContactSection";
 import { Footer } from "@/app/components/footer/Footer";
-import { TransitionLink } from "@/app/components/transitions/TransitionLink";
 import { SITE } from "@/app/lib/site";
 
 /** Shared deep-dive layout for /work/[slug] and /studio/[slug]. */
@@ -66,17 +65,10 @@ export function ProjectDetail({ project }: { project: Project }) {
         accent={accent}
         title={project.title}
         lede={project.subtitle}
-      >
-        <nav aria-label="Breadcrumb" className="flex">
-          <TransitionLink
-            href={parentHref}
-            label={parentLabel}
-            className="font-mono text-xs tracking-[0.15em] text-content-tertiary uppercase transition-colors hover:text-content-primary"
-          >
-            ← Back to {parentLabel.toLowerCase()}
-          </TransitionLink>
-        </nav>
-      </PageHeader>
+      />
+      {/* The visible "back" affordance is the fixed BackTrigger; the machine
+          readable trail is the BreadcrumbList JSON-LD above. Two on-screen
+          back links competing for the same job is one too many. */}
 
       <Container className="gap-16 pb-24">
         <Reveal className="relative aspect-video w-full overflow-hidden rounded-2xl border border-edge-subtle bg-surface-void">

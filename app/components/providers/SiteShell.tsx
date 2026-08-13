@@ -6,6 +6,7 @@ import { TransitionProvider } from "@/app/components/transitions/TransitionConte
 import { RedoxDoor } from "@/app/components/transitions/RedoxDoor";
 import { Preloader } from "@/app/components/preloader/Preloader";
 import { FloatingTrigger } from "@/app/components/navigation/FloatingTrigger";
+import { BackTrigger } from "@/app/components/navigation/BackTrigger";
 import { MotionModeSync } from "@/app/components/shared/MotionToggle";
 import { useSmoothScroll } from "@/app/hooks/useSmoothScroll";
 
@@ -27,6 +28,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
         <SmoothScroll />
         <Preloader />
         {children}
+        <BackTrigger />
         <FloatingTrigger />
         <RedoxDoor />
       </TransitionProvider>

@@ -23,6 +23,12 @@ type TransitionState = {
   label: string | null;
   /** True from the moment doors start closing until they finish opening. */
   covered: boolean;
+  /**
+   * The route navigated away from, or null on a cold load. Lets a back
+   * control return somewhere real instead of guessing — and, unlike
+   * history.back(), it cannot walk a reader off the site entirely.
+   */
+  previousPath: string | null;
   navigate: (href: string, label?: string) => void;
   /** Called by RedoxDoor when the close animation lands. */
   onDoorsClosed: () => void;
@@ -38,12 +44,14 @@ export function TransitionProvider({ children }: { children: React.ReactNode }) 
 
   const [phase, setPhase] = useState<DoorPhase>("idle");
   const [label, setLabel] = useState<string | null>(null);
+  const [previousPath, setPreviousPath] = useState<string | null>(null);
   const pendingHref = useRef<string | null>(null);
 
   const navigate = useCallback(
     (href: string, linkLabel?: string) => {
       if (href === pathname || pendingHref.current) return;
       pendingHref.current = href;
+      setPreviousPath(pathname);
       setLabel(linkLabel ? `// ${linkLabel.toUpperCase()}` : null);
       setPhase("closing");
     },
@@ -76,6 +84,7 @@ export function TransitionProvider({ children }: { children: React.ReactNode }) 
         phase,
         label,
         covered: phase !== "idle",
+        previousPath,
         navigate,
         onDoorsClosed,
         onDoorsOpened,
