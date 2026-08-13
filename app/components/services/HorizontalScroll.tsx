@@ -146,7 +146,7 @@ function ServiceCarousel({ services }: { services: Service[] }) {
     <div className="flex flex-col gap-6">
       <div
         ref={scroller}
-        className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 [scrollbar-width:none]"
+        className="scrollbar-none flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2"
       >
         {services.map((service, index) => (
           <div key={service.index} data-index={index} className="w-[85vw] shrink-0 snap-center">

@@ -4,13 +4,21 @@ import { useState } from "react";
 import { MagneticButton } from "@/app/components/shared/MagneticButton";
 import { SITE } from "@/app/lib/site";
 
+/**
+ * Quoted in USD because it is the stable unit across the markets we work in,
+ * but the ladder starts low enough to be realistic for local clients — a
+ * $25k floor silently tells a Lagos startup not to bother writing.
+ */
 const BUDGETS = [
-  "Under $25k",
-  "$25k – $75k",
-  "$75k – $200k",
-  "$200k+",
+  "Under $1k",
+  "$1k – $5k",
+  "$5k – $15k",
+  "$15k – $50k",
+  "$50k+",
   "Not sure yet",
 ];
+
+const DEFAULT_BUDGET = "Not sure yet";
 
 const fieldClass =
   "min-h-12 w-full rounded-lg border border-edge-subtle bg-surface-card px-4 py-3 text-content-primary transition-colors placeholder:text-content-tertiary focus:border-indigo-300";
@@ -86,7 +94,7 @@ export function InquiryForm() {
           <select
             id="budget"
             name="budget"
-            defaultValue={BUDGETS[4]}
+            defaultValue={DEFAULT_BUDGET}
             className={`${fieldClass} field-select`}
           >
             {BUDGETS.map((budget) => (

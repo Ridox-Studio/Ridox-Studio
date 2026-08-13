@@ -307,6 +307,52 @@ html.lenis body {
 }
 
 /* ============================================================
+   Scrollbar
+   Matched to the surface scale so the OS default does not sit as a bright
+   grey slab against a dark site. Kept at 10px rather than hairline-thin:
+   the bar is a position indicator and a drag target, and shrinking it to a
+   sliver trades a real affordance for a small aesthetic gain.
+   ============================================================ */
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--indigo-500) var(--bg-void);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-void);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--indigo-500);
+  border: 2px solid var(--bg-void);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--indigo-300);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--bg-void);
+}
+
+/* For scrollers whose position is already shown another way — the services
+   carousel has dot indicators, so a second indicator is redundant. */
+.scrollbar-none {
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* ============================================================
    Form controls
    ============================================================ */
 
