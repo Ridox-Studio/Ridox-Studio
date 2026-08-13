@@ -106,29 +106,34 @@ export const PROJECTS: Project[] = [
     featured: true,
     highlights: [
       { label: "Fees go", value: "Straight to the school" },
-      { label: "Persona surfaces", value: "4" },
-      { label: "Wallet ledger", value: "Append-only" },
+      { label: "Cash payments", value: "First-class" },
+      { label: "Double-booking", value: "Refused at entry" },
     ],
     features: [
       {
-        title: "Four surfaces, four audiences",
-        detail:
-          "Platform admin, institution staff, student and guardian each get their own layout and navigation. No screen tries to serve two people at once.",
-      },
-      {
-        title: "Every school is its own front door",
-        detail:
-          "Institution routes bind to a slug and log in through that school's own branded page. There is no generic dashboard a parent could land on by accident.",
-      },
-      {
         title: "School fees never touch us",
         detail:
-          "Each institution plugs in its own payment credentials, so parents pay the school directly and the money lands in the school's account. We record the transaction; we never hold the funds.",
+          "Each institution plugs in its own payment credentials, so parents pay the school and the money lands in the school's account. We found a withdrawal path that could pay out money the platform never held — rather than patch it, we removed custody entirely.",
       },
       {
-        title: "No custody, so no withdrawals to get wrong",
+        title: "Cash is a real payment method, not a workaround",
         detail:
-          "We found a withdrawal path that could pay out cash-funded credits — money the platform never actually held. Rather than patch it, we removed custody entirely. The safest way to handle someone else's money is not to.",
+          "A parent walks into the bursary with notes and a staff member records it against the student. Cash is implemented as a payment gateway alongside the card processor, so it produces the same receipts, the same ledger entries and the same audit trail.",
+      },
+      {
+        title: "Fees you can save toward",
+        detail:
+          "A student wallet lets a family put money aside a little at a time — including cash handed over the counter — until it covers the term. School fees rarely arrive as one payment on one day, and pretending otherwise is how families end up locked out.",
+      },
+      {
+        title: "Nothing double-books, school-wide",
+        detail:
+          "Every timetable slot is checked against the teacher's schedule and the class's schedule before it is allowed to exist. Two subjects cannot land on one class, and no teacher can be in two rooms at once — the clash is refused at entry, not found later.",
+      },
+      {
+        title: "Scores go in once",
+        detail:
+          "Teachers enter scores against the school's own assessment weighting. Totals, grades and end-of-session promotion follow from that — no spreadsheet reconciliation at the end of term.",
       },
       {
         title: "Infrastructure, not an intermediary",
@@ -141,9 +146,9 @@ export const PROJECTS: Project[] = [
           "Wallet movements are recorded as entries that are never edited or deleted, and balances are derived from them. A fee dispute can be traced rather than argued.",
       },
       {
-        title: "Guardians see every ward at once",
+        title: "Four surfaces, four audiences",
         detail:
-          "One login covers children across different institutions — monitoring and paying fees without a separate account per school.",
+          "Platform admin, institution staff, student and guardian each get their own layout and navigation — and a guardian's single login covers wards across different schools. Every institution routes on its own slug behind its own branded login, so there is no generic dashboard to land on by accident.",
       },
     ],
   },
