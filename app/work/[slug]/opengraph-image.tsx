@@ -1,12 +1,12 @@
 import { OG_CONTENT_TYPE, OG_SIZE, renderOgImage } from "@/app/lib/og";
-import { getProjectBySlug, getProjectsByCategory } from "@/app/data/projects";
+import { getProjectBySlug, getWorkProjects } from "@/app/data/projects";
 
 export const alt = "Ridox Studio case study";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 
 export function generateStaticParams() {
-  return getProjectsByCategory("client").map((project) => ({ slug: project.slug }));
+  return getWorkProjects().map((project) => ({ slug: project.slug }));
 }
 
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {

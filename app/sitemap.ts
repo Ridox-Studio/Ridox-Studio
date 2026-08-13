@@ -1,10 +1,10 @@
 import type { MetadataRoute } from "next";
-import { getAllProjects } from "@/app/data/projects";
+import { getAllProjects, getProjectHref } from "@/app/data/projects";
 import { SITE } from "@/app/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const projectUrls = getAllProjects().map((project) => ({
-    url: `${SITE.url}/${project.category === "client" ? "work" : "studio"}/${project.slug}`,
+    url: `${SITE.url}${getProjectHref(project)}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.7,

@@ -22,8 +22,8 @@ export default function StudioPage() {
       <PageHeader
         overline="Studio products"
         accent="amber"
-        title="Our own reactions"
-        lede="Tools we built for ourselves first. Each one exists because we hit the same problem on three engagements in a row and stopped tolerating it."
+        title="Our own products"
+        lede="We build and run our own products. They are how we prove the process before we sell it to anyone — the same architecture, the same standards, our own money."
       />
       <Container className="pb-24">
         <ProjectGallery projects={projects} />

@@ -1,153 +1,148 @@
 export interface Project {
   slug: string;
-  category: "client" | "studio";
+  /**
+   * `client`     — commissioned build.
+   * `consulting` — advisory: architecture, integration, direction. No build.
+   * `studio`     — our own product.
+   */
+  category: "client" | "consulting" | "studio";
   title: string;
   subtitle: string; // one-line result or product tagline
   description: string; // 2-3 sentences
-  coverImage: string; // path to screenshot/visual
+  /**
+   * Path to the screenshot/visual. Rendered with `object-cover` into panes
+   * whose aspect ratio varies with the viewport, so the crop is not
+   * predictable — keep anything that must stay legible near the centre.
+   */
+  coverImage: string;
   techStack: string[];
-  status?: "live" | "beta" | "open-source" | "archived";
+  status?: "live" | "beta" | "in-development" | "open-source" | "archived";
   externalUrl?: string;
   year: number;
-  /** Shown on the deep-dive page only. */
+  /** Shown on the deep-dive page only. Facts we can stand behind, not metrics. */
   highlights?: { label: string; value: string }[];
   featured?: boolean;
 }
 
 export const PROJECTS: Project[] = [
+  // ---------------------------------------------------------------- studio
   {
-    slug: "meridian-logistics-platform",
-    category: "client",
-    title: "Meridian",
-    subtitle: "Cut dispatch turnaround from 40 minutes to under 3",
-    description:
-      "A freight dispatch and fleet-tracking platform replacing a spreadsheet workflow across 12 depots. We rebuilt routing as an event-driven service, added live vehicle telemetry, and shipped an offline-capable driver app.",
-    coverImage: "/projects/meridian.svg",
-    techStack: ["Next.js", "NestJS", "PostgreSQL", "Redis", "AWS"],
-    status: "live",
-    year: 2025,
-    featured: true,
-    highlights: [
-      { label: "Dispatch time", value: "-92%" },
-      { label: "Depots live", value: "12" },
-      { label: "Uptime", value: "99.97%" },
-    ],
-  },
-  {
-    slug: "halcyon-health-portal",
-    category: "client",
-    title: "Halcyon Health",
-    subtitle: "HIPAA-compliant patient portal serving 80k monthly sessions",
-    description:
-      "A patient records and scheduling portal built for a multi-clinic provider group. Audit logging, role-scoped access, and encrypted document exchange were designed in from the first commit rather than bolted on.",
-    coverImage: "/projects/halcyon.svg",
-    techStack: ["Next.js", "Laravel", "PostgreSQL", "Terraform"],
-    status: "live",
-    year: 2025,
-    featured: true,
-    highlights: [
-      { label: "Monthly sessions", value: "80k" },
-      { label: "Audit coverage", value: "100%" },
-      { label: "LCP", value: "1.1s" },
-    ],
-  },
-  {
-    slug: "kestrel-trading-desk",
-    category: "client",
-    title: "Kestrel",
-    subtitle: "Real-time trading desk rendering 200k ticks per minute",
-    description:
-      "A browser trading terminal with streaming order books and sub-frame chart updates. We moved serialization to binary protocols and pushed rendering onto a canvas layer to hold 60fps under peak load.",
-    coverImage: "/projects/kestrel.svg",
-    techStack: ["React", "Go", "WebSockets", "ClickHouse"],
-    status: "live",
-    year: 2024,
-    featured: true,
-    highlights: [
-      { label: "Ticks / minute", value: "200k" },
-      { label: "Frame budget", value: "16ms" },
-      { label: "Payload size", value: "-71%" },
-    ],
-  },
-  {
-    slug: "orbit-commerce",
-    category: "client",
-    title: "Orbit Commerce",
-    subtitle: "Headless storefront rebuild that doubled conversion",
-    description:
-      "A monolithic storefront split into a headless architecture with edge-rendered catalogue pages. Checkout was rewritten as an isolated service so pricing experiments could ship without touching the core.",
-    coverImage: "/projects/orbit.svg",
-    techStack: ["Next.js", "Stripe", "GraphQL", "Vercel"],
-    status: "live",
-    year: 2024,
-    highlights: [
-      { label: "Conversion", value: "+104%" },
-      { label: "TTFB", value: "84ms" },
-    ],
-  },
-  {
-    slug: "atlas-field-ops",
-    category: "client",
-    title: "Atlas Field Ops",
-    subtitle: "Offline-first mobile system for crews with no signal",
-    description:
-      "A field inspection app for infrastructure crews working beyond network coverage. Local-first sync with conflict resolution means a full day of work uploads cleanly the moment a device reconnects.",
-    coverImage: "/projects/atlas.svg",
-    techStack: ["React Native", "SQLite", "Node.js", "GCP"],
-    status: "live",
-    year: 2023,
-    highlights: [
-      { label: "Offline duration", value: "14 days" },
-      { label: "Sync conflicts", value: "<0.1%" },
-    ],
-  },
-  {
-    slug: "reagent",
+    slug: "cilbup",
     category: "studio",
-    title: "Reagent",
-    subtitle: "Schema-first API scaffolding for teams that hate boilerplate",
+    title: "Cilbup",
+    subtitle: "Anonymous messaging and tipping for creators",
     description:
-      "An internal tool we open-sourced: point it at a database schema and it generates typed clients, migration guards, and contract tests. Built because we were writing the same 400 lines on every engagement.",
-    coverImage: "/projects/reagent.svg",
-    techStack: ["TypeScript", "Postgres", "OpenAPI"],
-    status: "open-source",
-    externalUrl: "https://github.com/ridox-studio",
-    year: 2025,
+      "Cilbup — \"public\" reversed — lets anyone send a creator an anonymous message, and optionally attach a tip to get priority attention. Creators get a dashboard for messages, earnings and analytics, with delivery over email, WhatsApp and browser push.",
+    coverImage: "/projects/cilbup.svg",
+    techStack: ["Next.js", "React 19", "TypeScript", "Prisma", "MongoDB", "Redis", "Paystack"],
+    status: "live",
+    externalUrl: "https://www.cilbup.site",
+    year: 2026,
     featured: true,
     highlights: [
-      { label: "Boilerplate saved", value: "~400 LOC" },
-      { label: "License", value: "MIT" },
+      { label: "Status", value: "Live" },
+      { label: "Payments", value: "Paystack" },
+      { label: "In development since", value: "2022" },
     ],
   },
   {
-    slug: "catalyst-observability",
+    slug: "risms",
     category: "studio",
-    title: "Catalyst",
-    subtitle: "Deployment observability that reads like a story, not a dashboard",
+    title: "RISMS",
+    subtitle: "Multi-tenant school management built for African institutions",
     description:
-      "A release-timeline tool that correlates deploys with error-rate and latency shifts, then writes a plain-language summary of what changed. Currently in private beta with three of our client teams.",
-    coverImage: "/projects/catalyst.svg",
-    techStack: ["Next.js", "Go", "ClickHouse", "OpenTelemetry"],
-    status: "beta",
-    year: 2025,
+      "A school management system covering academics, staff, students, timetabling, fees and multi-currency wallets. It segregates into four distinct persona surfaces — system admin, institution staff, student portal and guardian — so no screen tries to serve two audiences at once.",
+    coverImage: "/projects/risms.svg",
+    techStack: ["Laravel 11", "PHP 8.3", "Vue 3", "Inertia v2", "Tailwind 4", "Paystack"],
+    status: "in-development",
+    year: 2026,
     featured: true,
     highlights: [
-      { label: "Beta teams", value: "3" },
-      { label: "Mean detection", value: "42s" },
+      { label: "Persona surfaces", value: "4" },
+      { label: "Architecture", value: "Multi-tenant" },
+      { label: "Wallet ledger", value: "Append-only" },
     ],
   },
   {
-    slug: "valence-design-tokens",
+    slug: "resurgee",
     category: "studio",
-    title: "Valence",
-    subtitle: "A token pipeline that keeps design and code in one language",
+    title: "Resurgee",
+    subtitle: "An AI layer over the task manager you already use",
     description:
-      "A build step that compiles a single token source into CSS variables, Tailwind theme values, and native platform constants. It is the system that keeps this very site's colour scale locked to the logo.",
-    coverImage: "/projects/valence.svg",
-    techStack: ["TypeScript", "Tailwind", "Style Dictionary"],
-    status: "open-source",
-    externalUrl: "https://github.com/ridox-studio",
-    year: 2024,
+      "Resurgee augments Google Tasks and Calendar rather than replacing them. It watches for tasks about to slip, suggests rescheduling options when they do, and plans your day through a conversational assistant — across multiple linked Google accounts.",
+    coverImage: "/projects/resurgee.svg",
+    techStack: ["Next.js", "FastAPI", "Python 3.12", "PostgreSQL", "Celery", "Redis", "Flutter"],
+    status: "in-development",
+    externalUrl: "https://www.resurgee.xyz",
+    year: 2026,
+    featured: true,
+    highlights: [
+      { label: "Surfaces", value: "Web · Mobile · API" },
+      { label: "Integrations", value: "Google Tasks & Calendar" },
+      { label: "Started", value: "2025" },
+    ],
+  },
+
+  // ---------------------------------------------------------------- client
+  {
+    slug: "netcart",
+    category: "client",
+    title: "Netcart",
+    subtitle: "One marketplace system across three surfaces",
+    description:
+      "A marketplace and delivery platform built end to end: a Flutter app for customers, an operations portal for fleet, escalations, analytics and fraud controls, and the API underneath both — auth, catalogue, cart, orders, payments, withdrawals and earnings. Email, storage and payment providers sit behind adapters, so none of them is load-bearing.",
+    coverImage: "/projects/netcart.svg",
+    techStack: [
+      "Flutter",
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Express 5",
+      "Prisma",
+      "MongoDB",
+      "Paystack",
+    ],
+    status: "in-development",
+    year: 2026,
+    featured: true,
+    highlights: [
+      { label: "Surfaces", value: "App · Portal · API" },
+      { label: "Provider adapters", value: "Email · Storage · Payments" },
+      { label: "API contract", value: "OpenAPI" },
+    ],
+  },
+
+  // ------------------------------------------------------------ consulting
+  {
+    slug: "cy-academy",
+    category: "consulting",
+    title: "CY Academy",
+    subtitle: "Technical direction for an AI-built course platform",
+    description:
+      "The client built the platform themselves with AI assistance. We advised on how to structure and set up the project, connected a working transactional email service, and walked them through the course upload workflow and the operational pieces that AI-generated scaffolding leaves out.",
+    coverImage: "/projects/cy-academy.svg",
+    techStack: ["Architecture review", "Email deliverability", "Content workflow"],
+    status: "live",
+    externalUrl: "https://cyacademy.xyz",
+    year: 2026,
+    highlights: [
+      { label: "Engagement", value: "Advisory" },
+      { label: "Built by", value: "The client" },
+    ],
+  },
+  {
+    slug: "cy-udida-portfolio",
+    category: "consulting",
+    title: "CY Udida",
+    subtitle: "Portfolio site review and setup direction",
+    description:
+      "A personal portfolio for the same client. We reviewed the build and gave direction on setup and deployment — a small engagement, included because not every useful piece of work is a six-month contract.",
+    coverImage: "/projects/cy-udida-portfolio.svg",
+    techStack: ["Review", "Deployment"],
+    status: "live",
+    externalUrl: "https://cyudida.com",
+    year: 2026,
+    highlights: [{ label: "Engagement", value: "Advisory" }],
   },
 ];
 
@@ -159,12 +154,24 @@ export function getProjectsByCategory(category: Project["category"]): Project[] 
   return PROJECTS.filter((project) => project.category === category);
 }
 
-export function getFeatured(category: Project["category"], limit: number): Project[] {
-  return getProjectsByCategory(category)
-    .filter((project) => project.featured)
-    .slice(0, limit);
+/** Everything shown under /work — commissioned builds and advisory engagements. */
+export function getWorkProjects(): Project[] {
+  return PROJECTS.filter(
+    (project) => project.category === "client" || project.category === "consulting",
+  );
+}
+
+export function getFeatured(projects: Project[], limit: number): Project[] {
+  return projects.filter((project) => project.featured).slice(0, limit);
 }
 
 export function getProjectBySlug(slug: string): Project | undefined {
   return PROJECTS.find((project) => project.slug === slug);
+}
+
+/** Which route a project's deep dive lives on. */
+export function getProjectHref(project: Project): string {
+  return project.category === "studio"
+    ? `/studio/${project.slug}`
+    : `/work/${project.slug}`;
 }

@@ -12,7 +12,7 @@ import { SectionRail } from "@/app/components/shared/SectionRail";
 import { Reveal } from "@/app/components/shared/Reveal";
 import { TransitionLink } from "@/app/components/transitions/TransitionLink";
 import { MARQUEE_LINES, PROCESS_STEPS, SERVICES } from "@/app/data/content";
-import { getFeatured } from "@/app/data/projects";
+import { getFeatured, getProjectsByCategory, getWorkProjects } from "@/app/data/projects";
 import { buildPageMetadata } from "@/app/lib/metadata";
 import { SITE } from "@/app/lib/site";
 
@@ -33,8 +33,8 @@ const linkClass =
   "inline-flex w-fit items-center gap-2 font-mono text-xs tracking-[0.15em] uppercase transition-colors";
 
 export default function HomePage() {
-  const clientWork = getFeatured("client", 3);
-  const studioWork = getFeatured("studio", 2);
+  const clientWork = getFeatured(getWorkProjects(), 3);
+  const studioWork = getFeatured(getProjectsByCategory("studio"), 3);
 
   return (
     <main className="flex w-full flex-col">
@@ -48,8 +48,8 @@ export default function HomePage() {
             <SectionHeader
               overline="Client work"
               accent="indigo"
-              title="Systems built under real constraints"
-              lede="Three engagements where the brief was not 'make it pretty' but 'make it hold'."
+              title="Work we can talk through line by line"
+              lede="Commissioned builds and advisory work. Fewer engagements than a big agency lists, each one we can talk through line by line."
               action={
                 <TransitionLink
                   href="/work"
@@ -66,7 +66,7 @@ export default function HomePage() {
         <SectionRail
           overline="Client work"
           accent="indigo"
-          title="Systems built under real constraints"
+          title="Work we can talk through line by line"
           action={
             <TransitionLink
               href="/work"
@@ -91,8 +91,8 @@ export default function HomePage() {
             <SectionHeader
               overline="Studio products"
               accent="amber"
-              title="What we build when nobody is paying us"
-              lede="Tools born out of our own engagements, sharpened until they were worth releasing."
+              title="Products we build and run ourselves"
+              lede="We are a product studio that takes client work. These are ours — shipped, maintained, and the reason we know what we are selling."
               action={
                 <TransitionLink
                   href="/studio"
@@ -108,7 +108,7 @@ export default function HomePage() {
         </Container>
         <SectionRail
           overline="Studio products"
-          title="What we build when nobody is paying us"
+          title="Products we build and run ourselves"
           action={
             <TransitionLink
               href="/studio"

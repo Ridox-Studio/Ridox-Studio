@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 import { ArrowUpRight } from "lucide-react";
-import type { Project } from "@/app/data/projects";
+import { getProjectHref, type Project } from "@/app/data/projects";
 import { CursorSpotlight } from "@/app/components/shared/CursorSpotlight";
 import { ProjectImage } from "@/app/components/shared/ProjectImage";
 import { TransitionLink } from "@/app/components/transitions/TransitionLink";
@@ -11,8 +11,15 @@ import { useSpotlight } from "@/app/hooks/useMousePosition";
 const STATUS_LABEL: Record<NonNullable<Project["status"]>, string> = {
   live: "Live",
   beta: "Beta",
+  "in-development": "In development",
   "open-source": "Open source",
   archived: "Archived",
+};
+
+const CATEGORY_LABEL: Record<Project["category"], string> = {
+  client: "Client work",
+  consulting: "Consulting",
+  studio: "Studio product",
 };
 
 /**
@@ -26,9 +33,9 @@ export function ProjectCard({
   project: Project;
   priority?: boolean;
 }) {
-  const accent = project.category === "client" ? "amber" : "indigo";
+  const accent = project.category === "studio" ? "indigo" : "amber";
   const ref = useSpotlight<HTMLDivElement>();
-  const href = `/${project.category === "client" ? "work" : "studio"}/${project.slug}`;
+  const href = getProjectHref(project);
 
   return (
     <article
@@ -70,7 +77,7 @@ export function ProjectCard({
                   accent === "amber" ? "text-amber-400" : "text-indigo-300",
                 )}
               >
-                {project.category === "client" ? "Client work" : "Studio product"}
+                {CATEGORY_LABEL[project.category]}
               </span>
               <span className="type-overline font-mono text-content-tertiary">
                 {project.year}

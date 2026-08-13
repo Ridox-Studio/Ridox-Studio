@@ -12,10 +12,16 @@ import { SITE } from "@/app/lib/site";
 
 /** Shared deep-dive layout for /work/[slug] and /studio/[slug]. */
 export function ProjectDetail({ project }: { project: Project }) {
-  const isClient = project.category === "client";
-  const accent = isClient ? "indigo" : "amber";
-  const parentHref = isClient ? "/work" : "/studio";
-  const parentLabel = isClient ? "Work" : "Studio";
+  const isStudio = project.category === "studio";
+  const accent = isStudio ? "indigo" : "amber";
+  const parentHref = isStudio ? "/studio" : "/work";
+  const parentLabel = isStudio ? "Studio" : "Work";
+  const categoryLabel =
+    project.category === "studio"
+      ? "Studio product"
+      : project.category === "consulting"
+        ? "Consulting"
+        : "Client work";
 
   const creativeWorkSchema = {
     "@context": "https://schema.org",
@@ -56,7 +62,7 @@ export function ProjectDetail({ project }: { project: Project }) {
       />
 
       <PageHeader
-        overline={`${isClient ? "Client work" : "Studio product"} · ${project.year}`}
+        overline={`${categoryLabel} · ${project.year}`}
         accent={accent}
         title={project.title}
         lede={project.subtitle}
