@@ -4,22 +4,15 @@ import { Container } from "@/app/components/shared/SectionHeader";
 import { InquiryForm } from "@/app/components/contact/InquiryForm";
 import { Reveal } from "@/app/components/shared/Reveal";
 import { Footer } from "@/app/components/footer/Footer";
+import { buildPageMetadata } from "@/app/lib/metadata";
 import { SITE } from "@/app/lib/site";
 
-const description =
-  "Start a project with Ridox Studio. Tell us what you are building and what is in the way — we reply to every enquiry within two working days.";
-
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Contact",
-  description,
-  alternates: { canonical: "/contact" },
-  openGraph: {
-    title: `Contact — ${SITE.name}`,
-    description,
-    url: `${SITE.url}/contact`,
-  },
-  twitter: { title: `Contact — ${SITE.name}`, description },
-};
+  description:
+    "Start a project with Ridox Studio. Tell us what you are building and what is in the way — we reply to every enquiry within two working days.",
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

@@ -36,7 +36,8 @@ const mono = Bitcount_Prop_Single({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} — Software Systems Engineered at the Reaction Point`,
+    // Kept under 60 characters — Google and LinkedIn truncate past that.
+    default: `${SITE.name} — Engineered at the Reaction Point`,
     template: `%s — ${SITE.name}`,
   },
   description: SITE.description,
@@ -75,7 +76,7 @@ const organizationSchema = {
   name: SITE.name,
   url: SITE.url,
   logo: `${SITE.url}/logos/ridox-studio-logo.svg`,
-  description: SITE.description,
+  description: SITE.longDescription,
   sameAs: [SITE.social.twitter, SITE.social.github, SITE.social.linkedin],
   contactPoint: {
     "@type": "ContactPoint",

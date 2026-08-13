@@ -8,22 +8,14 @@ import { Reveal } from "@/app/components/shared/Reveal";
 import { ContactSection } from "@/app/components/contact/ContactSection";
 import { Footer } from "@/app/components/footer/Footer";
 import { PROCESS_STEPS, SERVICES } from "@/app/data/content";
-import { SITE } from "@/app/lib/site";
+import { buildPageMetadata } from "@/app/lib/metadata";
 
-const description =
-  "How a Ridox Studio engagement runs: discovery and reaction analysis, architecture and system design, engineering and iteration, then launch and equilibrium.";
-
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Process",
-  description,
-  alternates: { canonical: "/process" },
-  openGraph: {
-    title: `Process — ${SITE.name}`,
-    description,
-    url: `${SITE.url}/process`,
-  },
-  twitter: { title: `Process — ${SITE.name}`, description },
-};
+  description:
+    "How a Ridox Studio engagement runs: discovery, architecture and system design, engineering and iteration, then launch and equilibrium.",
+  path: "/process",
+});
 
 export default function ProcessPage() {
   return (

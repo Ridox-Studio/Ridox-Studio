@@ -5,26 +5,14 @@ import { ProjectGallery } from "@/app/components/projects/ProjectGallery";
 import { ContactSection } from "@/app/components/contact/ContactSection";
 import { Footer } from "@/app/components/footer/Footer";
 import { getProjectsByCategory } from "@/app/data/projects";
-import { SITE } from "@/app/lib/site";
+import { buildPageMetadata } from "@/app/lib/metadata";
 
-const description =
-  "Case studies and project showcases from Ridox Studio. Web applications, mobile platforms, and enterprise systems built for clients across industries.";
-
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Client Work",
-  description,
-  alternates: { canonical: "/work" },
-  openGraph: {
-    title: `Client Work — ${SITE.name}`,
-    description,
-    url: `${SITE.url}/work`,
-    // og:image comes from app/work/opengraph-image.tsx
-  },
-  twitter: {
-    title: `Client Work — ${SITE.name}`,
-    description,
-  },
-};
+  description:
+    "Case studies from Ridox Studio — web applications, mobile platforms and enterprise systems built for clients across industries.",
+  path: "/work",
+});
 
 export default function WorkPage() {
   const projects = getProjectsByCategory("client");

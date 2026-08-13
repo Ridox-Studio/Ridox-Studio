@@ -5,26 +5,14 @@ import { ProjectGallery } from "@/app/components/projects/ProjectGallery";
 import { ContactSection } from "@/app/components/contact/ContactSection";
 import { Footer } from "@/app/components/footer/Footer";
 import { getProjectsByCategory } from "@/app/data/projects";
-import { SITE } from "@/app/lib/site";
+import { buildPageMetadata } from "@/app/lib/metadata";
 
-const description =
-  "Internal products and public tools built by Ridox Studio — open-source developer tooling, observability, and design-token infrastructure born out of client engagements.";
-
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Studio Products",
-  description,
-  alternates: { canonical: "/studio" },
-  openGraph: {
-    title: `Studio Products — ${SITE.name}`,
-    description,
-    url: `${SITE.url}/studio`,
-    // og:image comes from app/studio/opengraph-image.tsx
-  },
-  twitter: {
-    title: `Studio Products — ${SITE.name}`,
-    description,
-  },
-};
+  description:
+    "Products and open-source tools built by Ridox Studio — developer tooling, observability and design-token infrastructure born out of client work.",
+  path: "/studio",
+});
 
 export default function StudioPage() {
   const projects = getProjectsByCategory("studio");

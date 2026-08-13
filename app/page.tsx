@@ -13,24 +13,20 @@ import { Reveal } from "@/app/components/shared/Reveal";
 import { TransitionLink } from "@/app/components/transitions/TransitionLink";
 import { MARQUEE_LINES, PROCESS_STEPS, SERVICES } from "@/app/data/content";
 import { getFeatured } from "@/app/data/projects";
+import { buildPageMetadata } from "@/app/lib/metadata";
 import { SITE } from "@/app/lib/site";
 
+// The homepage sets its own full title rather than taking the "%s — Ridox
+// Studio" template, which would repeat the name.
 export const metadata: Metadata = {
-  title: `${SITE.name} — Software Systems Engineered at the Reaction Point`,
-  description: SITE.description,
-  alternates: { canonical: "/" },
-  openGraph: {
-    title: `${SITE.name} — Software Systems Engineered at the Reaction Point`,
-    description:
+  ...buildPageMetadata({
+    title: "Engineered at the Reaction Point",
+    description: SITE.description,
+    path: "/",
+    socialDescription:
       "Software engineering agency balancing design energy with engineering depth.",
-    url: SITE.url,
-    // og:image comes from app/opengraph-image.tsx (Section 14.4)
-  },
-  twitter: {
-    title: `${SITE.name} — Software Systems Engineered at the Reaction Point`,
-    description:
-      "Software engineering agency balancing design energy with engineering depth.",
-  },
+  }),
+  title: `${SITE.name} — Engineered at the Reaction Point`,
 };
 
 const linkClass =
