@@ -77,7 +77,8 @@ const organizationSchema = {
   url: SITE.url,
   logo: `${SITE.url}/logos/ridox-studio-logo.svg`,
   description: SITE.longDescription,
-  sameAs: [SITE.social.twitter, SITE.social.github, SITE.social.linkedin],
+  // Derived so adding a profile to SITE.social is the only edit needed.
+  sameAs: Object.values(SITE.social),
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer service",

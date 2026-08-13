@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "logos": "node scripts/generate-logo-assets.mjs"
+    "logos": "node scripts/generate-logo-assets.mjs",
+    "banners": "node scripts/generate-social-banners.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -26,7 +27,10 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.0",
+    "fontkit": "^2.0.4",
+    "opentype.js": "^2.0.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wawoff2": "^2.0.1"
   }
 }

@@ -35,10 +35,15 @@ export const SITE = {
   longDescription:
     "Ridox Studio is a software engineering agency specializing in high-performance web applications, mobile systems, cloud infrastructure, and AI-powered solutions. Built on the principle of Redox duality — balancing design energy with engineering depth.",
   twitter: "@ridoxstudio",
+  /**
+   * Only list profiles that actually exist. These feed the Organization
+   * JSON-LD `sameAs`, which Google uses to link the site to its accounts —
+   * pointing it at a profile that 404s is worse than omitting it. Add
+   * LinkedIn here once the page is created.
+   */
   social: {
-    twitter: "https://twitter.com/ridoxstudio",
-    github: "https://github.com/ridox-studio",
-    linkedin: "https://linkedin.com/company/ridox-studio",
+    instagram: "https://instagram.com/ridoxstudio",
+    github: "https://github.com/Ridox-Studio",
   },
   email: "hello@ridoxstudio.com",
 } as const;
