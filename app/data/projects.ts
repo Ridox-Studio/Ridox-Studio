@@ -96,17 +96,17 @@ export const PROJECTS: Project[] = [
     slug: "risms",
     category: "studio",
     title: "RISMS",
-    subtitle: "Multi-tenant school management built for African institutions",
+    subtitle: "School management where the school keeps its own money",
     description:
-      "A school management system covering academics, staff, students, timetabling, fees and multi-currency wallets. It segregates into four distinct persona surfaces — system admin, institution staff, student portal and guardian — so no screen tries to serve two audiences at once.",
+      "Academics, staff, students, timetabling and fees for African institutions, split across four persona surfaces so no screen serves two audiences at once. Fees are collected on each school's own payment credentials — the platform records the money without ever holding it.",
     coverImage: "/projects/risms.svg",
     techStack: ["Laravel 11", "PHP 8.3", "Vue 3", "Inertia v2", "Tailwind 4", "Paystack"],
     status: "in-development",
     year: 2026,
     featured: true,
     highlights: [
+      { label: "Fees go", value: "Straight to the school" },
       { label: "Persona surfaces", value: "4" },
-      { label: "Architecture", value: "Multi-tenant" },
       { label: "Wallet ledger", value: "Append-only" },
     ],
     features: [
@@ -121,9 +121,19 @@ export const PROJECTS: Project[] = [
           "Institution routes bind to a slug and log in through that school's own branded page. There is no generic dashboard a parent could land on by accident.",
       },
       {
+        title: "School fees never touch us",
+        detail:
+          "Each institution plugs in its own payment credentials, so parents pay the school directly and the money lands in the school's account. We record the transaction; we never hold the funds.",
+      },
+      {
+        title: "No custody, so no withdrawals to get wrong",
+        detail:
+          "We found a withdrawal path that could pay out cash-funded credits — money the platform never actually held. Rather than patch it, we removed custody entirely. The safest way to handle someone else's money is not to.",
+      },
+      {
         title: "Money is an append-only ledger",
         detail:
-          "Multi-currency wallets are recorded as entries that are never edited or deleted. Balances are derived, so a fee dispute can be traced rather than argued.",
+          "Wallet movements are recorded as entries that are never edited or deleted, and balances are derived from them. A fee dispute can be traced rather than argued.",
       },
       {
         title: "Guardians see every ward at once",
