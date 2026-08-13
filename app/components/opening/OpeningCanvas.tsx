@@ -3,6 +3,8 @@
 import { motion, useSpring } from "framer-motion";
 import { useEffect } from "react";
 import { EASING } from "@/app/lib/motion";
+import { SERVICES } from "@/app/data/content";
+import { getProjectsByCategory, getWorkProjects } from "@/app/data/projects";
 import { SITE } from "@/app/lib/site";
 import { Logo } from "@/app/components/shared/Logo";
 import { useMousePosition } from "@/app/hooks/useMousePosition";
@@ -37,11 +39,16 @@ function useTilt(enabled: boolean) {
 const VERTICAL_WORDS =
   "REDUCTION ◆ OXIDATION ◆ ENGINEERING ◆ DESIGN ◆ ARCHITECTURE ◆ TRANSFORMATION ◆ ";
 
-/** Facts, not filler — they anchor the bottom of the canvas. */
+/**
+ * Facts, not filler. Every value is derived from the data that renders the
+ * rest of the site, so none of it can drift — or be quietly inflated.
+ */
+const pad = (value: number) => String(value).padStart(2, "0");
+
 const CANVAS_META = [
-  { label: "Founded", value: "2021" },
-  { label: "Capabilities", value: "05" },
-  { label: "Systems shipped", value: "40+" },
+  { label: "Capabilities", value: pad(SERVICES.length) },
+  { label: "Products", value: pad(getProjectsByCategory("studio").length) },
+  { label: "Engagements", value: pad(getWorkProjects().length) },
 ];
 
 /** Section 6.2 — the opening canvas. Not a hero. */

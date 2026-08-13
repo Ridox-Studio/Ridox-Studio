@@ -8,7 +8,7 @@ export interface Service {
   accent: Accent;
 }
 
-/** Section 8.1 — the five horizontal-scroll panels. */
+/** Section 8.1 — the horizontal-scroll capability panels. */
 export const SERVICES: Service[] = [
   {
     index: "01",
@@ -74,6 +74,19 @@ export const SERVICES: Service[] = [
       "Fractional technical leadership",
     ],
     accent: "amber",
+  },
+  {
+    index: "06",
+    title: "Technical Enablement & Coaching",
+    summary:
+      "AI will get you most of the way to a working product. We do the part that breaks in production — and leave your team able to do it themselves next time.",
+    capabilities: [
+      "Getting AI-built projects production-ready",
+      "Email deliverability, domains and DNS",
+      "Deployment, environments and CI setup",
+      "Pair sessions and code review for founders and small teams",
+    ],
+    accent: "indigo",
   },
 ];
 

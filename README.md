@@ -44,6 +44,7 @@ from those two values and nothing else.
 | **03** | **Cloud infrastructure & DevOps** | Infrastructure you can read. Declared in code, reproducible per environment, boring in the ways it should be. |
 | **04** | **AI & data systems** | Model-backed features with the unglamorous parts handled: evaluation, guardrails, cost control, a fallback when it fails. |
 | **05** | **Technical consulting** | Sometimes the deliverable is a decision. We audit, map the tradeoffs, and hand your team a plan they can execute without us. |
+| **06** | **Technical enablement & coaching** | AI will get you most of the way to a working product. We do the part that breaks in production — and leave your team able to do it themselves next time. |
 
 ## How we work
 

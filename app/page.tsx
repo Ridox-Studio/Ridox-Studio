@@ -131,7 +131,7 @@ export default function HomePage() {
             <SectionHeader
               overline="Capabilities"
               accent="indigo"
-              title="Five surfaces, one system"
+              title="Six surfaces, one system"
               lede="We do not sell isolated deliverables. Every capability below exists because the others need it."
             />
           </Reveal>
@@ -139,7 +139,7 @@ export default function HomePage() {
         <SectionRail
           overline="Capabilities"
           accent="indigo"
-          title="Five surfaces, one system"
+          title="Six surfaces, one system"
         />
         <HorizontalScroll services={SERVICES} />
       </section>
