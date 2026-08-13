@@ -34,7 +34,8 @@ export const SITE = {
   /** The full positioning statement, for JSON-LD and anywhere length is free. */
   longDescription:
     "Ridox Studio is a software engineering agency specializing in high-performance web applications, mobile systems, cloud infrastructure, and AI-powered solutions. Built on the principle of Redox duality — balancing design energy with engineering depth.",
-  twitter: "@ridoxstudio",
+  /** Note the trailing underscore — @ridoxstudio was taken. */
+  twitter: "@ridoxstudio_",
   /**
    * Only list profiles that actually exist. These feed the Organization
    * JSON-LD `sameAs`, which Google uses to link the site to its accounts —
@@ -42,9 +43,12 @@ export const SITE = {
    * LinkedIn here once the page is created.
    */
   social: {
+    x: "https://x.com/ridoxstudio_",
     instagram: "https://instagram.com/ridoxstudio",
     github: "https://github.com/Ridox-Studio",
   },
+  /** Country-level: the studio works across Nigeria, not from one city. */
+  location: "Nigeria",
   email: "hello@ridoxstudio.com",
 } as const;
 

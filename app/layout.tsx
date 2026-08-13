@@ -79,6 +79,10 @@ const organizationSchema = {
   description: SITE.longDescription,
   // Derived so adding a profile to SITE.social is the only edit needed.
   sameAs: Object.values(SITE.social),
+  // Country-level only — the studio is not tied to one city, and claiming a
+  // street address it does not have would be worse than claiming none.
+  address: { "@type": "PostalAddress", addressCountry: "NG" },
+  areaServed: "Worldwide",
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer service",
