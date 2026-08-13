@@ -29,9 +29,11 @@ Named after **Redox Reactions** (Reduction + Oxidation) — two opposing chemica
 
 ### 1.2 The Logo: Variant 7 — Monolith Cutout Slash
 
-Two geometric polygon blocks (Amber left, Indigo right) split by a sharp diagonal negative-space slash. Each block contains a **seed dot** of the opposing color — Indigo seed inside Amber, Amber seed inside Indigo. This is the visual embodiment of the Redox duality.
+Two geometric polygon blocks (Amber left, Indigo right) split by a sharp diagonal negative-space slash. This is the visual embodiment of the Redox duality.
 
-**The logo SVG files live at:** `public/logos/ridox/variant7*.svg`
+> The mark originally carried a **seed dot** of the opposing color inside each block. Those were removed — the duality now reads from the two blocks and the cut alone. Any animation that relied on the dots (the preloader's stationary anchors, the trigger pulse) animates the blocks instead.
+
+**The logo SVG files live at:** `public/logos/ridox-studio-logo.svg`
 
 ---
 
@@ -946,7 +948,7 @@ Structured data tells Google exactly what your site is, enabling rich search res
       '@type': 'Organization',
       name: 'Ridox Studio',
       url: 'https://ridoxstudio.com',
-      logo: 'https://ridoxstudio.com/logos/ridox/variant7.svg',
+      logo: 'https://ridoxstudio.com/logos/ridox-studio-logo.svg',
       description: 'Software engineering agency specializing in high-performance web applications, mobile systems, cloud infrastructure, and AI solutions.',
       sameAs: [
         'https://twitter.com/ridoxstudio',

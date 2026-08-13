@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="public/logos/ridox/variant7.svg" alt="Ridox Studio" width="110" />
+<img src="public/logos/ridox-studio-logo.svg" alt="Ridox Studio" width="110" />
 
 # Ridox Studio
 

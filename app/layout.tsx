@@ -74,7 +74,7 @@ const organizationSchema = {
   "@type": "Organization",
   name: SITE.name,
   url: SITE.url,
-  logo: `${SITE.url}/logos/ridox/variant7.svg`,
+  logo: `${SITE.url}/logos/ridox-studio-logo.svg`,
   description: SITE.description,
   sameAs: [SITE.social.twitter, SITE.social.github, SITE.social.linkedin],
   contactPoint: {

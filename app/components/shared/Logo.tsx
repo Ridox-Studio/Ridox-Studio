@@ -8,7 +8,7 @@ import { slidingDuality } from "@/app/lib/motion";
 const AMBER = "hsl(33, 95%, 52%)";
 const INDIGO = "hsl(258, 89%, 62%)";
 
-/** Variant 7 geometry — copied verbatim from public/logos/ridox/variant7.svg. */
+/** Variant 7 geometry — copied verbatim from public/logos/ridox-studio-logo.svg. */
 const SLASH_CUTOUT = "M 48,15 L 56,15 L 40,85 L 32,85 Z";
 const AMBER_BLOCK = "M 22,22 L 70,22 L 44,78 L 22,78 Z";
 const INDIGO_BLOCK = "M 56,22 L 78,22 L 78,78 L 30,78 Z";
