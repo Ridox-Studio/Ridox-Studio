@@ -16,6 +16,9 @@ const STATUS_LABEL: Record<NonNullable<Project["status"]>, string> = {
   archived: "Archived",
 };
 
+/** The rest are listed in full on the deep dive. */
+const MAX_TECH_PILLS = 5;
+
 const CATEGORY_LABEL: Record<Project["category"], string> = {
   client: "Client work",
   consulting: "Consulting",
@@ -37,6 +40,11 @@ export function ProjectCard({
   const ref = useSpotlight<HTMLDivElement>();
   const href = getProjectHref(project);
 
+  // Netcart carries eight technologies; unbounded, the pills wrap into four
+  // rows on a phone and push the call to action out of a fixed-height card.
+  const visibleTech = project.techStack.slice(0, MAX_TECH_PILLS);
+  const hiddenTechCount = project.techStack.length - visibleTech.length;
+
   return (
     <article
       ref={ref}
@@ -48,8 +56,10 @@ export function ProjectCard({
       <CursorSpotlight accent={accent} />
 
       <div className="relative flex h-full flex-col md:flex-row">
-        {/* Visual — full-bleed on top for mobile, one half on desktop */}
-        <div className="relative aspect-video w-full shrink-0 overflow-hidden bg-surface-void md:aspect-auto md:h-full md:w-1/2">
+        {/* Visual — full-bleed on top for mobile, one half on desktop. Capped
+            on mobile: the card is a fixed height, so every pixel the image
+            takes is a pixel the call to action loses. */}
+        <div className="relative aspect-[2/1] max-h-44 w-full shrink-0 overflow-hidden bg-surface-void md:aspect-auto md:max-h-none md:h-full md:w-1/2">
           <ProjectImage
             src={project.coverImage}
             alt={`${project.title} — ${project.subtitle}`}
@@ -94,20 +104,24 @@ export function ProjectCard({
             </h3>
             <p
               className={clsx(
-                "type-body font-medium",
+                "type-body line-clamp-2 font-medium",
                 accent === "amber" ? "text-amber-300" : "text-indigo-200",
               )}
             >
               {project.subtitle}
             </p>
-            <p className="type-body max-w-prose text-content-secondary">
+            {/* Clamped: the full text lives on the deep dive. A card that
+                overflows its fixed height loses its call to action. */}
+            <p className="type-body line-clamp-3 max-w-prose text-content-secondary md:line-clamp-4">
               {project.description}
             </p>
           </div>
 
-          <div className="flex flex-col gap-5">
+          {/* shrink-0 keeps this block at its natural size — it must never be
+              the thing that gets compressed away. */}
+          <div className="flex shrink-0 flex-col gap-5">
             <ul className="flex flex-wrap gap-2">
-              {project.techStack.map((tech) => (
+              {visibleTech.map((tech) => (
                 <li
                   key={tech}
                   className="rounded-full border border-edge-subtle px-2 py-1 font-mono text-[10px] text-content-secondary md:px-3 md:text-xs"
@@ -115,6 +129,11 @@ export function ProjectCard({
                   {tech}
                 </li>
               ))}
+              {hiddenTechCount > 0 && (
+                <li className="rounded-full border border-edge-subtle px-2 py-1 font-mono text-[10px] text-content-tertiary md:px-3 md:text-xs">
+                  +{hiddenTechCount}
+                </li>
+              )}
             </ul>
 
             <TransitionLink
