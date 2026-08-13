@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="7.575757575757578 7.575757575757578 84.84848484848484 84.84848484848484" class="logo-svg">
+  <rect x="7.575757575757578" y="7.575757575757578" width="84.84848484848484" height="84.84848484848484" fill="rgb(255, 255, 255)" />
+  <!-- Variant 7: Monolith True Cutout Slash (Transparent Background) -->
+  <defs>
+    <mask id="slash-cutout">
+      <rect width="100" height="100" fill="#ffffff" />
+      <path d="M 48,15 L 56,15 L 40,85 L 32,85 Z" fill="#000000" />
+    </mask>
+  </defs>
+  <g mask="url(#slash-cutout)">
+    <!-- Left Polygon Block (Amber) -->
+    <path d="M 22,22 L 70,22 L 44,78 L 22,78 Z" fill="hsl(33, 95%, 52%)" />
+    
+    <!-- Right Polygon Block (Indigo) -->
+    <path d="M 56,22 L 78,22 L 78,78 L 30,78 Z" fill="hsl(258, 89%, 62%)" opacity="0.9" />
+  </g>
+</svg>
