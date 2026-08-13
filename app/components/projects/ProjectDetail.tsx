@@ -114,12 +114,48 @@ export function ProjectDetail({ project }: { project: Project }) {
           </RevealGroup>
         )}
 
+        {project.features && project.features.length > 0 && (
+          <div className="flex flex-col gap-8">
+            <Reveal>
+              <h2 className="type-section font-display text-content-primary">
+                What it actually does
+              </h2>
+            </Reveal>
+            <RevealGroup as="ul" className="grid grid-cols-1 gap-x-12 gap-y-8 md:grid-cols-2">
+              {project.features.map((feature) => (
+                <RevealItem
+                  as="li"
+                  key={feature.title}
+                  className="flex flex-col gap-3 border-t border-edge-subtle pt-6"
+                >
+                  <h3
+                    className={clsx(
+                      "type-card font-display",
+                      accent === "amber" ? "text-amber-300" : "text-indigo-200",
+                    )}
+                  >
+                    {feature.title}
+                  </h3>
+                  <p className="type-body max-w-prose text-content-secondary">
+                    {feature.detail}
+                  </p>
+                </RevealItem>
+              ))}
+            </RevealGroup>
+          </div>
+        )}
+
         <div className="flex flex-col gap-10 md:flex-row md:gap-16">
           <Reveal className="flex flex-1 flex-col gap-6">
             <h2 className="type-section font-display text-content-primary">
               What we built
             </h2>
             <p className="type-body text-content-secondary">{project.description}</p>
+            {project.credits && (
+              <p className="type-caption border-s-2 border-edge-visible ps-4 text-content-tertiary">
+                {project.credits}
+              </p>
+            )}
           </Reveal>
 
           <Reveal delay={0.1} className="flex w-full flex-col gap-6 md:w-72 md:shrink-0">
