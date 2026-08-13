@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "logos": "node scripts/generate-logo-assets.mjs",
-    "banners": "node scripts/generate-social-banners.mjs"
+    "banners": "node scripts/generate-social-banners.mjs",
+    "covers": "node scripts/generate-project-covers.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
