@@ -9,5 +9,6 @@ export default function Image() {
     overline: "Studio products",
     title: "Our own reactions",
     subtitle: "Tools we built for ourselves first.",
+    cta: "Explore the tools",
   });
 }

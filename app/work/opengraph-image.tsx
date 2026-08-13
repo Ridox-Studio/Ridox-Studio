@@ -9,6 +9,7 @@ export default function Image() {
     overline: "Client work",
     title: "Case studies",
     subtitle: "Systems built under real constraints.",
+    cta: "Read the case studies",
     accent: "indigo",
   });
 }

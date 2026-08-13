@@ -9,5 +9,6 @@ export default function Image() {
     overline: "The process",
     title: "Four phases",
     subtitle: "Discovery, architecture, engineering, equilibrium.",
+    cta: "See how we work",
   });
 }

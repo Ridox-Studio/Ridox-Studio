@@ -17,6 +17,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     overline: `Client work · ${project?.year ?? ""}`,
     title: project?.title ?? "Case study",
     subtitle: project?.subtitle,
+    cta: "Read the case study",
     accent: "indigo",
   });
 }

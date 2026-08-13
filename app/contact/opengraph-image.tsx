@@ -9,5 +9,8 @@ export default function Image() {
     overline: "Contact",
     title: "Start a Reaction",
     subtitle: "Tell us what you are building and what is in the way.",
+    // Not a repeat of the title — and not "book a call": the ask here is to
+    // send a brief, which costs the reader nothing and gets us more signal.
+    cta: "Send us the brief",
   });
 }

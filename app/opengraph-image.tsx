@@ -9,5 +9,6 @@ export default function Image() {
     overline: "Software engineering agency",
     title: "Engineered at the reaction point",
     subtitle: "Balancing design energy with engineering depth.",
+    cta: "See the work",
   });
 }

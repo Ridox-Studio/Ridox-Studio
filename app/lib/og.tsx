@@ -17,11 +17,18 @@ export function renderOgImage({
   overline,
   title,
   subtitle,
+  cta,
   accent = "amber",
 }: {
   overline: string;
   title: string;
   subtitle?: string;
+  /**
+   * The next step this card invites. Keep it matched to the page — a stranger
+   * seeing the homepage in a feed is not ready for "book a call", but they
+   * will click "see the work".
+   */
+  cta?: string;
   accent?: "amber" | "indigo";
 }) {
   const accentColor = accent === "amber" ? AMBER : INDIGO;
@@ -105,6 +112,32 @@ export function renderOgImage({
           </span>
           {subtitle ? (
             <span style={{ color: MUTED, fontSize: 30, lineHeight: 1.35 }}>{subtitle}</span>
+          ) : null}
+
+          {cta ? (
+            // Sized to stay readable at the thumbnail scale feeds render at,
+            // but kept subordinate to the title so the card does not read as
+            // an advert.
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                alignSelf: "flex-start",
+                gap: 12,
+                marginTop: 12,
+                padding: "14px 28px",
+                borderRadius: 999,
+                border: `2px solid ${accentColor}`,
+                color: accentColor,
+                fontSize: 24,
+                fontWeight: 700,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+              }}
+            >
+              {cta}
+              <span>→</span>
+            </div>
           ) : null}
         </div>
       </div>
