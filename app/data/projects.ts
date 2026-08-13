@@ -41,7 +41,7 @@ export const PROJECTS: Project[] = [
     title: "Cilbup",
     subtitle: "Anonymous messaging and tipping for creators",
     description:
-      "Cilbup — \"public\" reversed — lets anyone send a creator an anonymous message, and optionally attach a tip to get priority attention. Tips settle in four currencies through swappable payment providers, and creators get a dashboard for messages, earnings and analytics with delivery over email, WhatsApp and browser push. It installs as a PWA, so the people it is built for — creators on phones, on Nigerian data — get an app without an app store.",
+      "Cilbup — \"public\" reversed — lets anyone send a creator an anonymous message, and optionally attach a tip to get priority attention. Tips settle in USD so earnings hold their value in markets where the local currency does not, while a fan pays however suits them — crypto or fiat. Creators get a dashboard for messages, earnings and analytics, and it installs as a PWA, so the people it is built for get an app without an app store.",
     coverImage: "/projects/cilbup.png",
     techStack: ["Next.js", "React 19", "TypeScript", "PWA", "Prisma", "MongoDB", "Redis", "Chainrails"],
     status: "live",
@@ -49,8 +49,8 @@ export const PROJECTS: Project[] = [
     year: 2026,
     featured: true,
     highlights: [
-      { label: "Currencies", value: "NGN · USD · GBP · EUR" },
-      { label: "Payment providers", value: "Pluggable" },
+      { label: "Settles in", value: "USD" },
+      { label: "Fans pay with", value: "Crypto or fiat" },
       { label: "In development since", value: "2022" },
     ],
     credits: "Designed in collaboration with an external product designer.",
@@ -66,9 +66,14 @@ export const PROJECTS: Project[] = [
           "Anyone can message for free. Attaching a tip moves a message up the creator's queue — the incentive is priority, not a paywall.",
       },
       {
-        title: "Four currencies, swappable processors",
+        title: "Paid in whatever, earned in USD",
         detail:
-          "NGN, USD, GBP and EUR each carry their own minimum, maximum and suggested amounts. Providers sit behind an interface, so the default moved from Paystack to Chainrails without touching the tipping flow.",
+          "A fan tips with crypto or fiat, whichever they have. It lands as USD, because a creator in a market with an unstable currency should not watch last month's tips lose value while they wait to withdraw.",
+      },
+      {
+        title: "The processor is a detail, not a dependency",
+        detail:
+          "Providers sit behind one interface, so the default moved from Paystack to Chainrails without the tipping flow noticing. The next switch will be the same.",
       },
       {
         title: "Messages are shareable assets",
