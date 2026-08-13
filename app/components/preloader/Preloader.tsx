@@ -2,12 +2,30 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { EASING, SLASH } from "@/app/lib/motion";
+import { doorVariants, SLASH } from "@/app/lib/motion";
 import { Logo } from "@/app/components/shared/Logo";
 import { useMotionPrefs } from "@/app/components/providers/MotionProvider";
 import { useReducedMotion } from "@/app/hooks/useReducedMotion";
 
 const MINIMUM_VISIBLE_MS = 1600;
+
+/**
+ * The wordmark painted on the closed door. Rendered once inside EACH half at
+ * identical coordinates, so the two clipped copies line up into one continuous
+ * lockup — the diagonal slash cuts through the letters rather than between
+ * them, and the word tears along that line as the halves part.
+ */
+function DoorWordmark() {
+  return (
+    <div
+      aria-hidden="true"
+      className="absolute inset-0 flex flex-col items-center justify-center text-surface-void"
+    >
+      <span className="type-door font-display">RIDOX</span>
+      <span className="type-door font-display">STUDIO</span>
+    </div>
+  );
+}
 
 /**
  * Section 6.1 — the controlled reveal.
@@ -20,7 +38,7 @@ const MINIMUM_VISIBLE_MS = 1600;
  */
 export function Preloader() {
   const reduce = useReducedMotion();
-  const { minimal, enableMinimalMode } = useMotionPrefs();
+  const { minimal } = useMotionPrefs();
   const [revealing, setRevealing] = useState(false);
   const [dismissed, setDismissed] = useState(false);
 
@@ -65,10 +83,9 @@ export function Preloader() {
     window.dispatchEvent(new Event("resize"));
   };
 
-  const skip = () => {
-    enableMinimalMode();
-    dismiss();
-  };
+  // Skipping the intro skips the intro — nothing more. Turning motion off
+  // site-wide is a separate, explicitly labelled choice in the footer.
+  const skip = () => dismiss();
 
   if (!active) return null;
 
@@ -97,29 +114,29 @@ export function Preloader() {
         </AnimatePresence>
       ) : (
         <div id="ridox-preloader" className="fixed inset-0 z-[60]">
-          {/* Phase 2 — the slash expands to viewport scale and the halves part. */}
+          {/* The initial load is the Redox Door already shut: the same two
+              halves, holding the sliding duality, then parting on reveal. */}
           <motion.div
-            className="absolute inset-0 bg-surface-void"
+            className="absolute inset-0 bg-amber-400"
             style={{ clipPath: SLASH.amberHalf }}
-            animate={revealing ? { x: "-110%", y: "-110%" } : { x: 0, y: 0 }}
-            transition={{ duration: 1.2, ease: EASING.redox }}
-            onAnimationComplete={() => {
-              if (revealing) dismiss();
+            variants={doorVariants(1, 0.6, 1.2)}
+            initial="closed"
+            animate={revealing ? "offscreen" : "duality"}
+            onAnimationComplete={(definition) => {
+              if (definition === "offscreen") dismiss();
             }}
-          />
+          >
+            <DoorWordmark />
+          </motion.div>
           <motion.div
-            className="absolute inset-0 bg-surface-void"
+            className="absolute inset-0 bg-indigo-300"
             style={{ clipPath: SLASH.indigoHalf }}
-            animate={revealing ? { x: "110%", y: "110%" } : { x: 0, y: 0 }}
-            transition={{ duration: 1.2, ease: EASING.redox }}
-          />
-          {/* A hairline of brand colour rides the parting edge. */}
-          <motion.div
-            className="absolute inset-0"
-            style={{ background: "var(--gradient-slash)" }}
-            animate={{ opacity: revealing ? 0 : 0.12 }}
-            transition={{ duration: 0.6, ease: EASING.redox }}
-          />
+            variants={doorVariants(-1, 0.6, 1.2)}
+            initial="closed"
+            animate={revealing ? "offscreen" : "duality"}
+          >
+            <DoorWordmark />
+          </motion.div>
 
           <AnimatePresence>
             {!revealing && (
@@ -129,22 +146,9 @@ export function Preloader() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <Logo
-                  size={80}
-                  animation="duality"
-                  distance={10}
-                  cycle={2}
-                  className="md:hidden"
-                />
-                <Logo
-                  size={120}
-                  animation="duality"
-                  distance={10}
-                  cycle={2}
-                  className="hidden md:block"
-                />
-
-                <p className="absolute bottom-8 left-1/2 -translate-x-1/2 font-mono text-[0.6875rem] text-content-tertiary md:left-8 md:translate-x-0">
+                {/* No logo mark here — the two halves ARE the mark at
+                    viewport scale, so a second one just competes with them. */}
+                <p className="absolute bottom-8 left-1/2 -translate-x-1/2 font-mono text-[0.6875rem] text-surface-void md:left-8 md:translate-x-0">
                   Initializing Redox Engine
                   <motion.span
                     aria-hidden="true"
@@ -158,9 +162,9 @@ export function Preloader() {
                 <button
                   type="button"
                   onClick={skip}
-                  className="absolute top-6 right-6 flex min-h-11 min-w-11 items-center rounded-sm px-3 font-mono text-xs text-content-secondary underline decoration-content-tertiary underline-offset-4 transition-colors hover:text-amber-400"
+                  className="absolute top-6 right-6 flex min-h-11 min-w-11 items-center rounded-sm px-3 font-mono text-xs text-surface-void underline decoration-surface-void/40 underline-offset-4"
                 >
-                  Skip to content →
+                  Skip intro →
                 </button>
               </motion.div>
             )}

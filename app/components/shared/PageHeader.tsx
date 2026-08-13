@@ -21,7 +21,7 @@ export function PageHeader({
   children?: ReactNode;
 }) {
   return (
-    <header className="relative flex w-full flex-col overflow-hidden pt-32 pb-16 md:pt-44 md:pb-24">
+    <header className="relative flex w-full flex-col overflow-hidden pt-24 pb-10 md:pt-32 md:pb-16">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"

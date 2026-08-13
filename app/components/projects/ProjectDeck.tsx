@@ -72,7 +72,8 @@ function StackedCard({
   // The slot stays a full viewport tall — that is what drives the stacking —
   // but the card is capped so its content is never stretched to fill it.
   return (
-    <div className="sticky top-0 flex h-[90svh] items-center py-4 md:h-svh md:py-8">
+    // Offset by the pinned section rail so cards never slide underneath it.
+    <div className="sticky top-[var(--rail-h)] flex h-[calc(90svh-var(--rail-h))] items-center py-4 md:h-[calc(100svh-var(--rail-h))] md:py-8">
       <motion.div
         // scale/translate only — no layout properties animate (Section 12.1)
         style={{ scale, y, opacity, transformOrigin: "top center" }}

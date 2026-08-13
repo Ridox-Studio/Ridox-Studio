@@ -8,6 +8,7 @@ import { ProcessTimeline } from "@/app/components/process/ProcessTimeline";
 import { ContactSection } from "@/app/components/contact/ContactSection";
 import { Footer } from "@/app/components/footer/Footer";
 import { Container, SectionHeader } from "@/app/components/shared/SectionHeader";
+import { SectionRail } from "@/app/components/shared/SectionRail";
 import { Reveal } from "@/app/components/shared/Reveal";
 import { TransitionLink } from "@/app/components/transitions/TransitionLink";
 import { MARQUEE_LINES, PROCESS_STEPS, SERVICES } from "@/app/data/content";
@@ -66,6 +67,21 @@ export default function HomePage() {
             />
           </Reveal>
         </Container>
+        <SectionRail
+          overline="Client work"
+          accent="indigo"
+          title="Systems built under real constraints"
+          action={
+            <TransitionLink
+              href="/work"
+              label="Work"
+              className={`${linkClass} shrink-0 text-indigo-300 hover:text-indigo-200`}
+            >
+              All work
+              <ArrowUpRight size={14} aria-hidden="true" />
+            </TransitionLink>
+          }
+        />
         <Container>
           <ProjectDeck projects={clientWork} />
         </Container>
@@ -94,6 +110,20 @@ export default function HomePage() {
             />
           </Reveal>
         </Container>
+        <SectionRail
+          overline="Studio products"
+          title="What we build when nobody is paying us"
+          action={
+            <TransitionLink
+              href="/studio"
+              label="Studio"
+              className={`${linkClass} shrink-0 text-amber-400 hover:text-amber-300`}
+            >
+              All products
+              <ArrowUpRight size={14} aria-hidden="true" />
+            </TransitionLink>
+          }
+        />
         <Container>
           <ProjectDeck projects={studioWork} />
         </Container>
@@ -110,6 +140,11 @@ export default function HomePage() {
             />
           </Reveal>
         </Container>
+        <SectionRail
+          overline="Capabilities"
+          accent="indigo"
+          title="Five surfaces, one system"
+        />
         <HorizontalScroll services={SERVICES} />
       </section>
 

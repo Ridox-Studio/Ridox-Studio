@@ -41,6 +41,39 @@ export const SLASH = {
 export const SLASH_AXIS = { x: -0.36, y: 0.93 } as const;
 
 /**
+ * The Redox Door choreography, shared by the page transition and the initial
+ * preloader so both read as the same object.
+ *
+ * `direction` is 1 for the amber half (exits top-left) and -1 for the indigo
+ * half (exits bottom-right).
+ */
+export function doorVariants(
+  direction: 1 | -1,
+  closeDuration: number,
+  openDuration: number,
+): Variants {
+  return {
+    offscreen: {
+      x: `${-110 * direction}%`,
+      y: `${-110 * direction}%`,
+      transition: { duration: openDuration, ease: EASING.redox },
+    },
+    closed: {
+      x: "0%",
+      y: "0%",
+      transition: { duration: closeDuration, ease: EASING.redox },
+    },
+    // The halves pass each other ALONG their shared edge, so the door stays
+    // sealed while whatever is behind it loads.
+    duality: {
+      x: [0, 10 * SLASH_AXIS.x * direction, 0, -10 * SLASH_AXIS.x * direction, 0],
+      y: [0, 10 * SLASH_AXIS.y * direction, 0, -10 * SLASH_AXIS.y * direction, 0],
+      transition: { duration: 1.6, ease: "easeInOut", repeat: Infinity },
+    },
+  };
+}
+
+/**
  * Section entrance — 0.8s, triggered at 20% viewport intersection (Section 11.4).
  * `reduce` swaps the transform for a plain opacity fade.
  */

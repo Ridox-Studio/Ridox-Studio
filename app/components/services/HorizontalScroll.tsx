@@ -107,7 +107,8 @@ function PinnedTrack({ services }: { services: Service[] }) {
       style={{ height: `calc(100svh + ${travel}px)` }}
       className="relative"
     >
-      <div className="sticky top-0 flex h-svh items-center overflow-hidden">
+      {/* Offset by the pinned section rail so panels clear the label. */}
+      <div className="sticky top-[var(--rail-h)] flex h-[calc(100svh-var(--rail-h))] items-center overflow-hidden">
         <motion.div ref={track} style={{ x }} className="flex gap-8 px-12">
           {services.map((service) => (
             <div key={service.index} className="h-[70svh] w-[75vw] shrink-0 xl:w-[55vw]">

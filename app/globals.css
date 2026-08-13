@@ -67,6 +67,10 @@
   /* Cursor spotlight defaults — overwritten per-element on mousemove */
   --mouse-x: 50%;
   --mouse-y: 50%;
+
+  /* Height of the pinned section rail. Pinned content offsets by this so it
+     never slides underneath the label. */
+  --rail-h: 3.25rem;
 }
 
 /* ============================================================
@@ -206,6 +210,16 @@ html.lenis body {
 .type-mega-outline {
   color: transparent;
   -webkit-text-stroke: clamp(1px, 0.22vw, 3px) var(--amber-400);
+}
+
+/* The wordmark carried on the closed Redox Door — sized to span the viewport
+   so the diagonal cuts through the letterforms themselves. */
+.type-door {
+  font-size: clamp(3.25rem, 15vw, 14rem);
+  font-weight: 900;
+  font-variation-settings: "wdth" 125;
+  letter-spacing: -0.04em;
+  line-height: 0.8;
 }
 
 /* Right-edge vertical word strip on the opening canvas. */

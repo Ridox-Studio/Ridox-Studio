@@ -21,7 +21,7 @@ export function ProcessTimeline({ steps }: { steps: ProcessStep[] }) {
   const spineScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <ol ref={container} className="relative flex flex-col gap-14 ps-10 md:ps-16">
+    <ol ref={container} className="relative flex flex-col gap-10 ps-10 md:ps-16">
       {/* Spine */}
       <div
         aria-hidden="true"

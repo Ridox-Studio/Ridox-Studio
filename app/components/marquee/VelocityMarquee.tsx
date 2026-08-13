@@ -91,14 +91,14 @@ export function VelocityMarquee({
   // Reduced motion / minimal mode — a static strip, no movement (Section 12.3).
   if (reduce) {
     return (
-      <div className="overflow-hidden py-12" aria-hidden="true">
+      <div className="overflow-hidden py-8" aria-hidden="true">
         <p className={`${typeClass} whitespace-nowrap`}>{top.join(" ◆ ")}</p>
       </div>
     );
   }
 
   return (
-    <div ref={ref} className="flex flex-col gap-2 py-12 md:py-20" aria-hidden="true">
+    <div ref={ref} className="flex flex-col gap-2 py-8 md:py-14" aria-hidden="true">
       <Strip words={top} direction={-1} className={typeClass} />
       {/* Second, opposing line is desktop-only to save vertical space */}
       <div className="hidden md:block">

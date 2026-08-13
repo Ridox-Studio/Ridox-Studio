@@ -8,7 +8,7 @@ export function ContactSection() {
   return (
     <section
       data-zone="amber"
-      className="relative flex w-full flex-col overflow-hidden py-28 md:py-40"
+      className="relative flex w-full flex-col overflow-hidden py-20 md:py-28"
     >
       <div
         aria-hidden="true"

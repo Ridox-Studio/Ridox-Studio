@@ -18,7 +18,7 @@ export function SectionHeader({
   className?: string;
 }) {
   return (
-    <header className={clsx("flex flex-col gap-6", className)}>
+    <header className={clsx("flex flex-col gap-4", className)}>
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-10">
         <div className="flex flex-col gap-4">
           <p
