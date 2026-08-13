@@ -11,8 +11,9 @@ export function ProjectGallery({ projects }: { projects: Project[] }) {
       {projects.map((project, index) => (
         <RevealItem as="li" key={project.slug}>
           {/* A definite height, not min-height: the card's `h-full` image pane
-              needs a resolvable parent height or it collapses to zero. */}
-          <div className="h-[34rem] md:h-[30rem]">
+              needs a resolvable parent height or it collapses to zero. Taller
+              on mobile, where the card stacks instead of splitting in two. */}
+          <div className="h-[40rem] md:h-[30rem]">
             <ProjectCard project={project} priority={index === 0} />
           </div>
         </RevealItem>

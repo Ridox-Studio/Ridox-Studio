@@ -77,7 +77,10 @@ function StackedCard({
       <motion.div
         // scale/translate only — no layout properties animate (Section 12.1)
         style={{ scale, y, opacity, transformOrigin: "top center" }}
-        className="h-full max-h-[34rem] w-full md:max-h-[30rem]"
+        // Capped on desktop, where a full-height card looks stretched. On
+        // mobile it fills the slot: the content is stacked rather than
+        // side by side, so it needs every pixel the viewport can give.
+        className="h-full w-full md:max-h-[30rem]"
       >
         <ProjectCard project={project} priority={priority} />
       </motion.div>

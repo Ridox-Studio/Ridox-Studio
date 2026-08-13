@@ -77,8 +77,10 @@ export function ProjectCard({
           />
         </div>
 
-        {/* Details */}
-        <div className="relative flex flex-1 flex-col justify-between gap-6 p-6 md:p-10">
+        {/* Details. min-h-0 lets this box be measured against the card's
+            height rather than its own content, so the overflow shows up as a
+            clamped line of text instead of a clipped button. */}
+        <div className="relative flex min-h-0 flex-1 flex-col justify-between gap-6 p-6 md:p-10">
           <div className="flex flex-col gap-4">
             <div className="flex flex-wrap items-center gap-3">
               <span
@@ -112,7 +114,7 @@ export function ProjectCard({
             </p>
             {/* Clamped: the full text lives on the deep dive. A card that
                 overflows its fixed height loses its call to action. */}
-            <p className="type-body line-clamp-3 max-w-prose text-content-secondary md:line-clamp-4">
+            <p className="type-body line-clamp-2 max-w-prose text-content-secondary sm:line-clamp-3 md:line-clamp-4">
               {project.description}
             </p>
           </div>
