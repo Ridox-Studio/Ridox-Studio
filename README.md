@@ -74,9 +74,13 @@ is stable in your hands.
 
 </div>
 
-Built to a written specification — [`NEW_WEBSITE.md`](NEW_WEBSITE.md) is the
-single source of truth for the brand system, motion architecture and layout
-rules. Read it before changing anything visual.
+Built to a written specification. Read these before changing anything visual:
+
+- [`BRAND.md`](BRAND.md) — the identity: colour, type, the mark, the slash,
+  recurring patterns, voice. Applies to anything carrying our name, not just
+  this site.
+- [`NEW_WEBSITE.md`](NEW_WEBSITE.md) — this site's motion architecture and
+  layout rules.
 
 ### Stack
 
