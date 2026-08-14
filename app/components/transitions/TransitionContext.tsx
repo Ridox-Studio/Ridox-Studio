@@ -44,14 +44,28 @@ export function TransitionProvider({ children }: { children: React.ReactNode }) 
 
   const [phase, setPhase] = useState<DoorPhase>("idle");
   const [label, setLabel] = useState<string | null>(null);
-  const [previousPath, setPreviousPath] = useState<string | null>(null);
+  /**
+   * The routes walked through to get here, oldest first. A stack rather than a
+   * single "previous" value: with one slot, going back overwrites it with the
+   * page just left, so the next back returns there and the reader ping-pongs
+   * between two pages instead of walking up the trail.
+   */
+  const [trail, setTrail] = useState<string[]>([]);
   const pendingHref = useRef<string | null>(null);
 
   const navigate = useCallback(
     (href: string, linkLabel?: string) => {
       if (href === pathname || pendingHref.current) return;
       pendingHref.current = href;
-      setPreviousPath(pathname);
+
+      setTrail((current) => {
+        // Navigating to wherever we came from IS going back, however the
+        // reader triggered it — the back control, the menu, or a footer link.
+        if (current[current.length - 1] === href) return current.slice(0, -1);
+        // Bounded: a long session should not accumulate an unbounded array.
+        return [...current, pathname].slice(-20);
+      });
+
       setLabel(linkLabel ? `// ${linkLabel.toUpperCase()}` : null);
       setPhase("closing");
     },
@@ -84,7 +98,7 @@ export function TransitionProvider({ children }: { children: React.ReactNode }) 
         phase,
         label,
         covered: phase !== "idle",
-        previousPath,
+        previousPath: trail[trail.length - 1] ?? null,
         navigate,
         onDoorsClosed,
         onDoorsOpened,
