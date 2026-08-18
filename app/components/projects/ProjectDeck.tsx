@@ -67,7 +67,11 @@ function StackedCard({
 
   const scale = useTransform(progress, [start, end], [1, isLast ? 1 : 0.95]);
   const y = useTransform(progress, [start, end], [0, isLast ? 0 : -20]);
-  const opacity = useTransform(progress, [start, end], [1, isLast ? 1 : 0.6]);
+  // A scrim drawn ON the card, not opacity applied TO it. Fading the card
+  // itself makes it translucent, so the card beneath shows through and the
+  // two images blend into a muddy composite — visible on every card except
+  // the first (nothing behind it) and the last (never dimmed).
+  const scrim = useTransform(progress, [start, end], [0, isLast ? 0 : 0.5]);
 
   // The slot stays a full viewport tall — that is what drives the stacking —
   // but the card is capped so its content is never stretched to fill it.
@@ -76,13 +80,19 @@ function StackedCard({
     <div className="sticky top-[var(--rail-h)] flex h-[calc(90svh-var(--rail-h))] items-center py-4 md:h-[calc(100svh-var(--rail-h))] md:py-8">
       <motion.div
         // scale/translate only — no layout properties animate (Section 12.1)
-        style={{ scale, y, opacity, transformOrigin: "top center" }}
+        style={{ scale, y, transformOrigin: "top center" }}
         // Capped on desktop, where a full-height card looks stretched. On
         // mobile it fills the slot: the content is stacked rather than
         // side by side, so it needs every pixel the viewport can give.
-        className="h-full w-full md:max-h-[30rem]"
+        className="relative h-full w-full md:max-h-[30rem]"
       >
         <ProjectCard project={project} priority={priority} />
+        <motion.div
+          aria-hidden="true"
+          style={{ opacity: scrim }}
+          // Radius matches the card so the scrim cannot square off its corners.
+          className="pointer-events-none absolute inset-0 rounded-2xl bg-surface-void"
+        />
       </motion.div>
     </div>
   );
