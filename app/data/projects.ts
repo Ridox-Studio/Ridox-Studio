@@ -99,9 +99,10 @@ export const PROJECTS: Project[] = [
     subtitle: "School management where the school keeps its own money",
     description:
       "Academics, staff, students, timetabling and fees for African institutions, split across four persona surfaces so no screen serves two audiences at once. Fees are collected on each school's own payment credentials — the platform records the money without ever holding it.",
-    coverImage: "/projects/risms.svg",
+    coverImage: "/projects/risms.png",
     techStack: ["Laravel 11", "PHP 8.3", "Vue 3", "Inertia v2", "Tailwind 4", "Paystack"],
     status: "in-development",
+    externalUrl: "https://risms.school",
     year: 2026,
     featured: true,
     highlights: [

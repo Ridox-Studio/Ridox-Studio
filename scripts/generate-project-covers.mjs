@@ -142,26 +142,59 @@ async function main() {
     const boxH = H * SAFE_H;
     const gap = 28;
 
-    // Each shot gets an equal share of the safe box's width.
-    const slotW = Math.floor((boxW - gap * (paths.length - 1)) / paths.length);
+    // Portrait shots sit side by side happily. Landscape ones do not — two
+    // 16:9 screens sharing the box width shrink until nothing is readable, so
+    // they cascade instead, offset along the logo's diagonal.
+    const meta = await Promise.all(paths.map((file) => sharp(file).metadata()));
+    const allLandscape = meta.every((m) => (m.width ?? 0) > (m.height ?? 0));
+    const cascade = allLandscape && paths.length > 1;
 
-    const framed = [];
-    for (const file of paths) {
-      framed.push(await frame(await sharp(file).png().toBuffer(), slotW, Math.floor(boxH)));
-    }
+    let layers;
 
-    const totalW = framed.reduce((sum, f) => sum + f.width, 0) + gap * (framed.length - 1);
-    let x = Math.round((W - totalW) / 2);
+    if (cascade) {
+      // Each shot is nearly box-width; the stack is offset down-left as it
+      // comes forward, so the last one drawn reads as the front of a deck.
+      const step = Math.round(boxW * 0.09);
+      const shotW = Math.round(boxW - step * (paths.length - 1));
+      const framed = [];
+      for (const file of paths) {
+        framed.push(
+          await frame(await sharp(file).png().toBuffer(), shotW, Math.floor(boxH)),
+        );
+      }
 
-    const layers = framed.map((f) => {
-      const layer = {
+      const spanW = framed[0].width + step * (paths.length - 1);
+      const spanH = framed[0].height + step * (paths.length - 1);
+      const originX = Math.round((W - spanW) / 2);
+      const originY = Math.round((H - spanH) / 2);
+
+      layers = framed.map((f, index) => ({
         input: f.buffer,
-        left: x,
-        top: Math.round((H - f.height) / 2),
-      };
-      x += f.width + gap;
-      return layer;
-    });
+        left: originX + step * (paths.length - 1 - index),
+        top: originY + step * index,
+      }));
+    } else {
+      // Each shot gets an equal share of the safe box's width.
+      const slotW = Math.floor((boxW - gap * (paths.length - 1)) / paths.length);
+
+      const framed = [];
+      for (const file of paths) {
+        framed.push(await frame(await sharp(file).png().toBuffer(), slotW, Math.floor(boxH)));
+      }
+
+      const totalW = framed.reduce((sum, f) => sum + f.width, 0) + gap * (framed.length - 1);
+      let x = Math.round((W - totalW) / 2);
+
+      layers = framed.map((f) => {
+        const layer = {
+          input: f.buffer,
+          left: x,
+          top: Math.round((H - f.height) / 2),
+        };
+        x += f.width + gap;
+        return layer;
+      });
+    }
 
     await sharp(Buffer.from(background(accent)))
       .composite(layers)
@@ -169,7 +202,7 @@ async function main() {
       .toFile(path.join(OUT, `${slug}.png`));
 
     console.log(
-      `${slug.padEnd(22)} ${paths.length} shot${paths.length > 1 ? "s" : ""} -> ${OUT}/${slug}.png`,
+      `${slug.padEnd(22)} ${paths.length} shot${paths.length > 1 ? "s" : ""} ${cascade ? "(cascade)" : ""} -> ${OUT}/${slug}.png`,
     );
   }
 
