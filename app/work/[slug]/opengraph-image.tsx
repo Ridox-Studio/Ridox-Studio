@@ -1,0 +1,23 @@
+import { OG_CONTENT_TYPE, OG_SIZE, renderOgImage } from "@/app/lib/og";
+import { getProjectBySlug, getWorkProjects } from "@/app/data/projects";
+
+export const alt = "Ridox Studio case study";
+export const size = OG_SIZE;
+export const contentType = OG_CONTENT_TYPE;
+
+export function generateStaticParams() {
+  return getWorkProjects().map((project) => ({ slug: project.slug }));
+}
+
+export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
+
+  return renderOgImage({
+    overline: `Client work · ${project?.year ?? ""}`,
+    title: project?.title ?? "Case study",
+    subtitle: project?.subtitle,
+    cta: "Read the case study",
+    accent: "indigo",
+  });
+}

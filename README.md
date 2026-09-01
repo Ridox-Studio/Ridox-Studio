@@ -1,70 +1,168 @@
-# Getting Started with Create React App
+<div align="center">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img src="public/logos/ridox-studio-logo.svg" alt="Ridox Studio" width="110" />
 
-## Available Scripts
+# Ridox Studio
 
-In the project directory, you can run:
+**Software systems engineered at the reaction point.**
 
-### `npm start`
+Every system is a balance of opposing forces — frontend and backend, chaos and
+structure, speed and stability, design and engineering. We build where they meet.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+[![Next.js](https://img.shields.io/badge/Next.js-16-000000?style=flat-square&logo=next.js&logoColor=white)](https://nextjs.org)
+[![React](https://img.shields.io/badge/React-19-087EA4?style=flat-square&logo=react&logoColor=white)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+[Website](https://ridoxstudio.com) · [Work](https://ridoxstudio.com/work) · [Studio](https://ridoxstudio.com/studio) · [Contact](https://ridoxstudio.com/contact)
 
-### `npm test`
+</div>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## The name
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Ridox is named after **redox reactions** — reduction and oxidation, two opposing
+chemical forces that cannot exist without each other. Neither is the whole
+reaction; the energy is in the exchange.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The mark is that idea drawn: two polygon blocks, amber and indigo, split by a
+sharp diagonal cut. The entire site, this README included, derives its colour
+from those two values and nothing else.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+| | Token | Role |
+|---|---|---|
+| 🟠 | `hsl(33, 95%, 52%)` | **Oxidation** — action, warmth, the energy side |
+| 🟣 | `hsl(258, 89%, 62%)` | **Reduction** — stability, depth, the structure side |
 
-### `npm run eject`
+## What we build
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+| | Capability | |
+|---|---|---|
+| **01** | **Web applications & platforms** | Product surfaces that stay fast as they grow — rendered on the server, typed end to end, instrumented from day one. |
+| **02** | **Mobile systems** | Built for the conditions users actually have: patchy signal, old devices, a thumb instead of a cursor. |
+| **03** | **Cloud infrastructure & DevOps** | Infrastructure you can read. Declared in code, reproducible per environment, boring in the ways it should be. |
+| **04** | **AI & data systems** | Model-backed features with the unglamorous parts handled: evaluation, guardrails, cost control, a fallback when it fails. |
+| **05** | **Technical consulting** | Sometimes the deliverable is a decision. We audit, map the tradeoffs, and hand your team a plan they can execute without us. |
+| **06** | **Technical enablement & coaching** | AI will get you most of the way to a working product. We do the part that breaks in production — and leave your team able to do it themselves next time. |
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## How we work
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**01 · Discovery & reaction analysis** — Interviews, code reading, data tracing.
+We map what exists, where it strains, and which constraints are real versus
+inherited. You get the written analysis whether or not we build anything together.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**02 · Architecture & system design** — The system design, data model and
+integration boundaries as reviewable documents. Nothing gets built from an
+assumption nobody wrote down.
 
-## Learn More
+**03 · Engineering & iteration** — A live preview environment from week one and a
+demo every fortnight. Tests, CI and observability are part of done, not a
+hardening phase promised for later.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**04 · Launch & equilibrium** — Runbooks, architecture walkthroughs and paired
+on-call until your engineers are comfortable. The engagement ends when the system
+is stable in your hands.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+<div align="center">
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## This repository
 
-### Analyzing the Bundle Size
+**The source of [ridoxstudio.com](https://ridoxstudio.com).**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+</div>
 
-### Making a Progressive Web App
+Built to a written specification. Read these before changing anything visual:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- [`BRAND.md`](BRAND.md) — the identity: colour, type, the mark, the slash,
+  recurring patterns, voice. Applies to anything carrying our name, not just
+  this site.
+- [`NEW_WEBSITE.md`](NEW_WEBSITE.md) — this site's motion architecture and
+  layout rules.
 
-### Advanced Configuration
+### Stack
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+| Layer | Choice | Why |
+|---|---|---|
+| Framework | Next.js 16 (App Router) | Server components, streaming, file routing |
+| Language | TypeScript 5 | Typed end to end |
+| Styling | Tailwind CSS 4 | CSS-first `@theme`, tokens bound to the logo's HSL values |
+| Animation | Framer Motion | Scroll transforms, layout transitions, the door system |
+| Scrolling | Lenis | Inertia scrolling, disabled under reduced motion |
+| Icons | Lucide | Consistent stroke set |
 
-### Deployment
+No UI component library, no WebGL, no GSAP — everything is custom and 2D by
+deliberate constraint.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Quick start
 
-### `npm run build` fails to minify
+```bash
+npm install
+npm run dev          # http://localhost:3000
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+npm run build        # production build
+npm start            # serve the production build
+npm run lint         # eslint
+npx tsc --noEmit     # typecheck
+```
+
+### Structure
+
+```
+app/
+├── layout.tsx            # Fonts, metadata, JSON-LD, the persistent shell
+├── page.tsx              # Homepage — the curated scroll experience
+├── globals.css           # Design tokens, Tailwind theme, type scale
+├── work/ studio/         # Case studies and products, with [slug] deep dives
+├── process/ contact/     # Methodology and enquiry
+├── components/
+│   ├── transitions/      # The Redox Door — the site's signature interaction
+│   ├── preloader/        # First-load reveal, shares the door choreography
+│   ├── navigation/       # Floating trigger + full-screen diagonal menu
+│   ├── projects/         # Sticky deck, gallery, cards, deep dives
+│   ├── services/         # Pinned horizontal track / touch carousel
+│   └── shared/           # Magnetic buttons, reveals, section furniture
+├── data/                 # Projects, services, process copy
+├── hooks/                # Motion preferences, media queries, pointer, Lenis
+└── lib/                  # Easing curves, door variants, site config, OG rendering
+```
+
+### Conventions
+
+These are enforced by review, not tooling — see §4 of the spec.
+
+- **No margins.** Spacing is the parent's job: `gap` between siblings, symmetrical
+  padding for wall distance. Negative margins need an inline comment justifying them.
+- **Animate `transform` and `opacity` only.** Never `width`, `height`, `top`, `left`.
+- **Every animation gates on `useReducedMotion()`** and falls back to a plain fade.
+  Motion is a three-state preference — `auto` / `full` / `minimal` — with a visible
+  control in the footer. Nothing may disable the site with no way back.
+- **SEO-critical text is server-rendered.** Animation wrappers may surround it; they
+  may not be the only thing that renders it.
+- **Touch is designed, not degraded.** Cursor-dependent effects need a touch
+  equivalent or clean removal, and tap targets are 44px minimum.
+
+### Contributing
+
+Fork, branch, and open a pull request against `main`. Run the typecheck and lint
+before pushing:
+
+```bash
+npx tsc --noEmit && npm run lint
+```
+
+---
+
+<div align="center">
+
+**Start a reaction.**
+
+[hello@ridoxstudio.com](mailto:hello@ridoxstudio.com)
+
+<sub>© Ridox Studio</sub>
+
+</div>
