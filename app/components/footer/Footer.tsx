@@ -49,9 +49,18 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col gap-6 border-t border-edge-subtle pt-6 md:flex-row md:items-end md:justify-between">
-          <p className="font-mono text-[0.6875rem] text-content-tertiary">
-            © {new Date().getFullYear()} {SITE.name} — {SITE.tagline}.
-          </p>
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-6">
+            <p className="font-mono text-[0.6875rem] text-content-tertiary">
+              © {new Date().getFullYear()} {SITE.name} — {SITE.tagline}.
+            </p>
+            <TransitionLink
+              href="/privacy"
+              label="Privacy"
+              className="font-mono text-[0.6875rem] tracking-[0.15em] text-content-tertiary uppercase transition-colors hover:text-amber-400"
+            >
+              Privacy
+            </TransitionLink>
+          </div>
           <MotionToggle />
         </div>
       </Container>

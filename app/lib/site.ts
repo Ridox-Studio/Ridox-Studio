@@ -45,6 +45,7 @@ export const SITE = {
   social: {
     x: "https://x.com/ridoxstudio_",
     instagram: "https://instagram.com/ridoxstudio",
+    linkedin: "https://www.linkedin.com/company/ridoxstudio",
     github: "https://github.com/Ridox-Studio",
   },
   /** Country-level: the studio works across Nigeria, not from one city. */
