@@ -1,64 +1,86 @@
 "use client";
 
-import { useState } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
+import { useFormStatus } from "react-dom";
 import { MagneticButton } from "@/app/components/shared/MagneticButton";
-import { SITE } from "@/app/lib/site";
-
-/**
- * Quoted in USD because it is the stable unit across the markets we work in,
- * but the ladder starts low enough to be realistic for local clients — a
- * $25k floor silently tells a Lagos startup not to bother writing.
- */
-const BUDGETS = [
-  "Under $1k",
-  "$1k – $5k",
-  "$5k – $15k",
-  "$15k – $50k",
-  "$50k+",
-  "Not sure yet",
-];
-
-const DEFAULT_BUDGET = "Not sure yet";
+import { BUDGETS, DEFAULT_BUDGET } from "@/app/lib/contact";
+import { submitInquiry, type InquiryState } from "@/app/contact/actions";
+import { trackLead } from "@/app/lib/analytics";
 
 const fieldClass =
   "min-h-12 w-full rounded-lg border border-edge-subtle bg-surface-card px-4 py-3 text-content-primary transition-colors placeholder:text-content-tertiary focus:border-indigo-300";
 
 const labelClass = "type-overline font-mono text-content-secondary";
 
+const INITIAL: InquiryState = { status: "idle" };
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+  return (
+    <MagneticButton type="submit" disabled={pending} className="w-full justify-center md:w-auto">
+      {pending ? "Sending…" : "Start a reaction"}
+    </MagneticButton>
+  );
+}
+
 /**
- * v1 has no backend, so the form composes a structured mail draft rather than
- * pretending to submit. Swap `handleSubmit` for a POST when the API exists.
+ * Submits through the `submitInquiry` Server Action. The Zoho SMTP credentials
+ * live only in server-side env vars — they are never bundled or sent to the
+ * browser. Fields are controlled so a validation error does not wipe the form.
  */
 export function InquiryForm() {
-  const [sent, setSent] = useState(false);
+  const [state, formAction] = useActionState(submitInquiry, INITIAL);
+  const [fields, setFields] = useState({
+    name: "",
+    email: "",
+    company: "",
+    budget: DEFAULT_BUDGET as string,
+    message: "",
+  });
+  const tracked = useRef(false);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const subject = `Project enquiry — ${data.get("company") || data.get("name")}`;
-    const body = [
-      `Name: ${data.get("name")}`,
-      `Email: ${data.get("email")}`,
-      `Company: ${data.get("company")}`,
-      `Budget: ${data.get("budget")}`,
-      "",
-      String(data.get("message") ?? ""),
-    ].join("\n");
+  useEffect(() => {
+    if (state.status === "success" && !tracked.current) {
+      tracked.current = true;
+      trackLead({ budget: state.budget, hasCompany: Boolean(fields.company) });
+    }
+  }, [state, fields.company]);
 
-    window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(body)}`;
-    setSent(true);
-  };
+  const set = (key: keyof typeof fields) => (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => setFields((f) => ({ ...f, [key]: e.target.value }));
+
+  if (state.status === "success") {
+    return (
+      <div
+        aria-live="polite"
+        className="flex flex-col gap-3 rounded-lg border border-edge-subtle bg-surface-card px-6 py-8"
+      >
+        <p className="type-overline font-mono text-amber-400">Enquiry received</p>
+        <p className="type-body text-content-secondary">
+          Thanks — it is in our inbox and a confirmation email is on its way to you. An
+          engineer replies within two working days.
+        </p>
+      </div>
+    );
+  }
 
   return (
-    <form onSubmit={handleSubmit} className="flex w-full flex-col gap-6">
+    <form action={formAction} className="flex w-full flex-col gap-6" noValidate>
       <div className="flex flex-col gap-6 md:flex-row md:gap-4">
         <div className="flex flex-1 flex-col gap-2">
           <label htmlFor="name" className={labelClass}>
             Name
           </label>
-          <input id="name" name="name" required autoComplete="name" className={fieldClass} />
+          <input
+            id="name"
+            name="name"
+            required
+            autoComplete="name"
+            value={fields.name}
+            onChange={set("name")}
+            className={fieldClass}
+          />
         </div>
         <div className="flex flex-1 flex-col gap-2">
           <label htmlFor="email" className={labelClass}>
@@ -70,6 +92,8 @@ export function InquiryForm() {
             type="email"
             required
             autoComplete="email"
+            value={fields.email}
+            onChange={set("email")}
             className={fieldClass}
           />
         </div>
@@ -84,6 +108,8 @@ export function InquiryForm() {
             id="company"
             name="company"
             autoComplete="organization"
+            value={fields.company}
+            onChange={set("company")}
             className={fieldClass}
           />
         </div>
@@ -94,7 +120,8 @@ export function InquiryForm() {
           <select
             id="budget"
             name="budget"
-            defaultValue={DEFAULT_BUDGET}
+            value={fields.budget}
+            onChange={set("budget")}
             className={`${fieldClass} field-select`}
           >
             {BUDGETS.map((budget) => (
@@ -115,19 +142,30 @@ export function InquiryForm() {
           name="message"
           rows={6}
           required
+          value={fields.message}
+          onChange={set("message")}
           placeholder="The system, the constraint you have hit, and the outcome you need."
           className={`${fieldClass} resize-y`}
         />
       </div>
 
+      {/* Honeypot — visually hidden, off the tab order. Bots fill it; humans don't. */}
+      <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+        <label htmlFor="website">Website</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
+
       <div className="flex flex-col items-start gap-4">
-        <MagneticButton type="submit" className="w-full justify-center md:w-auto">
-          Start a reaction
-        </MagneticButton>
-        <p aria-live="polite" className="type-caption font-mono text-content-tertiary">
-          {sent
-            ? "Your mail client should now be open with the enquiry drafted."
-            : `Submitting opens a pre-filled draft to ${SITE.email}.`}
+        <SubmitButton />
+        <p
+          aria-live="polite"
+          className={`type-caption font-mono ${
+            state.status === "error" ? "text-red-400" : "text-content-tertiary"
+          }`}
+        >
+          {state.status === "error"
+            ? state.message
+            : "We reply to every enquiry within two working days."}
         </p>
       </div>
     </form>

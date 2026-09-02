@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Archivo, Inter, Bitcount_Prop_Single } from "next/font/google";
 import { SITE } from "@/app/lib/site";
 import { SiteShell } from "@/app/components/providers/SiteShell";
+import { SiteAnalytics } from "@/app/components/analytics/SiteAnalytics";
 import "./globals.css";
 
 /**
@@ -118,6 +119,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <SiteShell>{children}</SiteShell>
+        <SiteAnalytics />
       </body>
     </html>
   );
