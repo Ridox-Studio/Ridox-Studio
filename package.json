@@ -12,6 +12,7 @@
     "covers": "node scripts/generate-project-covers.mjs"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "clsx": "^2.1.1",
     "framer-motion": "^13.1.0",
     "lenis": "^1.3.26",
