@@ -13,7 +13,7 @@ import { buildPageMetadata } from "@/app/lib/metadata";
 export const metadata: Metadata = buildPageMetadata({
   title: "Process",
   description:
-    "How a Ridox Studio engagement runs: discovery, architecture and system design, engineering and iteration, then launch and equilibrium.",
+    "How a Ridox Studio engagement runs: discovery, architecture and planning, build and iterate, then launch and handover — the same four phases whether you have a live product or just an idea.",
   path: "/process",
 });
 
@@ -24,7 +24,7 @@ export default function ProcessPage() {
         overline="The process"
         accent="amber"
         title="Four phases"
-        lede="No engagement starts with a proposal. It starts with us reading your system and telling you what we actually found — in writing, whether or not you hire us."
+        lede="No engagement starts with a proposal. It starts with understanding where you are — a live product, a prototype, or an idea — and telling you in writing what we found and what we would do, whether or not you hire us."
       />
 
       <section data-zone="amber" className="flex w-full flex-col pb-24">

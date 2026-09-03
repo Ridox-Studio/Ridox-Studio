@@ -102,34 +102,35 @@ export interface ProcessStep {
 export const PROCESS_STEPS: ProcessStep[] = [
   {
     index: "01",
-    title: "Discovery & Reaction Analysis",
-    summary: "We find the forces already acting on your system before proposing anything.",
+    title: "Discovery",
+    summary:
+      "We start by understanding where you are and what you are trying to reach.",
     detail:
-      "Two weeks of interviews, code reading, and data tracing. We map what exists, where it strains, and which constraints are real versus inherited. You get a written analysis whether or not we build anything together.",
+      "Whether you have a live product, a prototype, or just an idea written down, the first work is the same: we map the goal, the users, the constraints, and the current state — through interviews and a read of whatever already exists. You leave with a written analysis and a recommended path, whether or not we build it together.",
     accent: "amber",
   },
   {
     index: "02",
-    title: "Architecture & System Design",
-    summary: "Every decision written down, with the tradeoff that produced it.",
+    title: "Architecture & Planning",
+    summary: "The plan, written down — with the trade-off behind every decision.",
     detail:
-      "We produce the system design, data model, and integration boundaries as reviewable documents. Nothing gets built from an assumption nobody wrote down — architecture decision records travel with the codebase.",
+      "System design, data model, scope, and milestones as reviewable documents. You approve the shape and the sequence before engineering starts, and the decision records travel with the codebase so nothing is built from an assumption nobody wrote down.",
     accent: "indigo",
   },
   {
     index: "03",
-    title: "Engineering & Iteration",
-    summary: "Shipping in two-week reactions, with a working environment throughout.",
+    title: "Build & Iterate",
+    summary: "Two-week iterations, with a working preview from the first week.",
     detail:
-      "You get a live preview environment from the first week and a demo every fortnight. Tests, CI, and observability are part of the definition of done, not a hardening phase we promise for later.",
+      "You get a live preview environment early and a demo every two weeks. Tests, CI, and monitoring are part of the definition of done, not a hardening phase promised for later. We release to production when a milestone is genuinely ready — the two weeks are a rhythm for feedback, not a countdown to launch.",
     accent: "amber",
   },
   {
     index: "04",
-    title: "Launch & Equilibrium",
-    summary: "We hand over a system your team can hold without us.",
+    title: "Launch & Handover",
+    summary: "We hand over a system your team can run without us.",
     detail:
-      "Runbooks, architecture walkthroughs, and paired on-call rotations until your engineers are comfortable. The engagement ends when the system is stable in your hands — that is the equilibrium we are aiming for.",
+      "Runbooks, architecture walkthroughs, and paired on-call until your engineers are comfortable operating it. The engagement ends when the system is stable in your hands — that is the equilibrium we are aiming for.",
     accent: "indigo",
   },
 ];
