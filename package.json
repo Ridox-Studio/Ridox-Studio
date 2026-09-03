@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "logos": "node scripts/generate-logo-assets.mjs",
+    "favicons": "node scripts/generate-favicons.mjs",
     "banners": "node scripts/generate-social-banners.mjs",
     "covers": "node scripts/generate-project-covers.mjs"
   },

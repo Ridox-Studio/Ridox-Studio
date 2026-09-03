@@ -114,7 +114,24 @@ function layoutText(font, text, tracking = 0) {
   return { d: parts.join(" "), advance: x };
 }
 
-function buildBanner(font, { width, height, safe, avatarCorner, tagline: tagText }) {
+/**
+ * Horizontal placement of the text block within the box.
+ *
+ *   npm run banners            → right (flush against the slash channel)
+ *   npm run banners -- left     → left  (flush against the left margin)
+ *   npm run banners -- center   → centred in the box
+ *
+ * A per-banner `align` in the spec wins over the CLI default, so individual
+ * platforms can pin their own alignment while the rest follow the flag.
+ */
+const ALIGNMENTS = new Set(["left", "center", "right"]);
+
+function resolveAlign(argv) {
+  const flag = argv.find((arg) => ALIGNMENTS.has(arg));
+  return flag ?? "right";
+}
+
+function buildBanner(font, { width, height, safe, avatarCorner, tagline: tagText, align }) {
   const em = font.unitsPerEm;
   const cy = height / 2;
 
@@ -128,8 +145,11 @@ function buildBanner(font, { width, height, safe, avatarCorner, tagline: tagText
     `L ${slashX + offset + w - lean},${height * 1.2} L ${slashX + offset - lean},${height * 1.2} Z`;
 
   // Text box: from the left margin to the slash's leftmost point (its bottom
-  // edge, since it leans left as it descends), minus a gap.
-  const boxLeft = avatarCorner === "bottom-left" ? width * 0.16 : width * 0.07;
+  // edge, since it leans left as it descends), minus a gap. The avatar in the
+  // lower-left corner (X header) only constrains the left margin when the text
+  // is actually set left — right/centre clear it anyway.
+  const boxLeft =
+    align === "left" && avatarCorner === "bottom-left" ? width * 0.16 : width * 0.07;
   const boxRight = slashX - lean - width * 0.03;
   const boxWidth = boxRight - boxLeft;
 
@@ -153,9 +173,15 @@ function buildBanner(font, { width, height, safe, avatarCorner, tagline: tagText
   const wordWidth = wordmark.advance * wordScale;
   const tagWidth = tagline.advance * tagScale;
 
-  const boxCentre = boxLeft + boxWidth / 2;
-  const wordX = avatarCorner ? boxLeft : boxCentre - wordWidth / 2;
-  const tagX = avatarCorner ? boxLeft : boxCentre - tagWidth / 2;
+  // Place each line by the requested alignment. Right sits both lines hard
+  // against the slash channel; left against the margin; centre in the box.
+  const place = (lineWidth) => {
+    if (align === "left") return boxLeft;
+    if (align === "center") return boxLeft + (boxWidth - lineWidth) / 2;
+    return boxRight - lineWidth;
+  };
+  const wordX = place(wordWidth);
+  const tagX = place(tagWidth);
 
   // Lift the block clear of the avatar that overlaps the lower-left corner.
   const block = markSize + markSize * 0.62;
@@ -191,16 +217,18 @@ function buildBanner(font, { width, height, safe, avatarCorner, tagline: tagText
 }
 
 async function main() {
+  const cliAlign = resolveAlign(process.argv.slice(2));
   const font = await loadFont();
   await mkdir(OUT, { recursive: true });
 
   for (const spec of BANNERS) {
-    const svg = buildBanner(font, spec);
+    const align = spec.align ?? cliAlign;
+    const svg = buildBanner(font, { ...spec, align });
     await writeFile(path.join(OUT, `${spec.name}.svg`), svg, "utf8");
     await sharp(Buffer.from(svg))
       .png({ compressionLevel: 9 })
       .toFile(path.join(OUT, `${spec.name}.png`));
-    console.log(`${spec.label.padEnd(32)} ${spec.width}x${spec.height}`);
+    console.log(`${spec.label.padEnd(32)} ${spec.width}x${spec.height}  (${align})`);
   }
 
   console.log(`\n${BANNERS.length} banners written to ${OUT}`);

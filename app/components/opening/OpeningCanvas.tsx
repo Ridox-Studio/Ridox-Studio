@@ -107,8 +107,16 @@ export function OpeningCanvas() {
           Reduction ◆ Oxidation
         </motion.p>
 
+        {/* The visible wordmark is the two stacked blocks; the descriptive
+            phrase is what search engines and screen readers read as the H1.
+            One <h1> per page, keyword-first, with the brand mark intact. */}
         <h1 className="flex flex-col font-display text-content-primary">
+          <span className="sr-only">
+            {SITE.name} — a software engineering agency building web, mobile,
+            cloud and AI systems
+          </span>
           <motion.span
+            aria-hidden="true"
             className="type-mega block"
             initial={{ opacity: 0, y: reduce ? 0 : 60 }}
             animate={{ opacity: 1, y: 0 }}
@@ -117,6 +125,7 @@ export function OpeningCanvas() {
             RIDOX
           </motion.span>
           <motion.span
+            aria-hidden="true"
             className="type-mega type-mega-outline block"
             initial={{ opacity: 0, y: reduce ? 0 : 60 }}
             animate={{ opacity: 1, y: 0 }}

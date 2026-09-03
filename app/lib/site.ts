@@ -30,7 +30,23 @@ export const SITE = {
   tagline: "Software systems engineered at the reaction point",
   /** Meta description — kept under 160 chars so search results do not truncate. */
   description:
-    "A software engineering agency building web, mobile, cloud and AI systems at the reaction point — where design energy meets engineering depth.",
+    "A software engineering agency building world-class web, mobile, cloud and AI systems for teams worldwide — where design energy meets engineering depth.",
+  /**
+   * Primary search phrases the site is built to rank for. Ordered by intent:
+   * the head term first, the service-qualified variants after. Used for the
+   * <meta keywords> tag and, more importantly, the JSON-LD `knowsAbout`.
+   */
+  keywords: [
+    "software development agency",
+    "software engineering agency",
+    "custom software development",
+    "web application development",
+    "mobile app development",
+    "cloud infrastructure",
+    "AI development agency",
+    "product engineering studio",
+    "Ridox Studio",
+  ],
   /** The full positioning statement, for JSON-LD and anywhere length is free. */
   longDescription:
     "Ridox Studio is a software engineering agency specializing in high-performance web applications, mobile systems, cloud infrastructure, and AI-powered solutions. Built on the principle of Redox duality — balancing design energy with engineering depth.",

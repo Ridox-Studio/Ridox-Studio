@@ -17,16 +17,18 @@ import { buildPageMetadata } from "@/app/lib/metadata";
 import { SITE } from "@/app/lib/site";
 
 // The homepage sets its own full title rather than taking the "%s — Ridox
-// Studio" template, which would repeat the name.
+// Studio" template, which would repeat the name. It leads with the phrase
+// people actually search for; the brand stays first for branded queries.
 export const metadata: Metadata = {
   ...buildPageMetadata({
-    title: "Engineered at the Reaction Point",
+    title: "Software Development & Engineering Agency",
     description: SITE.description,
     path: "/",
+    socialTitle: `${SITE.name} — Software Development & Engineering Agency`,
     socialDescription:
-      "Software engineering agency balancing design energy with engineering depth.",
+      "A software engineering agency building world-class web, mobile, cloud and AI systems for teams worldwide.",
   }),
-  title: `${SITE.name} — Engineered at the Reaction Point`,
+  title: `${SITE.name} — Software Development & Engineering Agency`,
 };
 
 const linkClass =
