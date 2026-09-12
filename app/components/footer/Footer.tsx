@@ -54,6 +54,13 @@ export function Footer() {
               © {new Date().getFullYear()} {SITE.name} — {SITE.tagline}.
             </p>
             <TransitionLink
+              href="/blog"
+              label="Blog"
+              className="font-mono text-[0.6875rem] tracking-[0.15em] text-content-tertiary uppercase transition-colors hover:text-amber-400"
+            >
+              Blog
+            </TransitionLink>
+            <TransitionLink
               href="/privacy"
               label="Privacy"
               className="font-mono text-[0.6875rem] tracking-[0.15em] text-content-tertiary uppercase transition-colors hover:text-amber-400"

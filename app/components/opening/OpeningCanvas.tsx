@@ -2,11 +2,14 @@
 
 import { motion, useSpring } from "framer-motion";
 import { useEffect } from "react";
+import { ArrowUpRight } from "lucide-react";
 import { EASING } from "@/app/lib/motion";
 import { SERVICES } from "@/app/data/content";
 import { getProjectsByCategory, getWorkProjects } from "@/app/data/projects";
 import { SITE } from "@/app/lib/site";
 import { Logo } from "@/app/components/shared/Logo";
+import { MagneticButton } from "@/app/components/shared/MagneticButton";
+import { TransitionLink } from "@/app/components/transitions/TransitionLink";
 import { useMousePosition } from "@/app/hooks/useMousePosition";
 import { useMotionPrefs } from "@/app/components/providers/MotionProvider";
 import { useReducedMotion } from "@/app/hooks/useReducedMotion";
@@ -144,6 +147,41 @@ export function OpeningCanvas() {
           {SITE.tagline}. We build where opposing forces meet — frontend and backend,
           speed and stability, design energy and engineering depth.
         </motion.p>
+
+        {/* The hero had no path forward — a reader who did not want to scroll
+            six sections had no way to act.
+            Button copy is deliberately plain rather than "Start a Reaction":
+            everywhere else that phrase appears, the visitor has already
+            scrolled through redox-themed copy that sets it up — here it
+            would be the first thing said to someone who has seen only the
+            wordmark. Same reasoning that dropped "reaction" from the process
+            step titles (aab2cbf), kept as flavour in body copy rather than an
+            actionable label a first-time visitor has to decode.
+            "Tell us your idea" over "Talk to an engineer": the audience is
+            school owners and small-business founders, not developers — they
+            think in terms of their problem, not our job titles. It also
+            avoids "book a free consultation", which would contradict
+            /contact's own "no discovery-call funnel, not a calendar link":
+            nothing here promises a call, only that a message gets read and
+            answered. */}
+        <motion.div
+          className="flex flex-wrap items-center gap-x-8 gap-y-4"
+          initial={{ opacity: 0, y: reduce ? 0 : 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: reduce ? 0.3 : 0.7, delay: 0.72, ease: EASING.reveal }}
+        >
+          <MagneticButton href="/contact" label="Contact">
+            Tell us your idea
+          </MagneticButton>
+          <TransitionLink
+            href="/work"
+            label="Work"
+            className="inline-flex items-center gap-2 font-mono text-xs tracking-[0.15em] text-content-secondary uppercase transition-colors hover:text-indigo-300"
+          >
+            See the work
+            <ArrowUpRight size={14} aria-hidden="true" />
+          </TransitionLink>
+        </motion.div>
 
         <motion.dl
           className="flex flex-wrap gap-x-10 gap-y-4 border-t border-edge-subtle pt-6"

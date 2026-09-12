@@ -307,6 +307,175 @@ html.lenis body {
 }
 
 /* ============================================================
+   Blog prose
+   Scoped typography for compiled markdown (app/lib/blog.ts). A dedicated
+   scope rather than a generic ".prose" utility, since every rule here reads
+   off the same tokens as the rest of the site instead of a third-party
+   typography plugin's defaults.
+   ============================================================ */
+
+.prose-ridox {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.prose-ridox > :first-child {
+  margin-top: 0;
+}
+
+.prose-ridox h2,
+.prose-ridox h3,
+.prose-ridox h4 {
+  color: var(--text-primary);
+  font-family: var(--font-archivo), system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin-block: 2.25em 0.75em;
+  scroll-margin-top: 6rem; /* clears the fixed nav triggers on an anchor jump */
+}
+
+.prose-ridox h2 {
+  font-size: clamp(1.5rem, 3vw, 1.875rem);
+  font-variation-settings: "wdth" 115;
+}
+
+.prose-ridox h3 {
+  font-size: 1.25rem;
+  font-variation-settings: "wdth" 110;
+}
+
+.prose-ridox h4 {
+  font-size: 1.0625rem;
+}
+
+.prose-ridox p,
+.prose-ridox ul,
+.prose-ridox ol,
+.prose-ridox table,
+.prose-ridox .callout {
+  margin-block: 1.25em;
+}
+
+.prose-ridox img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-block: 1.75em;
+  border-radius: 1rem;
+  border: 1px solid var(--border-subtle);
+}
+
+.prose-ridox ul,
+.prose-ridox ol {
+  padding-inline-start: 1.5em;
+}
+
+.prose-ridox li + li {
+  margin-top: 0.5em;
+}
+
+.prose-ridox li::marker {
+  color: var(--text-tertiary);
+}
+
+.prose-ridox strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.prose-ridox a {
+  color: var(--indigo-300);
+  text-decoration: underline;
+  text-decoration-color: var(--indigo-300);
+  text-underline-offset: 0.15em;
+  transition: color 0.15s;
+}
+
+.prose-ridox a:hover {
+  color: var(--amber-400);
+  text-decoration-color: var(--amber-400);
+}
+
+.prose-ridox code {
+  background: var(--bg-card);
+  border-radius: 0.25rem;
+  color: var(--amber-300);
+  font-family: var(--font-bitcount), ui-monospace, monospace;
+  font-size: 0.875em;
+  padding: 0.15em 0.4em;
+}
+
+.prose-ridox pre {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.75rem;
+  margin-block: 1.5em;
+  overflow-x: auto;
+  padding: 1.25rem;
+}
+
+.prose-ridox pre code {
+  background: none;
+  color: var(--text-secondary);
+  padding: 0;
+}
+
+.prose-ridox blockquote {
+  border-inline-start: 2px solid var(--border-visible);
+  color: var(--text-secondary);
+  font-style: italic;
+  padding-inline-start: 1.25em;
+}
+
+.prose-ridox hr {
+  border: none;
+  border-top: 1px solid var(--border-subtle);
+  margin-block: 2.5em;
+}
+
+.prose-ridox table {
+  border-collapse: collapse;
+  display: block;
+  overflow-x: auto; /* a wide table scrolls its own axis, never the page */
+  width: 100%;
+}
+
+.prose-ridox th,
+.prose-ridox td {
+  border: 1px solid var(--border-subtle);
+  padding: 0.6em 0.9em;
+  text-align: start;
+}
+
+.prose-ridox th {
+  color: var(--text-primary);
+  font-family: var(--font-archivo), system-ui, sans-serif;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+}
+
+/* GitHub-style callouts — "> [!NOTE]" etc, transformed by remarkCallouts()
+   in app/lib/blog.ts into these classes rather than a blockquote. */
+.prose-ridox .callout {
+  border-inline-start: 3px solid var(--indigo-300);
+  border-radius: 0.5rem;
+  background: var(--indigo-ghost);
+  font-style: normal;
+  padding: 1em 1.25em;
+}
+
+.prose-ridox .callout p {
+  margin-block: 0;
+}
+
+.prose-ridox .callout-warning,
+.prose-ridox .callout-caution {
+  border-inline-start-color: var(--amber-400);
+  background: var(--amber-ghost);
+}
+
+/* ============================================================
    Scrollbar
    Matched to the surface scale so the OS default does not sit as a bright
    grey slab against a dark site. Kept at 10px rather than hairline-thin:

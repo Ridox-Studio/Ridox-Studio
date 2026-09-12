@@ -8,11 +8,14 @@ import { ProcessTimeline } from "@/app/components/process/ProcessTimeline";
 import { ContactSection } from "@/app/components/contact/ContactSection";
 import { Footer } from "@/app/components/footer/Footer";
 import { Container, SectionHeader } from "@/app/components/shared/SectionHeader";
+import { RevealGroup, RevealItem } from "@/app/components/shared/Reveal";
+import { BlogCard } from "@/app/components/blog/BlogCard";
 import { SectionRail } from "@/app/components/shared/SectionRail";
 import { Reveal } from "@/app/components/shared/Reveal";
 import { TransitionLink } from "@/app/components/transitions/TransitionLink";
 import { MARQUEE_LINES, PROCESS_STEPS, SERVICES } from "@/app/data/content";
 import { getFeatured, getProjectsByCategory, getWorkProjects } from "@/app/data/projects";
+import { getAllPosts } from "@/app/lib/blog";
 import { buildPageMetadata } from "@/app/lib/metadata";
 import { SITE } from "@/app/lib/site";
 
@@ -37,6 +40,7 @@ const linkClass =
 export default function HomePage() {
   const clientWork = getFeatured(getWorkProjects(), 3);
   const studioWork = getFeatured(getProjectsByCategory("studio"), 3);
+  const latestPosts = getAllPosts().slice(0, 3);
 
   return (
     <main className="flex w-full flex-col">
@@ -169,6 +173,44 @@ export default function HomePage() {
           <ProcessTimeline steps={PROCESS_STEPS} />
         </Container>
       </section>
+
+      {latestPosts.length > 0 && (
+        <section data-zone="indigo" className="flex w-full flex-col gap-8 py-14">
+          <Container>
+            <Reveal>
+              <SectionHeader
+                overline="The blog"
+                accent="indigo"
+                title="Decisions, not adjectives"
+                lede="What we found in the code, and the reasoning behind the calls we made."
+                action={
+                  <TransitionLink
+                    href="/blog"
+                    label="Blog"
+                    className={`${linkClass} text-indigo-300 hover:text-indigo-200`}
+                  >
+                    Read all posts
+                    <ArrowUpRight size={14} aria-hidden="true" />
+                  </TransitionLink>
+                }
+              />
+            </Reveal>
+          </Container>
+          <Container>
+            <RevealGroup
+              as="ul"
+              className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+              stagger={0.08}
+            >
+              {latestPosts.map((post, index) => (
+                <RevealItem as="li" key={post.slug}>
+                  <BlogCard post={post} index={index} />
+                </RevealItem>
+              ))}
+            </RevealGroup>
+          </Container>
+        </section>
+      )}
 
       <ContactSection />
       <Footer />

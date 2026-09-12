@@ -160,7 +160,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>
-      <body>
+      {/* suppressHydrationWarning is scoped to this one tag's attributes only
+          — it does not hide mismatches in children. Needed here because
+          browser extensions (Grammarly, password managers, ad blockers)
+          inject attributes like data-gr-ext-installed onto <body> before
+          React hydrates, which is a real DOM difference but not a bug in
+          this app; without it, every visitor running such an extension sees
+          a hydration-mismatch overlay in dev for something we cannot fix. */}
+      <body suppressHydrationWarning>
         <SiteShell>{children}</SiteShell>
         <SiteAnalytics />
       </body>
