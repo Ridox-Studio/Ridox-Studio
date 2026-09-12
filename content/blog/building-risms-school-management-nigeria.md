@@ -1,7 +1,7 @@
 ---
 title: "Building the best school management system in Nigeria: RISMS"
 description: We didn't start with an AI pitch for education. We started by asking why adaptation, not money, is the thing actually holding Nigerian schools back, and built RISMS from the answer.
-date: 2026-09-10
+date: 2026-09-12
 tags: [risms, education, product]
 cover: /projects/risms.png
 ---

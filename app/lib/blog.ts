@@ -29,6 +29,8 @@ export interface BlogPostMeta {
    * absent, so a post never has to wait on a screenshot before it can ship.
    */
   cover?: string;
+  /** Pinned posts always lead the listing, ahead of date order. */
+  pinned?: boolean;
 }
 
 export interface BlogPost extends BlogPostMeta {
@@ -48,6 +50,7 @@ type Frontmatter = {
   tags?: string[];
   cover?: string;
   draft?: boolean;
+  pinned?: boolean;
 };
 
 /** Normalises a frontmatter date to `YYYY-MM-DD`, whichever form YAML gave us. */
@@ -150,10 +153,17 @@ function toMeta(slug: string, frontmatter: Frontmatter, body: string): BlogPostM
     tags: frontmatter.tags ?? [],
     readingMinutes: Math.max(1, Math.round(readingTime(body).minutes)),
     cover: frontmatter.cover,
+    pinned: frontmatter.pinned,
   };
 }
 
-/** Every published post, newest first. Draft posts are hidden outside development. */
+/**
+ * Every published post, newest first, except a pinned post (e.g. the About
+ * page's introduction) always leads regardless of date — its date still
+ * reflects when it was actually written, so pinning is what keeps it first
+ * rather than inflating the date to game the sort. Draft posts are hidden
+ * outside development.
+ */
 export function getAllPosts(): BlogPostMeta[] {
   const showDrafts = process.env.NODE_ENV !== "production";
 
@@ -164,7 +174,10 @@ export function getAllPosts(): BlogPostMeta[] {
     })
     .filter(({ frontmatter }) => showDrafts || !frontmatter.draft)
     .map(({ meta }) => meta)
-    .sort((a, b) => (a.date < b.date ? 1 : -1));
+    .sort((a, b) => {
+      if (Boolean(a.pinned) !== Boolean(b.pinned)) return a.pinned ? -1 : 1;
+      return a.date < b.date ? 1 : -1;
+    });
 }
 
 export function getAllPostSlugs(): string[] {

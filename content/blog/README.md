@@ -13,6 +13,7 @@ date: 2026-08-14
 updated: 2026-08-20      # optional, omit if never revised
 tags: [risms, payments, architecture]
 draft: false             # optional, true hides it from the site (still readable in dev)
+pinned: false            # optional, true always sorts this post first, ahead of date order
 ---
 ```
 

@@ -1,8 +1,9 @@
 ---
 title: "About Ridox Studio: who we are, and what we're building toward"
 description: The story behind Ridox Studio, why "redox," what we're actually trying to build, how the team works, and the products we run ourselves alongside client work.
-date: 2026-09-12
+date: 2026-09-08
 tags: [about, studio]
+pinned: true
 ---
 
 Most "about" pages say the same three things in a different order. This one
