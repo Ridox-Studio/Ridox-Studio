@@ -1,5 +1,6 @@
 import { SERVICES } from "@/app/data/content";
 import { getAllProjects, getProjectHref } from "@/app/data/projects";
+import { getAllPosts } from "@/app/lib/blog";
 import { SITE } from "@/app/lib/site";
 
 /**
@@ -33,6 +34,7 @@ function build(): string {
   lines.push(`- [Work](${SITE.url}/work): client engagements and case studies`);
   lines.push(`- [Studio](${SITE.url}/studio): products and open-source tools built in-house`);
   lines.push(`- [Process](${SITE.url}/process): how an engagement runs, discovery through handover`);
+  lines.push(`- [Blog](${SITE.url}/blog): decisions and reasoning from inside the build`);
   lines.push(`- [Contact](${SITE.url}/contact): start a project`);
   lines.push("");
 
@@ -49,6 +51,13 @@ function build(): string {
     lines.push(
       `- [${project.title}](${SITE.url}${getProjectHref(project)}) (${project.category}) — ${project.subtitle}`,
     );
+  }
+  lines.push("");
+
+  lines.push("## Blog");
+  lines.push("");
+  for (const post of getAllPosts()) {
+    lines.push(`- [${post.title}](${SITE.url}/blog/${post.slug}) — ${post.description}`);
   }
   lines.push("");
 
