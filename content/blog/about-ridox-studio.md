@@ -25,11 +25,14 @@ pretend the studio has been running continuously since day one.
 
 ## Our vision
 
-Software in West Africa, and Nigeria specifically, does not lose to a lack
-of ambition. It loses to unfinished systems — the payment flow that works
-until the edge case, the admin tool built for a demo instead of a term. We
-want to be the studio that ships the version that survives contact with
-real use, for teams here and for teams anywhere else that hire us.
+We are not solving a regional problem, we are solving a global one: most
+software does not lose to a lack of ambition, it loses to unfinished
+systems — the payment flow that works until the edge case, the admin tool
+built for a demo instead of a term. What we look for, across every codebase
+and every engagement, is the contradicting take — the assumption a team
+stopped questioning — because that is usually where the real engineering
+gap is hiding. Our vision is to bring that standard of engineering to the
+world, one system at a time, wherever the client is.
 
 ## Our mission
 
