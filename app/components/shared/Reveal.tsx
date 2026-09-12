@@ -15,11 +15,20 @@ export function Reveal({
   className,
   delay = 0,
   as = "div",
+  amount = 0.2,
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
   as?: "div" | "section" | "li" | "article";
+  /**
+   * Fraction of the element's own area that must be on-screen before it
+   * reveals. The 0.2 default assumes a compact section — for something that
+   * can run much taller than the viewport (a long article body, say), that
+   * threshold may never be satisfiable on a phone, which looks like the
+   * reveal is stuck. Pass "some" (any pixel visible) for content like that.
+   */
+  amount?: number | "some" | "all";
 }) {
   const reduce = useReducedMotion();
   const Component = motion[as];
@@ -30,7 +39,7 @@ export function Reveal({
       variants={revealVariants(reduce)}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount }}
       transition={{ delay }}
     >
       {children}

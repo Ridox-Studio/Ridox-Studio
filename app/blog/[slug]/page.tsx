@@ -117,7 +117,10 @@ export default async function BlogPostPage({ params }: Params) {
               is a separate, simpler render path rather than an unfloated
               version of the desktop image. */}
           {post.cover && (
-            <Reveal className="relative mb-10 aspect-video w-full overflow-hidden rounded-2xl border border-edge-subtle bg-surface-void lg:hidden">
+            <Reveal
+              amount="some"
+              className="relative mb-10 aspect-video w-full overflow-hidden rounded-2xl border border-edge-subtle bg-surface-void lg:hidden"
+            >
               <Image
                 src={post.cover}
                 alt={post.title}
@@ -131,6 +134,11 @@ export default async function BlogPostPage({ params }: Params) {
 
           <Reveal
             delay={0.1}
+            // "some": the default 0.2 threshold requires 20% of the element's
+            // OWN height to be on-screen at once, which a long article with
+            // images can never satisfy on a phone-height viewport — it just
+            // looks like the reveal never fires. Any part visible is enough.
+            amount="some"
             // flow-root: a floated child collapses its parent's height unless
             // something clears it, which would let the float bleed into the
             // tags list and ContactSection below. This is the modern
