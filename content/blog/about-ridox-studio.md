@@ -1,82 +1,62 @@
 ---
-title: "About Ridox Studio: who we are, and what we're building toward"
-description: The story behind Ridox Studio, why "redox," what we're actually trying to build, how the team works, and the products we run ourselves alongside client work.
+title: "About Ridox Studio"
+description: Where the name comes from, what we're building toward, and how the studio works.
 date: 2026-09-08
 tags: [about, studio]
 ---
 
-Most "about" pages say the same three things in a different order. This one
-is here to actually explain them: where the name comes from, what we're
-trying to build, and how the studio is put together to do it.
+## The name
 
-## Where the name comes from
+Ridox echoes *redox*, the chemistry term for a reaction that only happens
+as a pair: one thing oxidising while another reduces. Neither half does
+anything alone. That's the model the studio is built around: design and
+engineering working as one reaction, not two departments handing work
+back and forth. "Software systems engineered at the reaction point" is
+that idea stated plainly.
 
-Ridox is a deliberate echo of *redox*, the chemistry term for a reaction
-that only happens as a pair, one thing oxidising while another reduces.
-Neither half of a redox reaction does anything alone. That is the model we
-built the studio around: design energy and engineering depth, working as
-one reaction rather than two departments handing work back and forth. The
-tagline we use, "software systems engineered at the reaction point," is
-that idea stated plainly, not decoration on top of it.
+The first commit is dated March 2022. The studio paused for four years,
+then restarted in 2026. That's simply what happened, and we're building
+forward from here.
 
-The studio's first commit is dated March 2022. It then went quiet for four
-years before relaunching in 2026. We'd rather say that plainly than
-pretend the studio has been running continuously since day one.
+## What we're building toward
 
-## Our vision
+Most software doesn't lose to a lack of ambition. It loses to unfinished
+systems: the payment flow that works until the edge case, the admin tool
+built for a demo instead of a term. What we look for, in every codebase
+and every engagement, is the assumption a team stopped questioning,
+because that's usually where the real gap is hiding. We bring that
+standard wherever the client is.
 
-We are not solving a regional problem, we are solving a global one: most
-software does not lose to a lack of ambition, it loses to unfinished
-systems, the payment flow that works until the edge case, the admin tool
-built for a demo instead of a term. What we look for, across every codebase
-and every engagement, is the contradicting take: the assumption a team
-stopped questioning, because that is usually where the real engineering
-gap is hiding. Our vision is to bring that standard of engineering to the
-world, one system at a time, wherever the client is.
+## What we do
 
-## Our mission
+Two kinds of work:
 
-Build and run software end to end (web, mobile, cloud and AI systems) and
-be honest about the tradeoffs at every layer instead of hiding them behind
-a pitch. That shows up in two kinds of work:
-
-- **Client work.** Commissioned builds and advisory engagements, run as
-  something we can talk through line by line rather than a black box handed
-  back at the end.
-- **Studio products.** Software we design, build, and operate ourselves:
+- **Client work.** Commissioned builds and advisory engagements, walked
+  through line by line rather than handed back as a black box.
+- **Studio products.** Software we build and run ourselves:
   [RISMS](/studio/risms) for school administration, [Cilbup](/studio/cilbup)
   for anonymous creator tipping, and [Resurgee](/studio/resurgee), an AI
   layer over the task manager people already use. Running our own products
-  is what keeps the advice we give clients grounded in software we actually
-  operate, not just software we shipped once.
+  keeps our advice grounded in software we actually operate.
 
 ## The team
 
-We stay small and hands-on by design. The same people who scope an
-engagement are the ones writing the code and answering when something
-breaks in production. We work across the full stack an agency usually
-splits into separate teams: product decisions, engineering, and the AI
-layer where it's actually warranted, not bolted on because it's trendy.
+Small and hands-on by design. The people who scope an engagement are the
+same people writing the code and answering when something breaks. We
+work across product, engineering, and AI where it's actually warranted,
+not bolted on because it's trendy.
 
-We're not going to pad this section with invented headcounts or job titles.
-If you want to know exactly who you'd be working with on a given
-engagement, that's a five-minute conversation, not a paragraph on a blog
-post.
+We won't pad this with invented headcounts or titles. Want to know who
+you'd actually work with? That's a five-minute conversation.
 
-## What we think should be here too
+## What's still missing here
 
-A studio's "about" is never really finished on day one. A few things we're
-planning to add as they become true rather than aspirational:
-
-- **A public build log**, the kind of decision write-ups already on this
-  blog, but indexed as a running account of what shipped and why.
-- **Named case studies** once client engagements clear the point where we
-  can name them publicly.
-- **Where we are now**, a short, honestly-dated note on team size and
-  what we're actively building, updated as it changes instead of left
-  stale.
+This page isn't finished, and we'd rather say so than fake it. Still to
+come: a public build log indexing the decisions already written up on
+this blog, named case studies once engagements clear the point where we
+can name them, and a plainly-dated "where we are now" on team size and
+what's actively being built.
 
 ---
 
-*Want to work with us, or just want to ask a question about how we work?
-[Get in touch](/contact). No discovery-call funnel, just a conversation.*
+*[Get in touch](/contact). No discovery-call funnel, just a conversation.*
