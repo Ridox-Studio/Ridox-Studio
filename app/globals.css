@@ -247,6 +247,23 @@ html.lenis body {
   line-height: 0.82;
 }
 
+/* Post titles are full sentences, not the short words type-hero was tuned
+   for (page headers, the homepage mark), so its 3.5rem floor overwhelms a
+   small screen. Same ceiling, lower floor. */
+.type-post-title {
+  font-size: clamp(2.25rem, 8vw, 7rem);
+  font-weight: 900;
+  font-variation-settings: "wdth" 125;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+}
+
+@media (min-width: 48rem) {
+  .type-post-title {
+    line-height: 0.82;
+  }
+}
+
 .type-section {
   font-size: clamp(2rem, 4vw, 3.5rem);
   font-weight: 800;

@@ -20,12 +20,18 @@ forward from here.
 
 ## What we're building toward
 
-Most software doesn't lose to a lack of ambition. It loses to unfinished
-systems: the payment flow that works until the edge case, the admin tool
-built for a demo instead of a term. What we look for, in every codebase
-and every engagement, is the assumption a team stopped questioning,
-because that's usually where the real gap is hiding. We bring that
-standard wherever the client is.
+We build tools to close a gap we can point at, not to chase a trend. It
+doesn't matter whether the gap was a client's brief or something we
+noticed ourselves: RISMS, Cilbup and Resurgee, below, all started
+because something people needed didn't exist yet in a form that
+actually worked.
+
+The standard we hold both to is the same. Most software doesn't lose to
+a lack of ambition. It loses to unfinished systems: the payment flow
+that works until the edge case, the admin tool built for a demo instead
+of a term. What we look for, in every codebase and every engagement, is
+the assumption a team stopped questioning, because that's usually where
+the real gap is hiding.
 
 ## What we do
 

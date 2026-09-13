@@ -92,7 +92,7 @@ export default async function BlogPostPage({ params }: Params) {
         <Container className="relative gap-6">
           <Reveal className="flex flex-col gap-6">
             <p className="type-overline font-mono text-indigo-300">The blog</p>
-            <h1 className="type-hero font-display text-content-primary">
+            <h1 className="type-post-title font-display text-content-primary">
               {post.title}
             </h1>
             <div className="flex flex-wrap items-center gap-3 type-overline font-mono text-content-tertiary">

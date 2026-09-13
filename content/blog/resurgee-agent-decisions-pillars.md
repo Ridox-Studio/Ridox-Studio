@@ -1,5 +1,5 @@
 ---
-title: "Your AI isn't dumb, it's blind: what building Resurgee taught us about agent decisions"
+title: "\"My AI is dumb\" - no, it isn't. Here's what we found building Resurgee"
 description: We didn't set out to solve consciousness. We set out to stop our AI task manager from making bad calls, and found the pillars every agent needs before it can decide instead of just predict.
 date: 2026-09-13
 tags: [resurgee, ai, product, context-engineering]
