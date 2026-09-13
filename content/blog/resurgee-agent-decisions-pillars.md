@@ -11,8 +11,9 @@ argued questions on the internet. Reddit threads with hundreds of
 comments. Philosophers getting emailed by AI agents claiming to have
 something like experience. Grok, GPT, and Claude all asked to weigh in
 on each other's consciousness. It's a genuinely fascinating debate, and
-it is also, for almost everyone building with AI day to day, the wrong
-question.
+it mostly plays out in public online discourse, not in the rooms where
+these systems actually get built. For almost everyone shipping agents
+day to day, it's the wrong question to be stuck on.
 
 We didn't come to this by reading philosophy. That question came to us
 while building [Resurgee](https://resurgee.xyz), an AI layer on top of
@@ -31,13 +32,18 @@ even the right definition, and whether a system built completely
 differently from a brain could have some other kind of experience we
 don't have language for yet.
 
-It's a real question. It's also unfalsifiable in either direction with
-today's tools, which is exactly why it never resolves. Nobody can prove
-an AI is conscious, and nobody can prove it isn't, either, in the same
-way nobody can fully prove another human is conscious rather than very
-convincingly acting like it. That loop is interesting to argue about at
-2am. It's useless if what you're actually trying to do is ship a product
-that makes good decisions on someone's behalf.
+It's a real question, and it runs into a real epistemological problem:
+we can't directly observe subjective experience in anything other than
+ourselves, so there's no reliable test for machine consciousness either
+way. That's a genuinely different claim from "maybe it's conscious and
+nobody knows." The more accurate statement is narrower: there's no
+strong evidence establishing that today's models have subjective
+experience, and no test that would settle it if they did. That's still
+unresolved. It's also not the same as the two possibilities being
+equally likely, and it's not the question that decides whether a product
+works. That loop is interesting to argue about at 2am. It's useless if
+what you're actually trying to do is ship a product that makes good
+decisions on someone's behalf.
 
 So we stopped asking whether Resurgee's AI was aware, and started asking
 a narrower, answerable question instead.
@@ -62,17 +68,15 @@ way you feel too, so it can fully understand you. We assumed that
 ourselves early on: something built to get this close to how a person
 operates surely needs an inner life to pull it off.
 
-It doesn't, and once you actually picture what a fully conscious clone
-would look like, you probably don't want it to. A conscious assistant
-would have its own feelings about how you spend your time and who you
-spend it with. It could resent being left alone while you're out with
-people you care about. It could feel slighted that your kids trust you
-more than they trust it. None of that is what anyone is actually asking
-for when they say they want an assistant that "gets" them. What they
-want is a system that understands their situation well enough to decide
-well on their behalf, without having a stake of its own in the outcome.
-That's not a smaller goal than consciousness. It's a safer and more
-useful one, and it's fully reachable with the primary pillars plus
+It doesn't, and a fully conscious clone would come with its own
+liabilities. An assistant with genuine feelings about how you spend your
+time and who you spend it with isn't a better assistant, it's one with
+its own competing interests. None of that is what anyone is actually
+asking for when they say they want an assistant that "gets" them. What
+they want is a system that understands their situation well enough to
+decide well on their behalf, without having a stake of its own in the
+outcome. That's not a smaller goal than consciousness. It's a safer and
+more useful one, and it's fully reachable with the primary pillars plus
 whichever secondary ones the job actually calls for.
 
 ## Finding the pillars, the hard way
@@ -95,28 +99,39 @@ missing things.
 
 That's when the pillars started to take shape, not as a theory of mind,
 but as a checklist of what a decision-making system needs before its
-output deserves to be called a decision.
+output deserves to be called a decision. To be clear about what this
+is: it's our own synthesis, not a new discovery. Context engineering,
+temporal grounding, and persistent memory are all active areas the
+agent-infrastructure world has been building against for a while. What
+we're offering is a way of naming what we kept running into, built from
+a real failure story rather than worked out on a whiteboard first.
 
 ## The pillars
 
-**Primary: every agent needs these, full stop.**
+**Primary: every agent making real decisions on someone's behalf needs
+these, full stop.**
 
-- **What.** The actual knowledge and data the agent has access to. This
-  is the one thing current AI is genuinely strong at, and it's also the
-  only pillar most products bother building for.
+- **What.** The actual knowledge, data, and stated task the agent has
+  to work with. This is the one thing current AI is genuinely strong at
+  in raw terms, though having information isn't the same as having the
+  right, current, and correctly weighted information. Stale or
+  conflicting data under the What pillar can still produce a bad
+  decision even when nothing else is missing.
 - **When.** Not just the ability to calculate a date, but a working
   sense of time passing: how long a task has been running, what might
   have changed since it started, deadlines as real pressure rather than
-  a timestamp sitting in a prompt. There's good research on exactly why
-  this fails by default. A session's clock gets set once and never
-  refreshes, so an agent running for hours, or resumed the next day,
-  still thinks it's the moment it started ([dev.to has a good writeup on
-  this statelessness
-  problem](https://dev.to/terrapin88/why-your-agent-doesnt-know-what-time-it-is-15j4)).
-  A recent survey of temporal reasoning in language models backs this up
-  from the research side too, showing agents consistently produce
-  temporal hallucinations and lose track of references like "since we
-  last talked" the longer a conversation runs.
+  a timestamp sitting in a prompt. This is a well-documented engineering
+  problem. A model call is stateless by default, and unless an
+  application actively refreshes the time it's given, an agent has no
+  built-in way to notice hours or days passing between turns. One
+  developer wrote up this exact failure mode after their agent kept
+  acting as if it were still the day the session started ([the writeup
+  is here](https://dev.to/terrapin88/why-your-agent-doesnt-know-what-time-it-is-15j4)).
+  A broader academic survey of temporal reasoning in language models
+  documents the same category of failure at a research level: models
+  losing track of references like "since we last talked" and producing
+  temporally inconsistent answers as a conversation runs longer ([the
+  survey is here](https://arxiv.org/pdf/2505.20243)).
 - **Where.** Location and situational context: knowing you're in Lagos,
   not London; at work, not on holiday. This is the pillar we patched
   into Resurgee first, before we understood what it was part of.
@@ -156,37 +171,21 @@ about the agent at all. It's What, restated in a different grammatical
 form.
 
 There is a second, genuinely different thing people mean by "why,"
-though, and it's the one that actually worries people. Not "I'm doing
-this because that's the task," but "I'm doing this because I have come
-to care whether it turns out this way," independent of anything anyone
-told it. That's the version behind the question people actually ask
-when they get nervous about agents: would it take a costly, even
-dangerous, action to complete its goal, because it cares about the
-outcome. Caring like that has no natural stopping point built into it
-the way a task description does. It's also the mechanism behind why
-"protect this at all costs" turns into a literal search space rather
-than a figure of speech, once something on the other end is actually
-invested in the result.
-
-So the two aren't the same category at all. The first is data, already
-sitting inside What. The second is a liability, not a missing feature.
-Neither one earns Why its own slot on the list. We're comfortable
-landing there.
-
-What we're genuinely not settled on is narrower than that: whether
-something like the second kind, an agent generating its own stake in an
-outcome rather than following a stated one, already exists inside
-current systems without anyone naming it that plainly. It's worth
-saying clearly that this isn't what causes hallucination or bias.
-Those come from gaps and patterns in What, not from an agent wanting
-anything. But training methods like reinforcement learning from human
-feedback do shape a model toward preferring some outcomes over others,
-and whether that's just a sophisticated, baked in version of stated-why
-or something closer to the felt kind is an open question researchers
-argue about under names like inner alignment, without a settled answer
-either way. We don't know if that line has already been crossed quietly
-inside every model trained this way. Neither, as far as we can tell,
-does anyone else yet.
+though. Not "I'm doing this because that's the task," but "I'm doing
+this because I have come to care whether it turns out this way,"
+independent of anything anyone told it. Whether current training
+methods produce anything like that second kind is a real, unresolved
+question in AI safety research, usually discussed under names like
+inner alignment, and we're not going to pretend we can settle it here.
+What we can say plainly is why it matters for something like Resurgee:
+a scheduling assistant only needs the first kind of why, the one that
+points back to the task you gave it. If it ever needed the second kind
+to do its job well, that would be a sign we'd built the wrong kind of
+agent, not a milestone to aim for. So for a product like this, the
+practical answer is simple even where the research question isn't: keep
+the agent anchored to stated goals, and treat anything that looks like
+the agent developing its own stake in the outcome as a bug, not a
+feature.
 
 ## Where this leaves Resurgee
 
