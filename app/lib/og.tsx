@@ -1,7 +1,11 @@
 import { ImageResponse } from "next/og";
+import { clamp } from "@/app/lib/metadata";
 
 export const OG_SIZE = { width: 1200, height: 630 };
 export const OG_CONTENT_TYPE = "image/png";
+
+/** Subtitles render at 30px in a fixed-height card — SEO-length descriptions overflow it. */
+const SUBTITLE_LIMIT = 140;
 
 const AMBER = "hsl(33, 95%, 52%)";
 const INDIGO = "hsl(258, 89%, 62%)";
@@ -32,6 +36,7 @@ export function renderOgImage({
   accent?: "amber" | "indigo";
 }) {
   const accentColor = accent === "amber" ? AMBER : INDIGO;
+  const trimmedSubtitle = subtitle ? clamp(subtitle, SUBTITLE_LIMIT) : subtitle;
 
   return new ImageResponse(
     (
@@ -110,8 +115,8 @@ export function renderOgImage({
           >
             {title}
           </span>
-          {subtitle ? (
-            <span style={{ color: MUTED, fontSize: 30, lineHeight: 1.35 }}>{subtitle}</span>
+          {trimmedSubtitle ? (
+            <span style={{ color: MUTED, fontSize: 30, lineHeight: 1.35 }}>{trimmedSubtitle}</span>
           ) : null}
 
           {cta ? (
