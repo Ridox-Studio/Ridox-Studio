@@ -103,6 +103,7 @@ export function Preloader() {
             <motion.div
               key="preloader-reduced"
               id="ridox-preloader"
+              data-nosnippet
               className="fixed inset-0 z-[60] flex items-center justify-center bg-surface-void"
               initial={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -113,7 +114,9 @@ export function Preloader() {
           )}
         </AnimatePresence>
       ) : (
-        <div id="ridox-preloader" className="fixed inset-0 z-[60]">
+        // data-nosnippet keeps the loader copy out of Google's result snippets,
+        // since this overlay is the first text in the server-rendered HTML.
+        <div id="ridox-preloader" data-nosnippet className="fixed inset-0 z-[60]">
           {/* The initial load is the Redox Door already shut: the same two
               halves, holding the sliding duality, then parting on reveal. */}
           <motion.div
