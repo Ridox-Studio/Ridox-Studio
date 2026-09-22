@@ -135,6 +135,7 @@ const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: SITE.name,
+  alternateName: "ridoxstudio",
   url: SITE.url,
   potentialAction: {
     "@type": "SearchAction",
