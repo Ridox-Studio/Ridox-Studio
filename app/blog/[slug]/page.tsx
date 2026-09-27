@@ -12,13 +12,18 @@ import { getAllPostSlugs, getPostBySlug } from "@/app/lib/blog";
 
 type Params = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return getAllPostSlugs().map((slug) => ({ slug }));
+// See app/blog/page.tsx — kept in sync with the index route so both refresh
+// on the same cadence under BLOG_SOURCE=wordpress.
+export const revalidate = 300;
+
+export async function generateStaticParams() {
+  const slugs = await getAllPostSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) return { title: "Post not found" };
 
   return buildPageMetadata({
@@ -39,7 +44,7 @@ function formatDate(iso: string): string {
 
 export default async function BlogPostPage({ params }: Params) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) notFound();
 
   const postUrl = `${SITE.url}/blog/${post.slug}`;
@@ -164,9 +169,10 @@ export default async function BlogPostPage({ params }: Params) {
               </div>
             )}
 
-            {/* Compiled from content/blog/<slug>.md — first-party content
-                only, never end-user input. See the trust boundary noted in
-                lib/blog.ts. */}
+            {/* Compiled from content/blog/<slug>.md, or rendered by
+                WordPress under BLOG_SOURCE=wordpress — first-party content
+                only either way, never end-user input. See the trust
+                boundary noted in lib/blog/types.ts. */}
             <div dangerouslySetInnerHTML={{ __html: post.html }} />
           </Reveal>
         </ImageLightbox>

@@ -3,7 +3,7 @@ import { getAllProjects, getProjectHref } from "@/app/data/projects";
 import { getAllPosts } from "@/app/lib/blog";
 import { SITE } from "@/app/lib/site";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const projectUrls = getAllProjects().map((project) => ({
     url: `${SITE.url}${getProjectHref(project)}`,
     lastModified: new Date(),
@@ -11,7 +11,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const postUrls = getAllPosts().map((post) => ({
+  const posts = await getAllPosts();
+  const postUrls = posts.map((post) => ({
     url: `${SITE.url}/blog/${post.slug}`,
     lastModified: new Date(post.updated ?? post.date),
     changeFrequency: "monthly" as const,
