@@ -37,10 +37,10 @@ export const metadata: Metadata = {
 const linkClass =
   "inline-flex w-fit items-center gap-2 font-mono text-xs tracking-[0.15em] uppercase transition-colors";
 
-export default function HomePage() {
+export default async function HomePage() {
   const clientWork = getFeatured(getWorkProjects(), 3);
   const studioWork = getFeatured(getProjectsByCategory("studio"), 3);
-  const latestPosts = getAllPosts().slice(0, 3);
+  const latestPosts = (await getAllPosts()).slice(0, 3);
 
   return (
     <main className="flex w-full flex-col">

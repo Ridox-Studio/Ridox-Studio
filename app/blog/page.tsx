@@ -15,8 +15,13 @@ export const metadata: Metadata = buildPageMetadata({
   path: "/blog",
 });
 
-export default function BlogIndexPage() {
-  const posts = getAllPosts();
+// WordPress mode fetches over the network (see app/lib/blog) — the
+// markdown mode only reads the filesystem, but this stays async either way
+// so BLOG_SOURCE can switch without touching this page.
+export const revalidate = 300;
+
+export default async function BlogIndexPage() {
+  const posts = await getAllPosts();
 
   return (
     <main data-zone="indigo" className="flex w-full flex-col">

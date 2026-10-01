@@ -10,33 +10,9 @@ import rehypeSlug from "rehype-slug";
 import rehypeStringify from "rehype-stringify";
 import { visit } from "unist-util-visit";
 import readingTime from "reading-time";
+import type { BlogPost, BlogPostMeta } from "./types";
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog");
-
-export interface BlogPostMeta {
-  slug: string;
-  title: string;
-  /** Search-snippet and social-card text — keep it under ~155 characters. */
-  description: string;
-  date: string;
-  /** Omitted unless the post was actually revised after publishing. */
-  updated?: string;
-  tags: string[];
-  readingMinutes: number;
-  /**
-   * Path to a real cover image, if one exists. Almost never set — the card
-   * grid falls back to a code-generated tile (BlogArt) whenever this is
-   * absent, so a post never has to wait on a screenshot before it can ship.
-   */
-  cover?: string;
-  /** Pinned posts always lead the listing, ahead of date order. */
-  pinned?: boolean;
-}
-
-export interface BlogPost extends BlogPostMeta {
-  /** Compiled, ready-to-render HTML — never raw markdown, never user input. */
-  html: string;
-}
 
 type Frontmatter = {
   title?: string;

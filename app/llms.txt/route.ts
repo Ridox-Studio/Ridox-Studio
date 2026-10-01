@@ -13,7 +13,7 @@ import { SITE } from "@/app/lib/site";
  */
 export const dynamic = "force-static";
 
-function build(): string {
+async function build(): Promise<string> {
   const lines: string[] = [];
 
   lines.push(`# ${SITE.name}`);
@@ -56,7 +56,7 @@ function build(): string {
 
   lines.push("## Blog");
   lines.push("");
-  for (const post of getAllPosts()) {
+  for (const post of await getAllPosts()) {
     lines.push(`- [${post.title}](${SITE.url}/blog/${post.slug}) — ${post.description}`);
   }
   lines.push("");
@@ -77,8 +77,8 @@ function build(): string {
   return lines.join("\n");
 }
 
-export function GET(): Response {
-  return new Response(build(), {
+export async function GET(): Promise<Response> {
+  return new Response(await build(), {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
       "Cache-Control": "public, max-age=0, s-maxage=86400, stale-while-revalidate=604800",

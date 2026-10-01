@@ -492,6 +492,158 @@ html.lenis body {
   background: var(--amber-ghost);
 }
 
+/* ------------------------------------------------------------
+   WordPress block-editor markup (BLOG_SOURCE=wordpress)
+   content.rendered comes straight from WordPress, not through the
+   markdown pipeline above — Gutenberg wraps things the remark/rehype
+   output never does (figure/figcaption, wp-block-* classes, alignment
+   utility classes, embeds). Selectors below target those directly so a
+   WP post reads as well-formatted as a markdown one, not just "readable".
+   The classic editor's older `.wp-caption` shortcode markup is covered
+   too, since either can show up depending on how a post was written.
+   ------------------------------------------------------------ */
+
+.prose-ridox figure {
+  margin-block: 1.75em;
+}
+
+/* img already has its own margin-block; a captioned image's figure
+   supplies that spacing instead so there's no doubled gap above the
+   caption text. */
+.prose-ridox figure img,
+.prose-ridox figure.wp-caption img {
+  margin-block: 0;
+}
+
+.prose-ridox figcaption,
+.prose-ridox .wp-caption-text {
+  color: var(--text-tertiary);
+  font-size: 0.8125rem;
+  margin-block-start: 0.6em;
+  text-align: center;
+}
+
+.prose-ridox .alignwide,
+.prose-ridox .alignfull {
+  max-width: none;
+  width: 100%;
+}
+
+.prose-ridox .aligncenter {
+  margin-inline: auto;
+}
+
+.prose-ridox .alignleft,
+.prose-ridox .alignright {
+  max-width: 50%;
+}
+
+@media (min-width: 640px) {
+  .prose-ridox .alignleft {
+    float: left;
+    margin-inline-end: 1.5em;
+  }
+
+  .prose-ridox .alignright {
+    float: right;
+    margin-inline-start: 1.5em;
+  }
+}
+
+.prose-ridox .has-text-align-center {
+  text-align: center;
+}
+
+.prose-ridox .has-text-align-right {
+  text-align: end;
+}
+
+/* Gutenberg's quote block is a plain <blockquote class="wp-block-quote">,
+   already covered by the blockquote rule above — this only adds the
+   optional <cite> attribution it sometimes carries. */
+.prose-ridox blockquote cite {
+  color: var(--text-tertiary);
+  display: block;
+  font-size: 0.8125rem;
+  font-style: normal;
+  margin-block-start: 0.5em;
+}
+
+.prose-ridox .wp-block-pullquote blockquote {
+  border-inline-start: none;
+  font-size: 1.25em;
+  text-align: center;
+}
+
+.prose-ridox .wp-block-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5em;
+  margin-block: 1.75em;
+}
+
+.prose-ridox .wp-block-column {
+  flex: 1 1 16rem;
+}
+
+.prose-ridox .wp-block-gallery {
+  display: grid;
+  gap: 0.75em;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  list-style: none;
+  margin-block: 1.75em;
+  padding-inline-start: 0;
+}
+
+.prose-ridox .wp-block-gallery img {
+  margin-block: 0;
+}
+
+.prose-ridox .wp-block-button__link,
+.prose-ridox .wp-block-file .wp-block-file__button {
+  background: var(--indigo-300);
+  border-radius: 999px;
+  color: var(--surface-void, #0b0a12);
+  display: inline-block;
+  font-family: var(--font-archivo), system-ui, sans-serif;
+  font-weight: 600;
+  padding: 0.6em 1.4em;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.prose-ridox .wp-block-button__link:hover,
+.prose-ridox .wp-block-file .wp-block-file__button:hover {
+  background: var(--amber-400);
+}
+
+.prose-ridox .wp-block-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75em;
+  list-style: none;
+  margin-block: 1.75em;
+  padding-inline-start: 0;
+}
+
+/* Embeds (YouTube, Twitter/X, etc.) come back as a fixed-ratio wrapper
+   around an <iframe> — force it responsive rather than trusting whatever
+   width/height WordPress hard-codes into the embed HTML. */
+.prose-ridox .wp-block-embed__wrapper {
+  aspect-ratio: 16 / 9;
+  position: relative;
+}
+
+.prose-ridox .wp-block-embed__wrapper iframe {
+  border: 0;
+  border-radius: 0.75rem;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
 /* ============================================================
    Scrollbar
    Matched to the surface scale so the OS default does not sit as a bright
