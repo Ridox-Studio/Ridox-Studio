@@ -75,6 +75,27 @@ export const SITE = {
   email: "hello@ridoxstudio.com",
 } as const;
 
+/**
+ * Stable JSON-LD node ids. Every schema block that mentions the studio, the
+ * site or the founder references these instead of restating name/url, so
+ * Google resolves them to one entity each. Fixed to the production host on
+ * purpose — an @id is an identifier, not a link, and must not change between
+ * preview deployments.
+ */
+export const SCHEMA_IDS = {
+  organization: "https://www.ridoxstudio.com/#organization",
+  website: "https://www.ridoxstudio.com/#website",
+  founder: "https://codad5.me/#person",
+} as const;
+
+export const FOUNDER = {
+  "@type": "Person",
+  "@id": SCHEMA_IDS.founder,
+  name: "Chibueze Aniezeofor",
+  url: "https://codad5.me",
+  sameAs: ["https://github.com/codad5", "https://www.linkedin.com/in/codad5"],
+} as const;
+
 /** Section 5.2 — 5 items max, no dropdowns, no sub-menus. */
 export const NAV_ITEMS = [
   { label: "Home", href: "/", zone: "neutral" },

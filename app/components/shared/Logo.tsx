@@ -69,7 +69,9 @@ export function Logo({
       aria-hidden={title ? undefined : true}
       aria-label={title}
     >
-      {title ? <title>{title}</title> : null}
+      {/* No <title> child: inline in the page it becomes a second <title>
+          element in the document, which crawlers can misread. role="img" +
+          aria-label already name the mark for assistive tech. */}
       <defs>
         <mask id={maskId}>
           <rect width="100" height="100" fill="#ffffff" />

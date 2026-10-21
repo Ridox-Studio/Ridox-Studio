@@ -7,7 +7,7 @@ import { Reveal, RevealGroup, RevealItem } from "@/app/components/shared/Reveal"
 import { ProjectImage } from "@/app/components/shared/ProjectImage";
 import { ContactSection } from "@/app/components/contact/ContactSection";
 import { Footer } from "@/app/components/footer/Footer";
-import { SITE } from "@/app/lib/site";
+import { SCHEMA_IDS, SITE } from "@/app/lib/site";
 
 /** Shared deep-dive layout for /work/[slug] and /studio/[slug]. */
 export function ProjectDetail({ project }: { project: Project }) {
@@ -29,7 +29,7 @@ export function ProjectDetail({ project }: { project: Project }) {
     description: project.description,
     url: `${SITE.url}${parentHref}/${project.slug}`,
     image: `${SITE.url}${project.coverImage}`,
-    creator: { "@type": "Organization", name: SITE.name },
+    creator: { "@id": SCHEMA_IDS.organization },
     dateCreated: project.year.toString(),
     keywords: project.techStack.join(", "),
   };

@@ -7,7 +7,7 @@ import { ImageLightbox } from "@/app/components/blog/ImageLightbox";
 import { ContactSection } from "@/app/components/contact/ContactSection";
 import { Footer } from "@/app/components/footer/Footer";
 import { buildPageMetadata } from "@/app/lib/metadata";
-import { SITE } from "@/app/lib/site";
+import { FOUNDER, SCHEMA_IDS, SITE } from "@/app/lib/site";
 import { getAllPostSlugs, getPostBySlug } from "@/app/lib/blog";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -58,12 +58,12 @@ export default async function BlogPostPage({ params }: Params) {
     mainEntityOfPage: postUrl,
     datePublished: post.date,
     dateModified: post.updated ?? post.date,
-    author: { "@type": "Organization", name: SITE.name, url: SITE.url },
-    publisher: {
-      "@type": "Organization",
-      name: SITE.name,
-      logo: { "@type": "ImageObject", url: `${SITE.url}/logos/ridox-studio-logo.svg` },
-    },
+    // Same @ids as the root layout's graph, so these resolve to the founder
+    // and studio entities. Name is repeated because Google's Article
+    // guidelines read author.name from this block directly.
+    author: FOUNDER,
+    publisher: { "@type": "Organization", "@id": SCHEMA_IDS.organization, name: SITE.name },
+    isPartOf: { "@id": SCHEMA_IDS.website },
     keywords: post.tags.join(", "),
   };
 

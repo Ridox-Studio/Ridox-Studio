@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, Inter, Bitcount_Prop_Single } from "next/font/google";
-import { SITE } from "@/app/lib/site";
+import { FOUNDER, SCHEMA_IDS, SITE } from "@/app/lib/site";
 import { SiteShell } from "@/app/components/providers/SiteShell";
 import { SiteAnalytics } from "@/app/components/analytics/SiteAnalytics";
 import "./globals.css";
@@ -47,7 +47,9 @@ export const metadata: Metadata = {
   keywords: [...SITE.keywords],
   authors: [{ name: SITE.name, url: SITE.url }],
   creator: SITE.name,
-  alternates: { canonical: "/" },
+  // No canonical here: it would be inherited by every route that forgets to
+  // set its own, pointing them all at the homepage. buildPageMetadata sets a
+  // self-referencing one per page.
   // Favicons come from the file conventions app/icon.svg + app/apple-icon.png
   openGraph: {
     siteName: SITE.name,
@@ -76,9 +78,15 @@ const SERVICE_AREAS = [
   "Product engineering",
 ];
 
+/**
+ * One node, two types: ProfessionalService narrows "an organization" to "a
+ * firm you can hire", the type Google associates with agency search intent.
+ * Merged rather than emitted as a second block so there is no question of
+ * whether they are the same entity.
+ */
 const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": ["Organization", "ProfessionalService"],
+  "@id": SCHEMA_IDS.organization,
   name: SITE.name,
   url: SITE.url,
   logo: `${SITE.url}/logos/ridox-studio-logo.svg`,
@@ -94,6 +102,8 @@ const organizationSchema = {
   areaServed: "Worldwide",
   knowsAbout: SERVICE_AREAS,
   foundingDate: String(SITE.founded),
+  founder: FOUNDER,
+  priceRange: "$$",
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer service",
@@ -102,25 +112,6 @@ const organizationSchema = {
     areaServed: "Worldwide",
     availableLanguage: ["en"],
   },
-};
-
-/**
- * ProfessionalService narrows the entity from "an organization" to "a firm you
- * can hire", which is the type Google associates with agency search intent.
- * Same name/url as the Organization block so they resolve to one entity.
- */
-const professionalServiceSchema = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: SITE.name,
-  url: SITE.url,
-  image: `${SITE.url}/logos/social/ridox-studio-profile-dark-1024.png`,
-  description: SITE.longDescription,
-  address: { "@type": "PostalAddress", addressCountry: "NG" },
-  areaServed: "Worldwide",
-  priceRange: "$$",
-  serviceType: SERVICE_AREAS,
-  sameAs: Object.values(SITE.social),
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "Software engineering services",
@@ -131,17 +122,22 @@ const professionalServiceSchema = {
   },
 };
 
+// No SearchAction: /work has no `q` search, and advertising one that does
+// nothing is a broken signal, not a neutral one.
 const websiteSchema = {
-  "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": SCHEMA_IDS.website,
   name: SITE.name,
-  alternateName: "ridoxstudio",
+  alternateName: ["Ridox", "ridoxstudio"],
+  // Same string as the homepage canonical and sitemap <loc> — Next.js always
+  // renders the root canonical without a trailing slash.
   url: SITE.url,
-  potentialAction: {
-    "@type": "SearchAction",
-    target: `${SITE.url}/work?q={search_term_string}`,
-    "query-input": "required name=search_term_string",
-  },
+  publisher: { "@id": SCHEMA_IDS.organization },
+};
+
+const siteSchema = {
+  "@context": "https://schema.org",
+  "@graph": [organizationSchema, websiteSchema],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -150,15 +146,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteSchema) }}
         />
       </head>
       {/* suppressHydrationWarning is scoped to this one tag's attributes only
