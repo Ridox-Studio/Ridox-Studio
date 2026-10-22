@@ -38,6 +38,13 @@ export function InquiryForm() {
     message: "",
   });
   const tracked = useRef(false);
+  // When the visitor started — set on mount, not render: the page is
+  // prerendered, so a render-time value would be the build time. The server
+  // treats sub-3-second submissions as scripted.
+  const startedAt = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (startedAt.current) startedAt.current.value = String(Date.now());
+  }, []);
 
   useEffect(() => {
     if (state.status === "success" && !tracked.current) {
@@ -154,6 +161,7 @@ export function InquiryForm() {
         <label htmlFor="website">Website</label>
         <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
       </div>
+      <input ref={startedAt} type="hidden" name="startedAt" defaultValue="" />
 
       <div className="flex flex-col items-start gap-4">
         <SubmitButton />

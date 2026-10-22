@@ -3,6 +3,8 @@
 import { headers } from "next/headers";
 import { parseInquiry } from "@/app/lib/contact";
 import { mailerConfigured, sendInquiryEmails } from "@/app/lib/mailer";
+import { screenInquiry } from "@/app/lib/spam";
+import { SITE } from "@/app/lib/site";
 
 export type InquiryState = {
   status: "idle" | "success" | "error";
@@ -59,6 +61,39 @@ export async function submitInquiry(
     return { status: "error", message: parsed.errors.join(" ") };
   }
 
+  // Set by the form on mount. Absent when JS is off — that is not a signal.
+  const startedAt = Number(formData.get("startedAt"));
+  const verdict = await screenInquiry(parsed.fields, {
+    elapsedMs: startedAt > 0 ? Date.now() - startedAt : null,
+  });
+
+  if (verdict.kind === "error") return { status: "error", message: verdict.message };
+
+  if (verdict.kind === "block") {
+    console.warn("Contact form blocked:", verdict.category, verdict.reasons, parsed.fields.email);
+    // Tell people why they were refused, never which rule fired — that would
+    // tell a spammer exactly what to change. Both messages leave a way through
+    // for a real person caught by mistake.
+    if (verdict.category === "pitch") {
+      return {
+        status: "error",
+        message: `This form is for project enquiries — we don't take service or partnership pitches here. For those, email us directly at ${SITE.email}.`,
+      };
+    }
+    if (verdict.category === "bot") {
+      return {
+        status: "error",
+        message: `We couldn't send this — it looks automated. If you're a real person, email us directly at ${SITE.email}.`,
+      };
+    }
+    // "silent": only a script trips these, so give it nothing to learn from.
+    return { status: "success" };
+  }
+
+  if (verdict.kind === "flag") {
+    console.warn("Contact form flagged for review:", verdict.reasons, parsed.fields.email);
+  }
+
   if (!mailerConfigured()) {
     console.error("Contact form submitted but Zoho SMTP env vars are missing.");
     return {
@@ -68,7 +103,7 @@ export async function submitInquiry(
   }
 
   try {
-    await sendInquiryEmails(parsed.fields);
+    await sendInquiryEmails(parsed.fields, { review: verdict.kind === "flag" });
   } catch (error) {
     console.error("Failed to send inquiry email:", error);
     return {

@@ -57,7 +57,7 @@ function plainSummary(f: InquiryFields): string {
 }
 
 /**
- * Sends two messages:
+ * Sends up to two messages:
  *
  * 1. Internal notification → your inbox, with Reply-To set to the enquirer, so
  *    hitting "Reply" answers the client directly from hello@ridoxstudio.com.
@@ -65,8 +65,16 @@ function plainSummary(f: InquiryFields): string {
  *
  * The internal mail is sent first and its failure is thrown; the acknowledgement
  * is best-effort so a bounce on the client's side never loses you the lead.
+ *
+ * `review` marks a submission the spam screen was unsure about: the
+ * notification is tagged "[Review]" for a Gmail filter (deliberately not the
+ * word "spam" — and never hit "Report spam" on these, it would teach Gmail to
+ * distrust hello@ridoxstudio.com itself), and no acknowledgement is sent.
  */
-export async function sendInquiryEmails(fields: InquiryFields): Promise<void> {
+export async function sendInquiryEmails(
+  fields: InquiryFields,
+  { review = false }: { review?: boolean } = {},
+): Promise<void> {
   const t = getTransporter();
   const who = fields.company ? `${fields.name} · ${fields.company}` : fields.name;
 
@@ -74,9 +82,11 @@ export async function sendInquiryEmails(fields: InquiryFields): Promise<void> {
     from: fromAddress,
     to: notifyAddress,
     replyTo: `${fields.name} <${fields.email}>`,
-    subject: `New enquiry — ${who}`,
+    subject: `${review ? "[Review] " : ""}New enquiry — ${who}`,
     text: plainSummary(fields),
   });
+
+  if (review) return;
 
   try {
     await t.sendMail({
@@ -84,15 +94,19 @@ export async function sendInquiryEmails(fields: InquiryFields): Promise<void> {
       to: `${fields.name} <${fields.email}>`,
       replyTo: `${SITE.name} <${notifyAddress}>`,
       subject: `We've got your enquiry — ${SITE.name}`,
+      // Deliberately does NOT echo the submitted message: anyone can type any
+      // address into the form, and echoing their text would let a bot use us
+      // to deliver its content to a stranger from our domain.
       text: [
         `Hi ${fields.name.split(" ")[0] || fields.name},`,
         "",
         "Thanks for reaching out to Ridox Studio. An engineer has your message and",
         "will reply within two working days — with a real answer, not a calendar link.",
         "",
-        "For reference, here is what you sent:",
+        `In the meantime, you can see what we build at ${SITE.url}/work`,
         "",
-        plainSummary(fields),
+        "Didn't contact us? Someone may have entered your email address by mistake.",
+        "You can safely ignore this message — you won't hear from us again.",
         "",
         "— Ridox Studio",
         SITE.url,
