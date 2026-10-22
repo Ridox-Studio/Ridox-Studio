@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { useEffect, useState } from "react";
 import { doorVariants, SLASH } from "@/app/lib/motion";
 import { Logo } from "@/app/components/shared/Logo";
@@ -100,7 +100,7 @@ export function Preloader() {
         // Reduced motion — static mark, plain fade out.
         <AnimatePresence onExitComplete={dismiss}>
           {!revealing && (
-            <motion.div
+            <m.div
               key="preloader-reduced"
               id="ridox-preloader"
               data-nosnippet
@@ -110,7 +110,7 @@ export function Preloader() {
               transition={{ duration: 0.3 }}
             >
               <Logo size={80} />
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
       ) : (
@@ -119,7 +119,7 @@ export function Preloader() {
         <div id="ridox-preloader" data-nosnippet className="fixed inset-0 z-[60]">
           {/* The initial load is the Redox Door already shut: the same two
               halves, holding the sliding duality, then parting on reveal. */}
-          <motion.div
+          <m.div
             className="absolute inset-0 bg-amber-400"
             style={{ clipPath: SLASH.amberHalf }}
             variants={doorVariants(1, 0.6, 1.2)}
@@ -130,8 +130,8 @@ export function Preloader() {
             }}
           >
             <DoorWordmark />
-          </motion.div>
-          <motion.div
+          </m.div>
+          <m.div
             className="absolute inset-0 bg-indigo-300"
             style={{ clipPath: SLASH.indigoHalf }}
             variants={doorVariants(-1, 0.6, 1.2)}
@@ -139,11 +139,11 @@ export function Preloader() {
             animate={revealing ? "offscreen" : "duality"}
           >
             <DoorWordmark />
-          </motion.div>
+          </m.div>
 
           <AnimatePresence>
             {!revealing && (
-              <motion.div
+              <m.div
                 key="preloader-chrome"
                 className="absolute inset-0 flex items-center justify-center"
                 exit={{ opacity: 0 }}
@@ -153,13 +153,13 @@ export function Preloader() {
                     viewport scale, so a second one just competes with them. */}
                 <p className="absolute bottom-8 left-1/2 -translate-x-1/2 font-mono text-[0.6875rem] text-surface-void md:left-8 md:translate-x-0">
                   Initializing Redox Engine
-                  <motion.span
+                  <m.span
                     aria-hidden="true"
                     animate={{ opacity: [1, 0] }}
                     transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
                   >
                     _
-                  </motion.span>
+                  </m.span>
                 </p>
 
                 <button
@@ -169,7 +169,7 @@ export function Preloader() {
                 >
                   Skip intro →
                 </button>
-              </motion.div>
+              </m.div>
             )}
           </AnimatePresence>
         </div>

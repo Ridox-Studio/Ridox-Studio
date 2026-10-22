@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useSpring } from "framer-motion";
+import { m, useSpring } from "framer-motion";
 import { useEffect } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { EASING } from "@/app/lib/motion";
@@ -71,7 +71,7 @@ export function OpeningCanvas() {
       className="relative flex min-h-[100svh] w-full flex-col justify-center overflow-hidden px-6 py-24 md:px-12"
     >
       {/* Giant watermark — bleeds off the right edge on desktop, centred on mobile */}
-      <motion.div
+      <m.div
         aria-hidden="true"
         className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.10] md:left-auto md:right-[-10vw] md:translate-x-0 md:opacity-[0.16]"
         style={hasPointer ? undefined : { rotate: tilt.x, y: tilt.y }}
@@ -82,10 +82,10 @@ export function OpeningCanvas() {
           {/* w-full/h-auto override the intrinsic square size */}
           <Logo className="h-auto w-full" />
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Right-edge vertical word strip — fills the dead column beside the
-          wordmark and gives the canvas a second axis of motion. */}
+          wordmark and gives the canvas a second axis of m. */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-y-0 right-0 hidden w-16 overflow-hidden md:flex md:justify-center"
@@ -101,14 +101,14 @@ export function OpeningCanvas() {
       </div>
 
       <div className="relative flex w-full max-w-[1400px] flex-col gap-8">
-        <motion.p
+        <m.p
           className="type-overline font-mono text-content-tertiary"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2, ease: EASING.reveal }}
         >
           Reduction ◆ Oxidation
-        </motion.p>
+        </m.p>
 
         {/* The visible wordmark is the two stacked blocks; the descriptive
             phrase is what search engines and screen readers read as the H1.
@@ -118,7 +118,7 @@ export function OpeningCanvas() {
             {SITE.name} — a software engineering agency building web, mobile,
             cloud and AI systems
           </span>
-          <motion.span
+          <m.span
             aria-hidden="true"
             className="type-mega block"
             initial={{ opacity: 0, y: reduce ? 0 : 60 }}
@@ -126,8 +126,8 @@ export function OpeningCanvas() {
             transition={{ duration: reduce ? 0.3 : 0.9, delay: 0.3, ease: EASING.redox }}
           >
             RIDOX
-          </motion.span>
-          <motion.span
+          </m.span>
+          <m.span
             aria-hidden="true"
             className="type-mega type-mega-outline block"
             initial={{ opacity: 0, y: reduce ? 0 : 60 }}
@@ -135,10 +135,10 @@ export function OpeningCanvas() {
             transition={{ duration: reduce ? 0.3 : 0.9, delay: 0.42, ease: EASING.redox }}
           >
             STUDIO
-          </motion.span>
+          </m.span>
         </h1>
 
-        <motion.p
+        <m.p
           className="type-body max-w-xl text-content-secondary"
           initial={{ opacity: 0, y: reduce ? 0 : 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -146,7 +146,7 @@ export function OpeningCanvas() {
         >
           {SITE.tagline}. We build where opposing forces meet — frontend and backend,
           speed and stability, design energy and engineering depth.
-        </motion.p>
+        </m.p>
 
         {/* The hero had no path forward — a reader who did not want to scroll
             six sections had no way to act.
@@ -164,7 +164,7 @@ export function OpeningCanvas() {
             /contact's own "no discovery-call funnel, not a calendar link":
             nothing here promises a call, only that a message gets read and
             answered. */}
-        <motion.div
+        <m.div
           className="flex flex-wrap items-center gap-x-8 gap-y-4"
           initial={{ opacity: 0, y: reduce ? 0 : 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -181,9 +181,9 @@ export function OpeningCanvas() {
             See the work
             <ArrowUpRight size={14} aria-hidden="true" />
           </TransitionLink>
-        </motion.div>
+        </m.div>
 
-        <motion.dl
+        <m.dl
           className="flex flex-wrap gap-x-10 gap-y-4 border-t border-edge-subtle pt-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -199,12 +199,12 @@ export function OpeningCanvas() {
               </dd>
             </div>
           ))}
-        </motion.dl>
+        </m.dl>
       </div>
 
       {/* Scroll indicator — the vertical strip carries this on desktop, so
           mobile only needs the chevron. */}
-      <motion.div
+      <m.div
         aria-hidden="true"
         className="absolute bottom-8 left-1/2 -translate-x-1/2 md:hidden"
         animate={reduce ? undefined : { y: [0, 6, 0], opacity: [0.4, 1, 0.4] }}
@@ -213,7 +213,7 @@ export function OpeningCanvas() {
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-content-tertiary">
           <path d="M6 9l6 6 6-6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
-      </motion.div>
+      </m.div>
     </section>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import {
-  motion,
+  m,
   useAnimationFrame,
   useMotionValue,
   useScroll,
@@ -58,7 +58,7 @@ function Strip({
 
   return (
     <div className="flex w-full overflow-hidden select-none">
-      <motion.div className="flex flex-nowrap whitespace-nowrap" style={{ x }}>
+      <m.div className="flex flex-nowrap whitespace-nowrap" style={{ x }}>
         {Array.from({ length: COPIES }, (_, index) => (
           // shrink-0 is load-bearing: the global `min-width: 0` reset would
           // otherwise let every copy collapse and overlap in place.
@@ -66,7 +66,7 @@ function Strip({
             {content}
           </span>
         ))}
-      </motion.div>
+      </m.div>
     </div>
   );
 }
@@ -85,8 +85,10 @@ export function VelocityMarquee({
   const reduce = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
 
+  // Ghost type, decorative and aria-hidden. /30 of the AA-raised tertiary
+  // token renders the same as the old /40 did, so the marquee looks unchanged.
   const typeClass =
-    "font-display text-[3rem] leading-none font-black tracking-tight text-content-tertiary/40 uppercase md:text-[6rem]";
+    "font-display text-[3rem] leading-none font-black tracking-tight text-content-tertiary/30 uppercase md:text-[6rem]";
 
   // Reduced motion / minimal mode — a static strip, no movement (Section 12.3).
   if (reduce) {

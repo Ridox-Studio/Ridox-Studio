@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { m, useScroll, useTransform } from "framer-motion";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import type { Service } from "@/app/data/content";
@@ -17,7 +17,9 @@ function ServicePanel({ service, className }: { service: Service; className?: st
         className,
       )}
     >
+      {/* Decorative index: the title below carries the meaning. */}
       <span
+        aria-hidden="true"
         className={clsx(
           "font-mono text-5xl font-medium md:text-7xl",
           amber ? "text-amber-400/30" : "text-indigo-300/30",
@@ -109,13 +111,13 @@ function PinnedTrack({ services }: { services: Service[] }) {
     >
       {/* Offset by the pinned section rail so panels clear the label. */}
       <div className="sticky top-[var(--rail-h)] flex h-[calc(100svh-var(--rail-h))] items-center overflow-hidden">
-        <motion.div ref={track} style={{ x }} className="flex gap-8 px-12">
+        <m.div ref={track} style={{ x }} className="flex gap-8 px-12">
           {services.map((service) => (
             <div key={service.index} className="h-[70svh] w-[75vw] shrink-0 xl:w-[55vw]">
               <ServicePanel service={service} />
             </div>
           ))}
-        </motion.div>
+        </m.div>
       </div>
     </div>
   );

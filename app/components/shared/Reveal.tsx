@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import type { ReactNode } from "react";
 import { revealVariants, staggerChild, staggerParent } from "@/app/lib/motion";
 import { useReducedMotion } from "@/app/hooks/useReducedMotion";
@@ -31,7 +31,7 @@ export function Reveal({
   amount?: number | "some" | "all";
 }) {
   const reduce = useReducedMotion();
-  const Component = motion[as];
+  const Component = m[as];
 
   return (
     <Component
@@ -60,7 +60,7 @@ export function RevealGroup({
   as?: "div" | "ul" | "ol";
 }) {
   const reduce = useReducedMotion();
-  const Component = motion[as];
+  const Component = m[as];
 
   return (
     <Component
@@ -85,7 +85,7 @@ export function RevealItem({
   as?: "div" | "li" | "article";
 }) {
   const reduce = useReducedMotion();
-  const Component = motion[as];
+  const Component = m[as];
 
   return (
     <Component className={className} variants={staggerChild(reduce)}>

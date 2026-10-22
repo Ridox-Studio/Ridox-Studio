@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { m, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import clsx from "clsx";
 import type { ProcessStep } from "@/app/data/content";
@@ -28,7 +28,7 @@ export function ProcessTimeline({ steps }: { steps: ProcessStep[] }) {
         className="absolute top-2 bottom-2 left-[7px] w-px bg-edge-subtle md:left-[11px]"
       />
       {!reduce && (
-        <motion.div
+        <m.div
           aria-hidden="true"
           className="absolute top-2 bottom-2 left-[7px] w-px origin-top md:left-[11px]"
           style={{ scaleY: spineScale, background: "var(--gradient-brand)" }}

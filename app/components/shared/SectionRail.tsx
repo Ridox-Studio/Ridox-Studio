@@ -30,7 +30,7 @@ export function SectionRail({
           <span
             className={clsx(
               "type-overline shrink-0 font-mono",
-              accent === "amber" ? "text-amber-400" : "text-indigo-300",
+              accent === "amber" ? "text-amber-400" : "text-indigo-200",
             )}
           >
             {overline}

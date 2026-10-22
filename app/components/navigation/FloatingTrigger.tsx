@@ -1,14 +1,24 @@
 "use client";
 
-import { animate, AnimatePresence, motion, useMotionValue } from "framer-motion";
+import { animate, AnimatePresence, m, useMotionValue } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { EASING } from "@/app/lib/motion";
 import { Logo } from "@/app/components/shared/Logo";
-import { FullScreenMenu } from "@/app/components/navigation/FullScreenMenu";
+import dynamic from "next/dynamic";
 import { useTransition } from "@/app/components/transitions/TransitionContext";
 import { useReducedMotion } from "@/app/hooks/useReducedMotion";
+
+/**
+ * The menu is only needed once someone opens it, so it is its own chunk.
+ * Prefetched when the browser goes idle (see below) so the first open is
+ * still instant.
+ */
+const loadMenu = () => import("@/app/components/navigation/FullScreenMenu");
+const FullScreenMenu = dynamic(() => loadMenu().then((mod) => mod.FullScreenMenu), {
+  ssr: false,
+});
 
 type Zone = "amber" | "indigo" | "neutral";
 
@@ -168,6 +178,11 @@ function useDraggablePosition() {
 /** Section 5 — there is no navbar. This small mark is the entire navigation. */
 export function FloatingTrigger() {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const idle = window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 2000));
+    idle(() => void loadMenu());
+  }, []);
   const { covered } = useTransition();
   const reduce = useReducedMotion();
   const zone = useScrollZone();
@@ -186,7 +201,7 @@ export function FloatingTrigger() {
 
   return (
     <>
-      <motion.button
+      <m.button
         type="button"
         onClick={() => {
           // A release that ended a drag should not also toggle the menu.
@@ -224,7 +239,7 @@ export function FloatingTrigger() {
           </span>
         )}
         <Logo size={26} animation={reduce || expanded ? "static" : "pulse"} />
-      </motion.button>
+      </m.button>
 
       <AnimatePresence>
         {expanded && <FullScreenMenu onDismiss={() => setOpen(false)} />}

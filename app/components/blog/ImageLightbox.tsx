@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { X } from "lucide-react";
 
 /**
@@ -45,7 +45,7 @@ export function ImageLightbox({ children }: { children: React.ReactNode }) {
 
       <AnimatePresence>
         {open && (
-          <motion.div
+          <m.div
             role="dialog"
             aria-modal="true"
             aria-label={open.alt || "Enlarged image"}
@@ -68,7 +68,7 @@ export function ImageLightbox({ children }: { children: React.ReactNode }) {
                 to (including Next's optimized srcset via currentSrc) — plain
                 img, not next/image, since this is an already-loaded runtime
                 src. */}
-            <motion.img
+            <m.img
               src={open.src}
               alt={open.alt}
               className="max-h-[90vh] max-w-[90vw] rounded-2xl object-contain"
@@ -78,7 +78,7 @@ export function ImageLightbox({ children }: { children: React.ReactNode }) {
               exit={{ opacity: 0, scale: 0.96 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             />
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </>

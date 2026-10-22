@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import clsx from "clsx";
@@ -35,7 +35,7 @@ export function FullScreenMenu({ onDismiss }: { onDismiss: () => void }) {
   }, [onDismiss]);
 
   return (
-    <motion.div
+    <m.div
       ref={panelRef}
       tabIndex={-1}
       className="fixed inset-0 z-40 outline-none"
@@ -68,7 +68,7 @@ export function FullScreenMenu({ onDismiss }: { onDismiss: () => void }) {
         aria-label="Main navigation"
         className="pointer-events-none relative flex h-full flex-col items-center justify-center px-6 py-24"
       >
-        <motion.ul
+        <m.ul
           className="pointer-events-auto flex w-full max-w-2xl flex-col items-center gap-2 md:items-stretch md:gap-1"
           variants={staggerParent(reduce ? 0 : 0.07, 0.15)}
           initial="hidden"
@@ -77,7 +77,7 @@ export function FullScreenMenu({ onDismiss }: { onDismiss: () => void }) {
           {NAV_ITEMS.map((item, index) => {
             const isActive = pathname === item.href;
             return (
-              <motion.li
+              <m.li
                 key={item.href}
                 variants={staggerChild(reduce)}
                 className="w-full"
@@ -102,12 +102,12 @@ export function FullScreenMenu({ onDismiss }: { onDismiss: () => void }) {
                   </span>
                   <span className="font-display">{item.label}</span>
                 </TransitionLink>
-              </motion.li>
+              </m.li>
             );
           })}
-        </motion.ul>
+        </m.ul>
 
-        <motion.p
+        <m.p
           className="pointer-events-auto absolute bottom-10 font-mono text-[0.6875rem] tracking-[0.15em] text-content-tertiary uppercase"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -116,8 +116,8 @@ export function FullScreenMenu({ onDismiss }: { onDismiss: () => void }) {
           <a href={`mailto:${SITE.email}`} className="hover:text-indigo-300">
             {SITE.email}
           </a>
-        </motion.p>
+        </m.p>
       </nav>
-    </motion.div>
+    </m.div>
   );
 }

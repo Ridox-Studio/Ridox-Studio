@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useId } from "react";
 import clsx from "clsx";
 import { slidingDuality } from "@/app/lib/motion";
@@ -79,14 +79,14 @@ export function Logo({
         </mask>
       </defs>
       <g mask={`url(#${maskId})`}>
-        <motion.path
+        <m.path
           d={AMBER_BLOCK}
           fill={AMBER}
           animate={sliding ? duality.amber.animate : undefined}
           transition={sliding ? duality.amber.transition : undefined}
           {...pulseFor(0, 1)}
         />
-        <motion.path
+        <m.path
           d={INDIGO_BLOCK}
           fill={INDIGO}
           opacity={0.9}

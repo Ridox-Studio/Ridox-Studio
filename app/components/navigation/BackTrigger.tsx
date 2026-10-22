@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { EASING } from "@/app/lib/motion";
@@ -47,7 +47,7 @@ export function BackTrigger() {
   const label = labelFor(destination);
 
   return (
-    <motion.div
+    <m.div
       className="fixed top-[max(1.5rem,env(safe-area-inset-top))] left-[max(1.5rem,env(safe-area-inset-left))] z-[45]"
       animate={{ opacity: covered ? 0 : 1, scale: covered ? 0.8 : 1 }}
       transition={{ duration: 0.3, ease: EASING.snap }}
@@ -69,6 +69,6 @@ export function BackTrigger() {
           {label}
         </span>
       </TransitionLink>
-    </motion.div>
+    </m.div>
   );
 }

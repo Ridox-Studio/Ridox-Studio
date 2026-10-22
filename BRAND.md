@@ -97,7 +97,7 @@ grey anywhere.
 
 --text-primary    hsl(258, 60%, 96%)   Headings, body.
 --text-secondary  hsl(258, 30%, 68%)   Descriptions, meta.
---text-tertiary   hsl(258, 20%, 45%)   Labels, timestamps, disabled.
+--text-tertiary   hsl(258, 20%, 58%)   Labels, timestamps, disabled.
 ```
 
 ### 2.4 Rules

@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { useEffect, useState } from "react";
 import { doorVariants, EASING, SLASH } from "@/app/lib/motion";
 import { useIsDesktop } from "@/app/hooks/useMediaQuery";
@@ -56,7 +56,7 @@ export function RedoxDoor() {
     return (
       <AnimatePresence>
         {phase !== "idle" && (
-          <motion.div
+          <m.div
             key="redox-fade"
             className="fixed inset-0 z-50 bg-surface-void"
             initial={{ opacity: 0 }}
@@ -88,7 +88,7 @@ export function RedoxDoor() {
       style={{ pointerEvents: phase === "idle" ? "none" : "all" }}
     >
       {/* Amber block — enters from the top-left */}
-      <motion.div
+      <m.div
         className="absolute inset-0 bg-amber-400"
         style={{ clipPath: SLASH.amberHalf }}
         variants={doorVariants(1, closeDuration, openDuration)}
@@ -97,7 +97,7 @@ export function RedoxDoor() {
         onAnimationComplete={handleComplete}
       />
       {/* Indigo block — enters from the bottom-right */}
-      <motion.div
+      <m.div
         className="absolute inset-0 bg-indigo-300"
         style={{ clipPath: SLASH.indigoHalf }}
         variants={doorVariants(-1, closeDuration, openDuration)}
@@ -107,7 +107,7 @@ export function RedoxDoor() {
 
       <AnimatePresence>
         {phase === "loading" && label && (
-          <motion.p
+          <m.p
             key="destination"
             className="absolute inset-0 flex items-center justify-center font-mono text-xs tracking-[0.3em] text-surface-void md:text-sm"
             initial={{ opacity: 0 }}
@@ -116,7 +116,7 @@ export function RedoxDoor() {
             transition={{ duration: 0.3, delay: 0.2, ease: EASING.reveal }}
           >
             {label}
-          </motion.p>
+          </m.p>
         )}
       </AnimatePresence>
 

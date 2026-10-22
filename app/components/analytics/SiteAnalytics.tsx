@@ -13,6 +13,11 @@ import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
  *
  * Clarity and GA4 fire only when their IDs are set, so local dev and preview
  * deploys stay out of the production properties.
+ *
+ * Both load `lazyOnload` (after the page's own load, when the browser is
+ * idle) rather than `afterInteractive`: together they are the largest
+ * third-party JS on the page and none of it is needed to render. Event
+ * helpers in lib/analytics.ts already no-op until the tags exist.
  */
 export function SiteAnalytics() {
   const clarityId = process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID;
@@ -21,7 +26,7 @@ export function SiteAnalytics() {
   return (
     <>
       {clarityId ? (
-        <Script id="ms-clarity" strategy="afterInteractive">
+        <Script id="ms-clarity" strategy="lazyOnload">
           {`(function(c,l,a,r,i,t,y){
               c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
               t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
@@ -34,9 +39,9 @@ export function SiteAnalytics() {
         <>
           <Script
             src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-            strategy="afterInteractive"
+            strategy="lazyOnload"
           />
-          <Script id="ga4" strategy="afterInteractive">
+          <Script id="ga4" strategy="lazyOnload">
             {`window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());

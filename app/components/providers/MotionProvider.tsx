@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useSyncExternalStore } from "react";
+import { LazyMotion } from "framer-motion";
 import { useHasPointer } from "@/app/hooks/useMediaQuery";
 
 const MOTION_MODE_KEY = "ridox_motion_mode";
@@ -51,8 +52,20 @@ function writeMode(mode: MotionMode) {
   listeners.forEach((listener) => listener());
 }
 
+const loadMotionFeatures = () => import("@/app/lib/motion-features").then((mod) => mod.default);
+
+/**
+ * Every animated element uses framer-motion's `m` components, which carry no
+ * animation code of their own. LazyMotion supplies it from a separate chunk,
+ * keeping ~25 KiB of gzipped JS off the first load. Server-rendered markup
+ * and initial styles are identical either way; animations simply start once
+ * the chunk lands, a moment after hydration.
+ *
+ * Use `m.*`, never `motion.*`: a `motion` component bundles the full feature
+ * set back in and undoes the split.
+ */
 export function MotionProvider({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return <LazyMotion features={loadMotionFeatures}>{children}</LazyMotion>;
 }
 
 export function useMotionPrefs() {

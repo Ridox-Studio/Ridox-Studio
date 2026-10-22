@@ -39,7 +39,7 @@
   /* === TEXT === */
   --text-primary: hsl(258, 60%, 96%);
   --text-secondary: hsl(258, 30%, 68%);
-  --text-tertiary: hsl(258, 20%, 45%);
+  --text-tertiary: hsl(258, 20%, 58%); /* 45% failed WCAG AA (3.2:1); 58% clears 4.5:1 on every --bg-* */
 
   /* === BORDERS === */
   --border-subtle: hsla(258, 40%, 25%, 0.5);
@@ -402,7 +402,9 @@ html.lenis body {
 }
 
 .prose-ridox a {
-  color: var(--indigo-300);
+  /* indigo-300 (the logo primary) is 3.8:1 on the page background, below AA
+     for body-size text; the next step up on the same hue clears it. */
+  color: var(--indigo-200);
   text-decoration: underline;
   text-decoration-color: var(--indigo-300);
   text-underline-offset: 0.15em;

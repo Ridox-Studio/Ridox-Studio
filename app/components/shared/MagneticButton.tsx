@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { m, useMotionValue, useSpring } from "framer-motion";
 import { useRef, type ReactNode } from "react";
 import clsx from "clsx";
 import { MAGNETIC_SPRING } from "@/app/lib/motion";
@@ -71,7 +71,7 @@ export function MagneticButton({
   );
 
   const inner = (
-    <motion.span
+    <m.span
       ref={ref}
       className="inline-flex"
       style={magnetic ? { x: springX, y: springY } : undefined}
@@ -87,7 +87,7 @@ export function MagneticButton({
           {children}
         </button>
       )}
-    </motion.span>
+    </m.span>
   );
 
   return (

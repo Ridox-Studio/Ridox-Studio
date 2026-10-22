@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { m, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import type { Project } from "@/app/data/projects";
 import { ProjectCard } from "@/app/components/projects/ProjectCard";
@@ -78,7 +78,7 @@ function StackedCard({
   return (
     // Offset by the pinned section rail so cards never slide underneath it.
     <div className="sticky top-[var(--rail-h)] flex h-[calc(90svh-var(--rail-h))] items-center py-4 md:h-[calc(100svh-var(--rail-h))] md:py-8">
-      <motion.div
+      <m.div
         // scale/translate only — no layout properties animate (Section 12.1)
         style={{ scale, y, transformOrigin: "top center" }}
         // Capped on desktop, where a full-height card looks stretched. On
@@ -87,13 +87,13 @@ function StackedCard({
         className="relative h-full w-full md:max-h-[30rem]"
       >
         <ProjectCard project={project} priority={priority} />
-        <motion.div
+        <m.div
           aria-hidden="true"
           style={{ opacity: scrim }}
           // Radius matches the card so the scrim cannot square off its corners.
           className="pointer-events-none absolute inset-0 rounded-2xl bg-surface-void"
         />
-      </motion.div>
+      </m.div>
     </div>
   );
 }

@@ -60,7 +60,7 @@ export default async function HomePage() {
                 <TransitionLink
                   href="/work"
                   label="Work"
-                  className={`${linkClass} text-indigo-300 hover:text-indigo-200`}
+                  className={`${linkClass} text-indigo-200 hover:text-indigo-100`}
                 >
                   View all work
                   <ArrowUpRight size={14} aria-hidden="true" />
@@ -77,7 +77,7 @@ export default async function HomePage() {
             <TransitionLink
               href="/work"
               label="Work"
-              className={`${linkClass} shrink-0 text-indigo-300 hover:text-indigo-200`}
+              className={`${linkClass} shrink-0 text-indigo-200 hover:text-indigo-100`}
             >
               All work
               <ArrowUpRight size={14} aria-hidden="true" />
@@ -187,7 +187,7 @@ export default async function HomePage() {
                   <TransitionLink
                     href="/blog"
                     label="Blog"
-                    className={`${linkClass} text-indigo-300 hover:text-indigo-200`}
+                    className={`${linkClass} text-indigo-200 hover:text-indigo-100`}
                   >
                     Read all posts
                     <ArrowUpRight size={14} aria-hidden="true" />
