@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test": "node --test --experimental-strip-types --conditions=react-server --disable-warning=ExperimentalWarning --disable-warning=MODULE_TYPELESS_PACKAGE_JSON \"app/**/*.test.ts\"",
     "logos": "node scripts/generate-logo-assets.mjs",
     "favicons": "node scripts/generate-favicons.mjs",
     "banners": "node scripts/generate-social-banners.mjs",
