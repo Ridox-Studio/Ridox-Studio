@@ -65,8 +65,7 @@ export function InquiryForm() {
       >
         <p className="type-overline font-mono text-amber-400">Enquiry received</p>
         <p className="type-body text-content-secondary">
-          Thanks — it is in our inbox and a confirmation email is on its way to you. An
-          engineer replies within two working days.
+          Thanks, it is in our inbox. An engineer replies within two working days.
         </p>
       </div>
     );
