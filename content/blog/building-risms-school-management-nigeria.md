@@ -112,8 +112,8 @@ Several decisions came straight from the failures above:
   problem from earlier, designed out.
 - **Every school gets its own subdomain.** Each school's portal lives at
   its own address on risms.school, so there's no separate domain to
-  manage or forget to renew. A school can move to its own domain later
-  without starting over.
+  manage or forget to renew. On the Growth and Established plans a school
+  can also use its own domain, without starting over.
 - **We maintain and patch it centrally.** No school is left running a
   one-off build that stops getting updates when the developer moves on.
 - **Bulk import from Excel or paper records.** Schools don't have to
@@ -127,16 +127,48 @@ None of these are AI features. They're the dull operational work that a
 lot of self-hosted school software skips, and they have to be solid
 before anything adaptive can be built on top responsibly.
 
+## What RISMS includes
+
+Here's what a school gets today, grouped the way the
+[RISMS knowledge base](https://risms.school/docs) is.
+
+- **Student records and classes.** Create classes, add students one by
+  one or import them in bulk, and manage transfers, tags and each
+  student's profile. Students sign in with their admission number, so
+  they don't need an email address.
+- **Staff and permissions.** Starting roles for admins, bursars, teaching
+  and non-teaching staff, plus custom roles if a school needs its own.
+  Each person only sees what their role allows.
+- **Fees and payments.** Set up fee items, bill whole classes, take
+  online payments through the school's own Paystack account or record
+  cash, and handle wallets, refunds, receipts and reconciliation.
+- **Timetable and attendance.** Set up subjects, assign them to classes,
+  build the weekly timetable with breaks and events, and take attendance
+  by class. Clashes are refused when a slot is entered.
+- **Results and report cards.** Set assessment weightings and a grading
+  scale, enter scores, approve results, and produce printable term report
+  cards. Students can download theirs as a PDF. Promotions to the next
+  class run from the same records.
+- **Student portal.** Results, timetable, attendance, fees and a prepaid
+  wallet for paying online.
+- **Guardian portal.** Parents follow each child's results, report cards,
+  timetable and balance, top up a wallet, pay bills and download
+  receipts. One guardian can have several children, and switch between
+  RISMS schools from one login.
+- **Your school's own address.** A subdomain on risms.school on every
+  plan, your own logo and branding, and a custom domain on the Growth and
+  Established plans.
+
 ## What RISMS costs
 
 Cost still matters, even if it isn't the main thing holding schools back.
-RISMS has a few plans so a school pays for its size instead of one fixed
-package. On our [current pricing](https://risms.school/pricing/compare),
-the Starter plan is ₦75,000 a term for up to 200 students, and the Growth
-and Established plans are ₦200,000 and ₦280,000 a year for up to 400 and
-800 students. Filled to capacity, that works out to roughly ₦120 to ₦375
-per student per term. Quotes we've seen schools get elsewhere were in the
-₦700 to ₦1,000 range. There's also a free three-day trial.
+RISMS plans are a flat price for a school's size, with no per-student
+fees. On our [current pricing](https://risms.school/pricing/compare), the
+Starter plan is ₦75,000 a term for up to 200 students, and the Growth and
+Established plans are ₦200,000 and ₦280,000 a year for up to 400 and 800
+students. With a full school, that works out to roughly ₦120 to ₦375 per
+student per term. Quotes we've seen schools get elsewhere were in the ₦700
+to ₦1,000 range. There's also a free three-day trial.
 
 ## Helping close the Ministry's data gap
 
