@@ -1,6 +1,6 @@
 ---
 title: "Why AI assistants make bad decisions, and what we learned building Resurgee"
-description: "My AI is dumb" usually isn't true. Building Resurgee, we found the inputs an AI agent needs before its choices count as decisions instead of guesses.
+description: '"My AI is dumb" usually isn''t true. Building Resurgee, we found the inputs an AI agent needs before its choices count as decisions instead of guesses.'
 date: 2026-09-13
 updated: 2026-10-22
 tags: [resurgee, ai, product, context-engineering]
