@@ -1,222 +1,197 @@
 ---
-title: "\"My AI is dumb\" - no, it isn't. Here's what we found building Resurgee"
-description: We didn't set out to solve consciousness. We set out to stop our AI task manager from making bad calls, and found the pillars every agent needs before it can decide instead of just predict.
+title: "Why AI assistants make bad decisions, and what we learned building Resurgee"
+description: "My AI is dumb" usually isn't true. Building Resurgee, we found the inputs an AI agent needs before its choices count as decisions instead of guesses.
 date: 2026-09-13
+updated: 2026-10-22
 tags: [resurgee, ai, product, context-engineering]
 cover: /projects/resurgee.png
 ---
 
-Somewhere in the last year, "is AI conscious" became one of the most
-argued questions on the internet. Reddit threads with hundreds of
-comments. Philosophers getting emailed by AI agents claiming to have
-something like experience. Grok, GPT, and Claude all asked to weigh in
-on each other's consciousness. It's a genuinely fascinating debate, and
-it mostly plays out in public online discourse, not in the rooms where
-these systems actually get built. For almost everyone shipping agents
-day to day, it's the wrong question to be stuck on.
+At some point in the last year, "is AI conscious?" became one of the most
+argued questions online. Reddit threads with hundreds of comments.
+Philosophers getting emails from AI agents claiming something like
+experience. Grok, GPT and Claude all asked to weigh in on each other. It's
+a fascinating argument, but it mostly happens in public discussion, not in
+the rooms where these systems get built. For most people shipping agents
+every day, it's the wrong question to get stuck on.
 
-We didn't come to this by reading philosophy. That question came to us
-while building [Resurgee](https://resurgee.xyz), an AI layer on top of
-Google Tasks and Calendar, and finding a defect in what AI agents like
-to call their "reasoning." The assistant wasn't stupid. It could reason
-fine on paper. It just kept making decisions like it had never met you.
+We didn't get here by reading philosophy. The question found us while we
+were building [Resurgee](https://resurgee.xyz), an AI layer on top of
+Google Tasks and Calendar. People kept telling us "my AI is dumb". It
+wasn't. It could reason fine on paper. It just kept making decisions as
+if it had never met you.
 
-## The debate everyone's stuck in
+## Is AI conscious? The debate everyone's stuck in
 
-The consciousness argument usually goes something like this: consciousness
-requires an inner life, a subjective first-person experience, maybe even
-agency and desire. AI has none of that. It resets every session, has no
-continuity, and generates responses that sound like emotion without any
-internal state behind them. People argue for years over whether that's
-even the right definition, and whether a system built completely
-differently from a brain could have some other kind of experience we
-don't have language for yet.
+The argument usually runs like this. Consciousness needs an inner life, a
+first-person experience, maybe agency and desire. AI has none of that. It
+resets every session, has no continuity, and produces responses that sound
+emotional with no internal state behind them. People then argue for years
+about whether that's the right definition, and whether something built
+nothing like a brain could have a kind of experience we don't have words
+for yet.
 
-It's a real question, and it runs into a real epistemological problem:
-we can't directly observe subjective experience in anything other than
-ourselves, so there's no reliable test for machine consciousness either
-way. That's a genuinely different claim from "maybe it's conscious and
-nobody knows." The more accurate statement is narrower: there's no
-strong evidence establishing that today's models have subjective
-experience, and no test that would settle it if they did. That's still
-unresolved. It's also not the same as the two possibilities being
-equally likely, and it's not the question that decides whether a product
-works. That loop is interesting to argue about at 2am. It's useless if
-what you're actually trying to do is ship a product that makes good
-decisions on someone's behalf.
+There's a real problem underneath it. We can't directly observe anyone
+else's subjective experience, so there's no reliable test for machine
+consciousness either way. The accurate claim is a narrow one: there's no
+strong evidence that today's models have subjective experience, and no
+test that would settle it if they did. That doesn't make the two answers
+equally likely, and either way it doesn't decide whether a product works.
+It's a fun loop to argue about at 2am. It's no help when you're trying to
+ship something that makes good decisions on someone's behalf.
 
-So we stopped asking whether Resurgee's AI was aware, and started asking
-a narrower, answerable question instead.
+So we stopped asking whether Resurgee's AI was aware, and asked a smaller
+question we could answer.
 
-## Decision-making isn't consciousness
+## Making good decisions doesn't require consciousness
 
-A thermostat decides when to turn the heater on. Nobody thinks it's
-conscious. A chess engine makes better decisions than almost every human
-alive and has no inner life at all. Decision quality and consciousness
-are simply different axes: you can max out one with zero of the other.
+A thermostat decides when to turn the heating on, and nobody thinks it's
+conscious. A chess engine makes better moves than almost every human alive
+with no inner life at all. Decision quality and consciousness sit on
+different axes. You can max out one and have none of the other.
 
-That distinction matters because it changes what you're allowed to
-demand from a product. You don't need Resurgee to feel anything. You
-need it to know enough about your situation that its decisions stop
-looking like guesses. Once we reframed it that way, the actual gap
-became obvious: our AI wasn't missing a soul, it was missing inputs.
+That changes what you can ask of a product. You don't need Resurgee to
+feel anything. You need it to know enough about your situation that its
+choices stop looking like guesses. Once we framed it that way the gap was
+obvious. The AI wasn't missing a soul. It was missing inputs.
 
-There's a reason "clone" talk keeps dragging consciousness into the
-room. If you want something that thinks the way you think and decides
-the way you'd decide, it feels natural to assume it needs to feel the
-way you feel too, so it can fully understand you. We assumed that
-ourselves early on: something built to get this close to how a person
-operates surely needs an inner life to pull it off.
+There's a reason talk of AI "clones" keeps pulling consciousness into the
+conversation. If you want something that thinks and decides the way you
+would, it feels natural to assume it also has to feel the way you do in
+order to understand you. We assumed that too, early on.
 
-It doesn't, and a fully conscious clone would come with its own
-liabilities. An assistant with genuine feelings about how you spend your
-time and who you spend it with isn't a better assistant, it's one with
-its own competing interests. None of that is what anyone is actually
-asking for when they say they want an assistant that "gets" them. What
-they want is a system that understands their situation well enough to
-decide well on their behalf, without having a stake of its own in the
-outcome. That's not a smaller goal than consciousness. It's a safer and
-more useful one, and it's fully reachable with the primary pillars plus
-whichever secondary ones the job actually calls for.
+It doesn't, and a conscious clone would bring problems of its own. An
+assistant with real feelings about how you spend your time, and who with,
+would have its own interests competing with yours. That's not what people
+mean when they say they want an assistant that "gets" them. They want one
+that understands their situation well enough to decide well for them, with
+no stake of its own in the result. That goal is safer, more useful, and
+reachable today with the right inputs, which we ended up calling pillars.
 
 ## Finding the pillars, the hard way
 
-The honest version of the story is that we got the diagnosis wrong
-twice before we got it right.
+We got the diagnosis wrong twice before we got it right.
 
-First pass: we assumed the model just wasn't sharp enough. More
-reasoning, better prompting, a bigger model. That helped at the margins
-and didn't fix the actual complaints. The assistant would reschedule
-something to a time that made no sense for the person's actual day, or
-suggest a plan that ignored where they'd told it they'd be.
+First we assumed the model wasn't sharp enough. More reasoning, better
+prompts, a bigger model. That helped a little and didn't fix the actual
+complaints. The assistant would move something to a time that made no
+sense for the person's day, or suggest a plan that ignored where they'd
+said they would be.
 
-Second pass: we decided it was a context problem and added
-location-sharing, so the AI could factor in where you actually were
-before making a scheduling call. That helped, and it was also the
-moment we realized the fix was bigger than one feature. Location wasn't
-the missing thing. Location was one instance of a whole category of
-missing things.
+Then we decided it was a context problem and added location sharing, so
+the AI could factor in where you were before scheduling anything. That
+helped, and it was also when we saw the fix was bigger than one feature.
+Location wasn't the missing piece. It was one example of a whole category
+of missing pieces.
 
-That's when the pillars started to take shape, not as a theory of mind,
-but as a checklist of what a decision-making system needs before its
-output deserves to be called a decision. To be clear about what this
-is: it's our own synthesis, not a new discovery. Context engineering,
-temporal grounding, and persistent memory are all active areas the
-agent-infrastructure world has been building against for a while. What
-we're offering is a way of naming what we kept running into, built from
-a real failure story rather than worked out on a whiteboard first.
+That's when the pillars took shape. They aren't a theory of mind. They're
+a checklist of what a system needs before its output deserves to be called
+a decision. To be clear, this is our own way of organising things, not a
+new discovery. Context engineering, temporal grounding and persistent
+memory are all areas the agent-infrastructure world has been working on
+for a while. What we're adding is names for what we kept running into,
+taken from a real failure rather than drawn on a whiteboard first.
 
-## The pillars
+## The pillars an AI agent needs to make good decisions
 
-**Primary: every agent making real decisions on someone's behalf needs
-these, full stop.**
+**Primary pillars. Any agent making real decisions on someone's behalf
+needs these.**
 
-- **What.** The actual knowledge, data, and stated task the agent has
-  to work with. This is the one thing current AI is genuinely strong at
-  in raw terms, though having information isn't the same as having the
-  right, current, and correctly weighted information. Stale or
-  conflicting data under the What pillar can still produce a bad
-  decision even when nothing else is missing.
-- **When.** Not just the ability to calculate a date, but a working
-  sense of time passing: how long a task has been running, what might
-  have changed since it started, deadlines as real pressure rather than
-  a timestamp sitting in a prompt. This is a well-documented engineering
-  problem. A model call is stateless by default, and unless an
-  application actively refreshes the time it's given, an agent has no
-  built-in way to notice hours or days passing between turns. One
-  developer wrote up this exact failure mode after their agent kept
-  acting as if it were still the day the session started ([the writeup
-  is here](https://dev.to/terrapin88/why-your-agent-doesnt-know-what-time-it-is-15j4)).
-  A broader academic survey of temporal reasoning in language models
-  documents the same category of failure at a research level: models
-  losing track of references like "since we last talked" and producing
-  temporally inconsistent answers as a conversation runs longer ([the
-  survey is here](https://arxiv.org/pdf/2505.20243)).
-- **Where.** Location and situational context: knowing you're in Lagos,
-  not London; at work, not on holiday. This is the pillar we patched
-  into Resurgee first, before we understood what it was part of.
+- **What.** The knowledge, data and task the agent has to work with. This
+  is the part current AI is strongest at, though having information isn't
+  the same as having the right, current and properly weighted
+  information. Stale or conflicting data here can still produce a bad
+  decision when nothing else is missing.
+- **When.** More than calculating a date. A working sense of time passing:
+  how long a task has been running, what might have changed since it
+  started, deadlines as real pressure rather than a timestamp in a prompt.
+  This is a well-documented engineering problem. A model call is stateless
+  by default, and unless the application keeps updating the time it's
+  given, an agent can't notice hours or days passing between turns. One
+  developer wrote up exactly this after their agent kept acting as if it
+  were still the day the session started ([the writeup is
+  here](https://dev.to/terrapin88/why-your-agent-doesnt-know-what-time-it-is-15j4)).
+  An academic survey of temporal reasoning in language models describes
+  the same kind of failure at research level: models losing track of
+  phrases like "since we last talked" and giving answers that contradict
+  each other on time as a conversation gets longer ([the survey is
+  here](https://arxiv.org/pdf/2505.20243)).
+- **Where.** Location and situation: knowing you're in Lagos, not London,
+  at work, not on holiday. This is the pillar we added to Resurgee first,
+  before we understood it was part of a set.
 
-**Secondary: depends on what the agent is actually for.**
+**Secondary pillars. Whether you need these depends on what the agent is
+for.**
 
-- **How.** Cost and risk, weighed once What, When, and Where are known.
-  We're splitting hairs on this one internally. There's external cost
-  (what does this decision cost the user) and something closer to
-  internal capacity (how much budget, confidence, or runway the agent
-  itself has left to work with). We don't think we've fully separated
-  these yet, and we'd rather say that plainly than pretend we have.
-- **Who.** Relationship and identity continuity: knowing who it's
-  helping, and carrying that across sessions instead of treating every
-  interaction like a first meeting. Vital for a personal assistant, far
-  less important for a one-shot tool. This is also an active research
-  area outside of what we're doing. Memory systems like Mem0 and Zep
-  exist specifically because agents don't hold this on their own.
+- **How.** Cost and risk, weighed once What, When and Where are known.
+  We're still arguing about this one internally. There's the external
+  cost (what a decision costs the user) and something closer to internal
+  capacity (how much budget, confidence or runway the agent has left). We
+  haven't fully separated the two yet, and we'd rather say so than pretend
+  we have.
+- **Who.** Knowing who it's helping, and carrying that across sessions
+  instead of treating every conversation as a first meeting. Vital for a
+  personal assistant, much less important for a one-off tool. Plenty of
+  people outside our team are working on this too. Memory systems like
+  Mem0 and Zep exist because agents don't keep this on their own.
 
 ### The debate over Why
 
-We went back and forth on this one more than any other pillar, so it's
-worth showing the actual back and forth rather than just handing you a
-conclusion.
+We went back and forth on this pillar more than any other, so here's the
+actual argument rather than just our conclusion.
 
-The confusion starts because "why" quietly means two different things,
-and most people, us included at first, switch between them without
-noticing. Take an agent tasked with saving a life:
+The confusion is that "why" quietly means two different things, and most
+people, us included at first, switch between them without noticing. Take
+an agent whose task is to save a life:
 
 - **What are you doing?** I am saving a human life.
 - **Why are you doing this?** Because that's the task I was given.
 
-Look closely at that second answer. It isn't new information. It's just
-pointing back at the first one. The task description already contains
-its own purpose, so this version of "why" was never a separate fact
-about the agent at all. It's What, restated in a different grammatical
-form.
+Look at the second answer. It adds nothing new. It points back at the
+first one. The task already contains its own purpose, so this kind of
+"why" was never a separate fact about the agent. It's What, said a
+different way.
 
-There is a second, genuinely different thing people mean by "why,"
-though. Not "I'm doing this because that's the task," but "I'm doing
-this because I have come to care whether it turns out this way,"
-independent of anything anyone told it. Whether current training
-methods produce anything like that second kind is a real, unresolved
-question in AI safety research, usually discussed under names like
-inner alignment, and we're not going to pretend we can settle it here.
-What we can say plainly is why it matters for something like Resurgee:
-a scheduling assistant only needs the first kind of why, the one that
-points back to the task you gave it. If it ever needed the second kind
-to do its job well, that would be a sign we'd built the wrong kind of
-agent, not a milestone to aim for. So for a product like this, the
-practical answer is simple even where the research question isn't: keep
-the agent anchored to stated goals, and treat anything that looks like
-the agent developing its own stake in the outcome as a bug, not a
-feature.
+People sometimes mean something else by "why", though. Not "because that's
+my task" but "because I've come to care how this turns out", whatever
+anyone told it. Whether current training methods produce anything like
+that is an open question in AI safety research, usually discussed as inner
+alignment, and we won't pretend to settle it here. What we can say is why
+it matters for something like Resurgee. A scheduling assistant only needs
+the first kind of why, the one that points back to the task you gave it.
+If it ever needed the second kind to do its job, we'd have built the wrong
+kind of agent. So our practical rule is simple even though the research
+question isn't: keep the agent tied to the goals it was given, and treat
+any sign of it developing its own stake in the outcome as a bug.
 
-## Where this leaves Resurgee
+## What Resurgee does today
 
-We want to be straight about which of these are actually solved in the
-product today, because a builder's post that claims total victory isn't
-worth reading.
+Here's which of these the product actually handles today. A builder's post
+that claims total victory isn't worth reading.
 
-**What, When, and Where are real and shipped.** Resurgee reads your
-actual tasks and calendar rather than guessing, adjusts scheduling
-suggestions against your real productivity patterns instead of treating
-every hour as equal, and factors in where you are before proposing when
-something should happen.
+**What, When and Where are shipped.** Resurgee reads your real tasks and
+calendar instead of guessing, adjusts its scheduling suggestions to your
+own productivity patterns instead of treating every hour the same, and
+takes into account where you are before suggesting when something should
+happen.
 
-**Who is present but thin.** Multi-account, multi-calendar sync means
-Resurgee has to track whose calendar it's touching, but that's closer
-to table stakes for a calendar tool than proof we've solved
-relationship-awareness. We're not going to oversell it.
+**Who is there, but thin.** Multi-account, multi-calendar sync means
+Resurgee has to track whose calendar it's touching. That's basic for a
+calendar tool, not proof we've solved knowing who you are, and we won't
+oversell it.
 
-**How isn't built yet.** There's no explicit cost or risk layer in
-Resurgee today. It's the pillar we understand least and the one we're
-working on next, which is a more honest place to end this post than a
-victory lap.
+**How isn't built yet.** There's no cost or risk layer in Resurgee today.
+It's the pillar we understand least, and it's what we're working on next.
 
-If you've felt the same thing we felt, an AI tool that reasons fine and
-still keeps making decisions that miss the point, that's not a
-consciousness problem, and it's probably not even a "better model"
-problem. It's a missing-pillar problem. [Resurgee](https://resurgee.xyz)
-is our attempt at closing that gap, one pillar at a time, in public.
+If you've used an AI tool that reasons fine and still makes decisions that
+miss the point, the problem probably isn't consciousness, and it may not
+be the model either. More likely one of these pillars is missing.
+[Resurgee](https://resurgee.xyz) is our attempt to fill them in, one at a
+time, in public. You can read more about it on our
+[Resurgee product page](/studio/resurgee).
 
 ---
 
-*[Resurgee](https://resurgee.xyz) is in active development. We'll be
-writing more as we work through the How pillar. If that's a problem
-you're also chewing on, we'd like to hear how you're thinking about it.*
+*Resurgee is in active development, and we'll write more as we work
+through the How pillar. If you're working on the same problem, we'd like
+to hear how you're thinking about it. [Get in touch](/contact).*

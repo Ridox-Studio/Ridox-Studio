@@ -1,194 +1,168 @@
 ---
-title: "Building the best school management system in Nigeria: RISMS"
-description: We didn't start with an AI pitch for education. We started by asking why adaptation, not money, is the thing actually holding Nigerian schools back, and built RISMS from the answer.
+title: "Why Nigerian school portals keep failing, and how we built RISMS"
+description: Only 55.7% of Nigeria's schools report data to the Ministry. What we found checking school portals, and how it shaped RISMS, our school management system.
 date: 2026-09-12
+updated: 2026-10-22
 tags: [risms, education, product]
 cover: /projects/risms.png
 ---
 
-The Ridox team has spent a lot of time this year on the same question
-everyone building software has: how does the rise of AI actually change
-education, and specifically, what does it change for West Africa, and for
-Nigeria in particular. It is an easy question to get excited about and a
-much harder one to answer honestly, because we are a software team, not an
-education policy team. We do not have deep standing in how Nigerian
-curricula, exam boards or ministries actually operate day to day.
+Like most software teams this year, we kept coming back to one question:
+what does AI actually change for education in West Africa, and in Nigeria
+in particular? It's an easy question to get excited about and a hard one
+to answer honestly. We're a software team, not an education policy team,
+and we don't have deep knowledge of how Nigerian curricula, exam boards or
+ministries work day to day.
 
-So we did not start by trying to import AI into the classroom. We started
-by looking at what was actually happening on the ground, without assuming
-we already understood it.
+So we didn't start by trying to bring AI into the classroom. We started by
+looking at what schools around us were actually running, without assuming
+we already knew.
 
-## The scale problem, in one dataset
+## How many Nigerian schools have usable digital records?
 
-Nigeria's own [Federal Ministry of Education Management Information
-System](https://emis.education.gov.ng/) puts a number on how far there is
-to go: as of the 2024/2025 school year, there are 222,888 schools
-nationally, and only 55.7% of them have reported data at all, according to
-the [Ministry's public data portal](https://emis.education.gov.ng/portal/).
-That reporting rate is itself the finding. It means that for nearly half
-the schools in the country, there is no reliable digital record of
-enrollment, staffing or classroom conditions at the national level, not
-because the schools don't exist, but because the basic pipeline for
-getting their data anywhere doesn't.
+Nigeria's [Federal Ministry of Education Management Information
+System](https://emis.education.gov.ng/) (DNEMIS) gives a useful starting
+number. For the 2024/2025 school year it lists 222,888 schools nationally,
+and only 55.7% of them have reported any data, according to the
+[Ministry's public data portal](https://emis.education.gov.ng/portal/).
 
-That gap isn't evenly a money problem. It's an infrastructure and
-maintenance problem, and the closer you look, the more specific the
-failure mode gets.
+That reporting rate tells you more than the school count does. For nearly
+half the schools in the country there's no reliable national record of
+enrolment, staffing or classroom conditions. The schools exist. The
+pipeline that would get their data anywhere doesn't.
 
-## Adaptation isn't the same as "having a portal"
+We don't think that's mainly about money. From what we've seen it's about
+infrastructure and maintenance, and the closer you look, the more specific
+the problems get.
 
-Assuming a school has gone digital because it has a website or a portal is
-a mistake we made ourselves before looking closer. Some schools have
-tried. That is arguably the more instructive case, because it shows what
-happens after the initial build.
+## What we found when we checked school portals
 
-Looking at schools within reach of us, out of roughly twenty, only two had
-a portal that actually worked for a parent or student trying to use it.
-One of those two belongs to a group of schools maintained centrally by a
-single company across multiple campuses, which is close to what a managed
-platform looks like. The other was self-hosted, and carried the risk that
-comes with that: a single point of failure, with no one clearly
-responsible for keeping it patched or online.
+We assumed at first that a school with a website or a portal had already
+gone digital. That turned out to be wrong, and the schools that had tried
+were the most useful to look at, because they show what happens after the
+first build.
 
-We looked at a handful of others outside our immediate area too. One
-school's site was built well enough on a general website builder, but had
-no working link to any student portal at all, which defeats the purpose of
-having one. Another had a portal link that resolved to an "expired
-hosting" notice, suggesting the school's student data was sitting behind a
-lapsed bill, if it still existed at all. A third had a portal that was
-live, but threw a raw, unhandled application error directly to the public
-the moment we tried to log in, the kind of failure that exposes server
-file paths to anyone who happens to click through, and one that had
-clearly been sitting untouched for a while.
+Of roughly twenty schools within reach of us, only two had a portal that
+worked for a parent or student trying to use it. One belongs to a group of
+schools whose portals are maintained centrally by one company across
+several campuses, which is close to what a managed platform looks like.
+The other was self-hosted, with the usual risk: one point of failure and
+nobody clearly responsible for keeping it patched or online.
 
-None of these are hypothetical edge cases. They are what "we digitized"
-looks like a year or two after the person who built it moved on, no one
-renewed the hosting, and no one was watching for the day it broke. A
-school that goes through the effort of commissioning a portal and still
-ends up here isn't behind on ambition. It's carrying software with no one
-accountable for keeping it alive, which in practice is often worse than
-having stayed on paper: paper doesn't silently disappear when a hosting
-invoice goes unpaid.
+We looked at a few more schools further away. One had a decent site built
+on a general website builder but no working link to a student portal at
+all. Another's portal link led to an "expired hosting" notice, so the
+school's student data was sitting behind an unpaid bill, if it still
+existed. A third had a live portal that showed a raw application error to
+the public as soon as we tried to log in. Errors like that can expose
+server file paths to anyone who clicks through, and this one had clearly
+been there a while.
 
-## Why this blocks AI specifically, not just digitization
+These were real schools, not made-up examples. This is what "we went
+digital" tends to look like a year or two later, after the person who
+built the portal has moved on and nobody renewed the hosting or noticed it
+break. The schools in these stories had the ambition and paid for a
+portal. What they didn't have was anyone responsible for keeping it
+running. In some ways that's worse than staying on paper, because paper
+doesn't disappear when a hosting invoice goes unpaid.
 
-This is where the AI-in-education question we started with actually
-connects back to something concrete. Personalized, AI-assisted learning
-only works if there's a reliable, ongoing record of each student: what
-they've covered, where they're ahead, where they're stuck, and how that
-changes week to week. Students are not uniform. Some grasp a topic
-quickly, some need it repeated a different way, and any system that
-claims to adapt to that needs a real, continuously updated source of truth
-to adapt from.
+## Why AI in Nigerian classrooms has to wait for the basics
 
-A school without a functioning portal has no such source. Its data, if it
-exists at all, is scattered across paper registers, one-off spreadsheets,
-or a database sitting behind an expired hosting plan. There is nothing
-for an AI layer to read from, and nothing that would still be there
-reliably a term later even if there were. Trying to bring adaptive
-learning tools into that environment isn't introducing a new capability on
-solid ground, it's asking a system to personalize instruction for students
-it has no consistent way to see.
+This is where our original AI question comes back in. Personalised,
+AI-assisted learning needs a reliable, ongoing record of each student:
+what they've covered, where they're ahead, where they're stuck and how
+that changes week to week. Students learn at different speeds. Any system
+that claims to adapt to them needs an up-to-date record to adapt from.
 
-Put plainly: a school that can't keep a portal online long enough to
-survive one hosting renewal cycle is not close to being able to run AI
-tools that need a stable, longitudinal record of every student and
-teacher to be useful. Digitizing the basics isn't a nice-to-have that
-happens alongside AI adoption. It's the precondition for it, and right
-now, for a large share of Nigerian schools, that precondition isn't met.
+A school without a working portal doesn't have that record. Whatever data
+it has is spread across paper registers, one-off spreadsheets or a
+database behind an expired hosting plan. An AI tool would have nothing
+consistent to read, and nothing guaranteed to still be there next term.
 
-## Building RISMS
+If a school can't keep its portal online through one hosting renewal, it
+isn't close to running AI tools that depend on years of student and
+teacher records. Getting the basics digital comes first. Right now, for a
+large share of Nigerian schools, that first step hasn't happened.
 
-[RISMS](https://risms.school/) covers academics, staff, students,
-timetabling and fees, split across four persona surfaces so no single
-screen has to serve every audience at once. A school admin, a teacher, a
-bursar and a parent are not looking for the same thing, and forcing them
-through one interface is part of what makes existing school software feel
-heavier than it needs to.
+## How we built RISMS around those failures
 
-A few decisions came directly out of watching how these failures actually
-happen, not how school software usually assumes a school operates:
+[RISMS](https://risms.school/) is school management software for Nigerian
+schools. It covers academics, staff, students, timetables and fees, with
+separate views for admins, teachers, bursars and parents. Those four
+people want different things from the same system, and putting them all
+through one screen is part of why a lot of school software feels heavier
+than it needs to.
 
-- **Timetabling refuses conflicts at entry.** Every timetable slot is
-  checked against both the teacher's schedule and the class's schedule
-  before it's allowed to exist, so a double-booking is refused when
-  someone tries to create it, not discovered afterward by a teacher
-  standing in the wrong room.
-- **Cash is a first-class payment method.** Most school fees in Nigeria
-  are still paid in cash over a counter, and [RISMS](https://risms.school/)
-  treats a cash payment as its own gateway alongside the card processor:
-  same receipt, same ledger entry, same audit trail, instead of bolting it
-  on as an afterthought.
-- **The school keeps its own money.** Each institution connects its own
-  payment credentials, so fees a parent pays land straight in the school's
-  account rather than sitting in ours first. [RISMS](https://risms.school/)
-  records the transaction, it never holds the money.
-- **A lapsed subscription freezes data, it doesn't delete it.** If a
-  school fails to renew, their records are locked, not lost. Deletion only
-  happens on the school's own request. The hosting-expiry failure we saw
-  elsewhere is exactly what this is built to prevent.
-- **A custom subdomain is included by default.** A school never has to
-  separately manage or renew a domain to keep its portal reachable, and
-  can bring their own domain later without re-platforming.
-- **We maintain and patch the software centrally.** No school is carrying
-  a one-off build that quietly stops getting updated the day the person
-  who built it moves on to something else.
-- **Bulk import from existing records.** Schools coming from Excel
-  spreadsheets or paper registers don't have to re-enter years of student
-  and staff data by hand. [RISMS](https://risms.school/) accepts bulk
-  import so a school's existing records become the starting point, not a
-  blocker to switching over.
-- **Opening balances carry forward.** A student's unpaid fees from before
-  a school adopted [RISMS](https://risms.school/) aren't lost or written
-  off in the switch. Schools can record an opening balance per student, so
-  outstanding bills from the old system stay tracked instead of quietly
-  disappearing on transition.
+Several decisions came straight from the failures above:
 
-None of these are AI features. They are the unglamorous administrative and
-operational discipline that most self-hosted school software in this
-market doesn't have, and it's the layer that has to hold before anything
-adaptive or AI-driven can be built on top of it responsibly.
+- **Timetables refuse clashes when you enter them.** Every slot is checked
+  against the teacher's schedule and the class's schedule before it's
+  saved. A double booking is refused at the point someone creates it, so
+  a teacher doesn't find out by standing in the wrong room.
+- **Cash is treated as a real payment method.** Most school fees in
+  Nigeria are still paid in cash at a counter. RISMS records a cash
+  payment the same way as a card payment: same receipt, same ledger entry,
+  same audit trail.
+- **The school keeps its own money.** Each school connects its own
+  payment account, so fees a parent pays online go straight to the
+  school. RISMS records the transaction and never holds the money.
+- **A lapsed subscription freezes data. It never deletes it.** If a school
+  doesn't renew, its records are locked until it does. We only delete a
+  school's data when the school asks us to. That's the expired-hosting
+  problem from earlier, designed out.
+- **Every school gets its own subdomain.** Each school's portal lives at
+  its own address on risms.school, so there's no separate domain to
+  manage or forget to renew. A school can move to its own domain later
+  without starting over.
+- **We maintain and patch it centrally.** No school is left running a
+  one-off build that stops getting updates when the developer moves on.
+- **Bulk import from Excel or paper records.** Schools don't have to
+  retype years of student and staff data. They import what they already
+  have and start from there.
+- **Old balances come with you.** Fees a student owed before the school
+  joined RISMS can be entered as an opening balance, so they stay on the
+  books after the switch.
 
-Cost is part of that discipline too. [RISMS](https://risms.school/) is
-built with different plans so a school pays for what it actually needs
-rather than one fixed package, and pricing on our site currently runs
-roughly ₦150-250 per student per term depending on plan, well under what
-we've seen schools quoted elsewhere in the ₦700-1,000 range. The core
-argument of this piece is that adaptation, not money, is the harder
-problem, but that doesn't mean cost shouldn't also stop being a reason a
-school delays making the switch.
+None of these are AI features. They're the dull operational work that a
+lot of self-hosted school software skips, and they have to be solid
+before anything adaptive can be built on top responsibly.
 
-## Beyond the portal: closing the data gap the Ministry itself flagged
+## What RISMS costs
 
-The 55.7% reporting rate we opened with is not just a statistic about the
-past, it's a live gap that shapes decisions today. Government and NGO
-programs aimed at improving ICT infrastructure in schools can only reach
-where there's visibility. A school with no functioning digital record is,
-in practice, invisible to that kind of intervention, which means the
-schools furthest behind are also the hardest ones to identify and help.
+Cost still matters, even if it isn't the main thing holding schools back.
+RISMS has a few plans so a school pays for its size instead of one fixed
+package. On our [current pricing](https://risms.school/pricing/compare),
+the Starter plan is ₦75,000 a term for up to 200 students, and the Growth
+and Established plans are ₦200,000 and ₦280,000 a year for up to 400 and
+800 students. Filled to capacity, that works out to roughly ₦120 to ₦375
+per student per term. Quotes we've seen schools get elsewhere were in the
+₦700 to ₦1,000 range. There's also a free three-day trial.
 
-As schools adopt [RISMS](https://risms.school/), we're positioning it to
-help close that visibility gap rather than sit next to it. Aggregated,
-anonymized data on IT and ICT adoption across the schools on our platform,
-things like how much of a school's record-keeping is still manual at the
-point they join, and how that changes over time, gives a picture of where
-slow digital integration is actually happening. That's information the
-Ministry's own [DNEMIS system](https://emis.education.gov.ng/) is already
-trying to gather nationally. Longer-term, we want
-[RISMS](https://risms.school/) to make it easier to have that conversation
-with government and NGO partners: not by replacing DNEMIS, but by giving
-it more of the ground-level visibility it needs to find and prioritize the
-schools that need help most.
+## Helping close the Ministry's data gap
 
-This isn't built yet. It's the direction the platform is heading in as
-more schools come on board, and it's part of why getting schools onto a
-proper system matters beyond any one school's own convenience. Any data
-shared this way would be aggregated and anonymized at the school level,
-never tied back to an individual student, teacher, or family without
-their consent.
+The 55.7% reporting rate isn't only a fact about the past. Government and
+NGO programmes that fund ICT in schools can only reach schools they can
+see. A school with no digital records is invisible to them, which means
+the schools furthest behind are also the hardest to find and help.
+
+As more schools join RISMS, we want it to help with that. Aggregated,
+anonymised figures on ICT adoption across schools on the platform, such as
+how much record-keeping is still manual when a school joins and how that
+changes over time, would show where digital adoption is slow. That's the
+kind of information [DNEMIS](https://emis.education.gov.ng/) is already
+trying to collect nationally. Longer term, we'd like RISMS to support
+those conversations with government and NGO partners, adding ground-level
+detail to DNEMIS rather than replacing it.
+
+We haven't built this yet. It's where we want the platform to go as more
+schools come on, and it's one more reason getting schools onto a proper
+system matters beyond one school's convenience. Any data shared this way
+would be aggregated and anonymised at school level, and never tied to an
+individual student, teacher or family without their consent.
 
 ---
 
-*RISMS is in active development. If you run a school and want to see the
-current build, [get in touch](/contact); we are onboarding pilot schools
-now.*
+*RISMS is in active development and schools are already using it. If you
+run a school, you can [start a free trial](https://risms.school/) or
+[talk to us](/contact). You can also read more about
+[RISMS as a studio product](/studio/risms).*

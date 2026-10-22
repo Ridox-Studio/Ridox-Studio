@@ -1,68 +1,74 @@
 ---
 title: "About Ridox Studio"
-description: Where the name comes from, what we're building toward, and how the studio works.
+description: Ridox Studio is a small software studio in Nigeria building web, mobile, cloud and AI products, including RISMS, Cilbup and Resurgee.
 date: 2026-09-08
+updated: 2026-10-22
 tags: [about, studio]
 ---
 
-## The name
+Ridox Studio is a small software engineering studio based in Nigeria. We
+build web apps, mobile apps, cloud infrastructure and AI features for
+clients, and we run three products of our own. This page covers where the
+name comes from, what we work on and how we work.
 
-Ridox echoes *redox*, the chemistry term for a reaction that only happens
-as a pair: one thing oxidising while another reduces. Neither half does
-anything alone. That's the model the studio is built around: design and
-engineering working as one reaction, not two departments handing work
-back and forth. "Software systems engineered at the reaction point" is
-that idea stated plainly.
+## Where the name comes from
 
-The first commit is dated March 2022. The studio paused for four years,
-then restarted in 2026. That's simply what happened, and we're building
-forward from here.
+Ridox is a play on *redox*, the chemistry term for a reaction that only
+happens as a pair: one thing oxidises while the other reduces, and neither
+half happens alone. We wanted the studio to work the same way, with design
+and engineering done together by the same people instead of passed between
+two departments. Our tagline, "software systems engineered at the reaction
+point", comes from the same idea.
 
-## What we're building toward
+The first commit is dated March 2022. The studio then sat quiet for four
+years and restarted in 2026. We'd rather tell you that than pretend it's
+been running nonstop.
 
-We build tools to close a gap we can point at, not to chase a trend. It
-doesn't matter whether the gap was a client's brief or something we
-noticed ourselves: RISMS, Cilbup and Resurgee, below, all started
-because something people needed didn't exist yet in a form that
-actually worked.
+## What we work on
 
-The standard we hold both to is the same. Most software doesn't lose to
-a lack of ambition. It loses to unfinished systems: the payment flow
-that works until the edge case, the admin tool built for a demo instead
-of a term. What we look for, in every codebase and every engagement, is
-the assumption a team stopped questioning, because that's usually where
-the real gap is hiding.
+We like problems we can point at. RISMS, Cilbup and Resurgee all started
+because something people needed either didn't exist or didn't hold up once
+people used it every day.
 
-## What we do
+In client work we keep looking for the same thing: the assumption a team
+stopped questioning. In our experience that's where software breaks. The
+payment flow that works until a refund comes in, or the admin tool that
+was built for a demo and then had to survive a full school term.
 
-Two kinds of work:
+## Client work and studio products
 
-- **Client work.** Commissioned builds and advisory engagements, walked
-  through line by line rather than handed back as a black box.
+We do two kinds of work.
+
+- **Client work.** Commissioned builds and advisory engagements. When we
+  hand a system over, we walk your team through how it works so you're
+  not left with a black box. You can see some of it on our
+  [work page](/work).
 - **Studio products.** Software we build and run ourselves:
-  [RISMS](/studio/risms) for school administration, [Cilbup](/studio/cilbup)
-  for anonymous creator tipping, and [Resurgee](/studio/resurgee), an AI
-  layer over the task manager people already use. Running our own products
-  keeps our advice grounded in software we actually operate.
+  [RISMS](/studio/risms), school management software for Nigerian
+  schools; [Cilbup](/studio/cilbup), anonymous messages and tips for
+  creators; and [Resurgee](/studio/resurgee), an AI layer on top of
+  Google Tasks and Calendar. Running our own products means the advice we
+  give clients comes from software we keep online ourselves.
 
 ## The team
 
-Small and hands-on by design. The people who scope an engagement are the
-same people writing the code and answering when something breaks. We
-work across product, engineering, and AI where it's actually warranted,
-not bolted on because it's trendy.
+We're small on purpose. The people who scope your project are the same
+people who write the code and pick up the phone when something breaks. We
+work across product, engineering and AI, and we only add AI where it
+actually helps the product.
 
-We won't pad this with invented headcounts or titles. Want to know who
-you'd actually work with? That's a five-minute conversation.
+We're not going to list headcounts or job titles we don't have. If you
+want to know exactly who you'd be working with, ask us. It's a short
+conversation.
 
-## What's still missing here
+## What's not on this page yet
 
-This page isn't finished, and we'd rather say so than fake it. Still to
-come: a public build log indexing the decisions already written up on
-this blog, named case studies once engagements clear the point where we
-can name them, and a plainly-dated "where we are now" on team size and
-what's actively being built.
+This page isn't finished. Still to come: a public build log that links the
+decisions we've already written up on this blog, named case studies once
+clients are happy for us to name them, and a dated note on team size and
+what we're building right now.
 
 ---
 
-*[Get in touch](/contact). No discovery-call funnel, just a conversation.*
+*Want to build something with us? [Get in touch](/contact) or read
+[how we work](/process). No sales funnel, just a conversation.*
