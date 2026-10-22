@@ -11,7 +11,7 @@ import { getAllPosts } from "@/app/lib/blog";
 export const metadata: Metadata = buildPageMetadata({
   title: "Blog",
   description:
-    "Decisions from inside the build — why RISMS never holds a school's fees, what breaks when AI-built products meet production, and the rest of what we learn shipping.",
+    "Decisions from inside the build. Why RISMS never holds a school's fees, what breaks when AI-built products meet production, and what we learn shipping.",
   path: "/blog",
 });
 

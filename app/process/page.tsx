@@ -13,7 +13,7 @@ import { buildPageMetadata } from "@/app/lib/metadata";
 export const metadata: Metadata = buildPageMetadata({
   title: "Process",
   description:
-    "How a Ridox Studio engagement runs: discovery, architecture and planning, build and iterate, then launch and handover — the same four phases whether you have a live product or just an idea.",
+    "How a Ridox Studio engagement runs, from discovery and architecture to build and launch. The same four phases for a live product or just an idea.",
   path: "/process",
 });
 

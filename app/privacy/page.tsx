@@ -10,7 +10,7 @@ import { SITE } from "@/app/lib/site";
 export const metadata: Metadata = buildPageMetadata({
   title: "Privacy",
   description:
-    "How Ridox Studio collects, uses and protects your data — the contact form, analytics, and your rights under the Nigeria Data Protection Act.",
+    "How Ridox Studio collects, uses and protects your data, covering the contact form, analytics, and your rights under the Nigeria Data Protection Act.",
   path: "/privacy",
 });
 

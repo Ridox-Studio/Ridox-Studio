@@ -1,6 +1,6 @@
 import { OG_CONTENT_TYPE, OG_SIZE, renderOgImage } from "@/app/lib/og";
 
-export const alt = "Ridox Studio — Software systems engineered at the reaction point";
+export const alt = "Ridox Studio | Software systems engineered at the reaction point";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 

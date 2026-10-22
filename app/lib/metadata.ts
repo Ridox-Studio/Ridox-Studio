@@ -5,6 +5,37 @@ import { SITE } from "@/app/lib/site";
 const TITLE_LIMIT = 60;
 /** Search snippets are cut around 150–160 characters. */
 const DESCRIPTION_LIMIT = 155;
+/** Appended to page titles; matches the root layout's title.template. */
+export const TITLE_SUFFIX = ` | ${SITE.name}`;
+
+/**
+ * The full title a page renders with. Titles are never clamped: one cut off
+ * mid-sentence reads worse in a search result than one without the brand.
+ * So the suffix is added only when the whole string still fits; otherwise
+ * the title stands alone.
+ */
+export function resolveTitle(title: string): { fits: boolean; full: string } {
+  const withSuffix = `${title}${TITLE_SUFFIX}`;
+  return withSuffix.length <= TITLE_LIMIT
+    ? { fits: true, full: withSuffix }
+    : { fits: false, full: title };
+}
+
+/**
+ * Like clamp, but prefers ending on a whole sentence: keeps as many complete
+ * sentences as fit, and only falls back to a word-boundary ellipsis when even
+ * the first sentence is too long.
+ */
+function clampToSentences(text: string, limit: number): string {
+  if (text.length <= limit) return text;
+  const sentences = text.match(/[^.!?]+[.!?]+(\s+|$)/g) ?? [];
+  let kept = "";
+  for (const sentence of sentences) {
+    if ((kept + sentence).trimEnd().length > limit) break;
+    kept += sentence;
+  }
+  return kept.trim() || clamp(text, limit);
+}
 
 /** Trims to a word boundary rather than mid-word, adding an ellipsis. */
 export function clamp(text: string, limit: number): string {
@@ -15,7 +46,7 @@ export function clamp(text: string, limit: number): string {
 }
 
 type PageMetadataInput = {
-  /** Page title WITHOUT the site suffix — the layout template appends it. */
+  /** Page title WITHOUT the site suffix; it is appended when it fits. */
   title: string;
   /** Meta description. Clamped to the search-snippet limit. */
   description: string;
@@ -49,13 +80,13 @@ export function buildPageMetadata({
   socialTitle,
   type = "website",
 }: PageMetadataInput): Metadata {
-  const pageTitle = clamp(title, TITLE_LIMIT);
-  const fullTitle = `${pageTitle} — ${SITE.name}`;
-  const metaDescription = clamp(description, DESCRIPTION_LIMIT);
-  const social = clamp(socialDescription ?? description, DESCRIPTION_LIMIT);
+  const { fits, full: fullTitle } = resolveTitle(title);
+  const metaDescription = clampToSentences(description, DESCRIPTION_LIMIT);
+  const social = clampToSentences(socialDescription ?? description, DESCRIPTION_LIMIT);
 
   return {
-    title: pageTitle,
+    // `absolute` skips the layout's "%s | Ridox Studio" template.
+    title: fits ? title : { absolute: title },
     description: metaDescription,
     alternates: { canonical: path },
     openGraph: {

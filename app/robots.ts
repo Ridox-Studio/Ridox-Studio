@@ -24,7 +24,9 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/_next/"],
+        // Never disallow /_next/: it serves the JS, CSS, fonts and optimised
+        // images Google needs to render pages and index images.
+        disallow: ["/api/"],
       },
       {
         userAgent: AI_CRAWLERS,

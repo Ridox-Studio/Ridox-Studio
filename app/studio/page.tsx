@@ -10,7 +10,7 @@ import { buildPageMetadata } from "@/app/lib/metadata";
 export const metadata: Metadata = buildPageMetadata({
   title: "Studio Products",
   description:
-    "Products and open-source tools built by Ridox Studio — developer tooling, observability and design-token infrastructure born out of client work.",
+    "Products and open-source tools built by Ridox Studio, including developer tooling, observability and design-token infrastructure born out of client work.",
   path: "/studio",
 });
 

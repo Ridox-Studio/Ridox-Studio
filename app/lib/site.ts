@@ -30,7 +30,7 @@ export const SITE = {
   tagline: "Software systems engineered at the reaction point",
   /** Meta description — kept under 160 chars so search results do not truncate. */
   description:
-    "A software engineering agency building world-class web, mobile, cloud and AI systems for teams worldwide — where design energy meets engineering depth.",
+    "A software engineering agency building world-class web, mobile, cloud and AI systems for teams worldwide, where design energy meets engineering depth.",
   /**
    * Primary search phrases the site is built to rank for. Ordered by intent:
    * the head term first, the service-qualified variants after. Used for the
@@ -49,7 +49,7 @@ export const SITE = {
   ],
   /** The full positioning statement, for JSON-LD and anywhere length is free. */
   longDescription:
-    "Ridox Studio is a software engineering agency specializing in high-performance web applications, mobile systems, cloud infrastructure, and AI-powered solutions. Built on the principle of Redox duality — balancing design energy with engineering depth.",
+    "Ridox Studio is a software engineering agency specializing in high-performance web applications, mobile systems, cloud infrastructure, and AI-powered solutions. Built on the principle of Redox duality, balancing design energy with engineering depth.",
   /** Note the trailing underscore — @ridoxstudio was taken. */
   twitter: "@ridoxstudio_",
   /**
@@ -93,7 +93,7 @@ export const FOUNDER = {
   "@id": SCHEMA_IDS.founder,
   name: "Chibueze Aniezeofor",
   url: "https://codad5.me",
-  sameAs: ["https://github.com/codad5", "https://www.linkedin.com/in/codad5"],
+  sameAs: ["https://github.com/codad5", "https://www.linkedin.com/in/chibueze-aniezeofor"],
 } as const;
 
 /** Section 5.2 — 5 items max, no dropdowns, no sub-menus. */

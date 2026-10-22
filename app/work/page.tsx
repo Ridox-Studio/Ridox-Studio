@@ -10,7 +10,7 @@ import { buildPageMetadata } from "@/app/lib/metadata";
 export const metadata: Metadata = buildPageMetadata({
   title: "Client Work",
   description:
-    "Case studies from Ridox Studio — web applications, mobile platforms and enterprise systems built for clients across industries.",
+    "Case studies from Ridox Studio, covering web applications, mobile platforms and enterprise systems built for clients across industries.",
   path: "/work",
 });
 

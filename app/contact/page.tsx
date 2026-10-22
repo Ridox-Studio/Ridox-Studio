@@ -10,7 +10,7 @@ import { SITE } from "@/app/lib/site";
 export const metadata: Metadata = buildPageMetadata({
   title: "Contact",
   description:
-    "Start a project with Ridox Studio. Tell us what you are building and what is in the way — we reply to every enquiry within two working days.",
+    "Start a project with Ridox Studio. Tell us what you are building and what is in the way. We reply to every enquiry within two working days.",
   path: "/contact",
 });
 

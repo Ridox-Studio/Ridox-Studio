@@ -40,8 +40,8 @@ export const metadata: Metadata = {
     // Leads with the phrase people actually search; brand stays first for
     // recognition on branded queries. Kept ~54 chars — Google and LinkedIn
     // truncate past ~60.
-    default: `${SITE.name} — Software Development & Engineering Agency`,
-    template: `%s — ${SITE.name}`,
+    default: `${SITE.name} | Software Development & Engineering Agency`,
+    template: `%s | ${SITE.name}`,
   },
   description: SITE.description,
   keywords: [...SITE.keywords],

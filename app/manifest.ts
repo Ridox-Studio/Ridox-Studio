@@ -8,7 +8,7 @@ import { SITE } from "@/app/lib/site";
  */
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: `${SITE.name} — Software Development & Engineering Agency`,
+    name: `${SITE.name} | Software Development & Engineering Agency`,
     short_name: SITE.name,
     description: SITE.description,
     start_url: "/",

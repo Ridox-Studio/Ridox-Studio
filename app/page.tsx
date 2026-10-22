@@ -19,7 +19,7 @@ import { getAllPosts } from "@/app/lib/blog";
 import { buildPageMetadata } from "@/app/lib/metadata";
 import { SITE } from "@/app/lib/site";
 
-// The homepage sets its own full title rather than taking the "%s — Ridox
+// The homepage sets its own full title rather than taking the "%s | Ridox
 // Studio" template, which would repeat the name. It leads with the phrase
 // people actually search for; the brand stays first for branded queries.
 export const metadata: Metadata = {
@@ -27,11 +27,11 @@ export const metadata: Metadata = {
     title: "Software Development & Engineering Agency",
     description: SITE.description,
     path: "/",
-    socialTitle: `${SITE.name} — Software Development & Engineering Agency`,
+    socialTitle: `${SITE.name} | Software Development & Engineering Agency`,
     socialDescription:
       "A software engineering agency building world-class web, mobile, cloud and AI systems for teams worldwide.",
   }),
-  title: `${SITE.name} — Software Development & Engineering Agency`,
+  title: { absolute: `${SITE.name} | Software Development & Engineering Agency` },
 };
 
 const linkClass =

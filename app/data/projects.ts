@@ -10,6 +10,11 @@ export interface Project {
   subtitle: string; // one-line result or product tagline
   description: string; // 2-3 sentences
   /**
+   * Meta description override, 155 chars max. Only needed when `description`
+   * runs past the limit and its first sentence alone is too thin a snippet.
+   */
+  metaDescription?: string;
+  /**
    * Path to the screenshot/visual. Rendered with `object-cover` into panes
    * whose aspect ratio varies with the viewport, so the crop is not
    * predictable — keep anything that must stay legible near the centre.
@@ -41,7 +46,7 @@ export const PROJECTS: Project[] = [
     title: "Cilbup",
     subtitle: "Anonymous messaging and tipping for creators",
     description:
-      "Cilbup — \"public\" reversed — lets anyone send a creator an anonymous message, and attach a tip to get priority attention. Fans pay with crypto or fiat; creators earn in USD, on a platform that installs to a phone without an app store.",
+      "Cilbup, \"public\" reversed, lets anyone send a creator an anonymous message, and attach a tip to get priority attention. Fans pay with crypto or fiat; creators earn in USD, on a platform that installs to a phone without an app store.",
     coverImage: "/projects/cilbup.png",
     techStack: ["Next.js", "React 19", "TypeScript", "PWA", "Prisma", "MongoDB", "Redis", "Chainrails"],
     status: "live",
@@ -98,7 +103,7 @@ export const PROJECTS: Project[] = [
     title: "RISMS",
     subtitle: "School management where the school keeps its own money",
     description:
-      "Academics, staff, students, timetabling and fees for African institutions, split across four persona surfaces so no screen serves two audiences at once. Fees are collected on each school's own payment credentials — the platform records the money without ever holding it.",
+      "Academics, staff, students, timetabling and fees for African institutions, split across four persona surfaces so no screen serves two audiences at once. Fees are collected on each school's own payment credentials, so the platform records the money without ever holding it.",
     coverImage: "/projects/risms.png",
     techStack: ["Laravel 11", "PHP 8.3", "Vue 3", "Inertia v2", "Tailwind 4", "Paystack"],
     status: "in-development",
@@ -157,9 +162,11 @@ export const PROJECTS: Project[] = [
     slug: "resurgee",
     category: "studio",
     title: "Resurgee",
+    metaDescription:
+      "Resurgee augments Google Tasks and Calendar. It spots tasks about to slip, suggests better times, and plans your day across linked Google accounts.",
     subtitle: "An AI layer over the task manager you already use",
     description:
-      "Resurgee augments Google Tasks and Calendar rather than replacing them. It watches for tasks about to slip, suggests rescheduling options when they do, and plans your day through a conversational assistant — across multiple linked Google accounts.",
+      "Resurgee augments Google Tasks and Calendar rather than replacing them. It watches for tasks about to slip, suggests rescheduling options when they do, and plans your day through a conversational assistant, across multiple linked Google accounts.",
     coverImage: "/projects/resurgee.png",
     techStack: ["Next.js", "FastAPI", "Python 3.12", "PostgreSQL", "Celery", "Redis", "Flutter"],
     status: "in-development",
@@ -207,7 +214,7 @@ export const PROJECTS: Project[] = [
     title: "Netcart",
     subtitle: "One marketplace, four audiences, built end to end",
     description:
-      "Customers ordering, stores selling, couriers delivering and admins running the whole thing — each with their own surface, over a single API. Built from an empty repository to a system that handles catalogue, orders, payments, earnings and payouts.",
+      "Customers ordering, stores selling, couriers delivering and admins running the whole thing, each with their own surface, over a single API. Built from an empty repository to a system that handles catalogue, orders, payments, earnings and payouts.",
     coverImage: "/projects/netcart.png",
     techStack: [
       "Flutter",
@@ -266,6 +273,8 @@ export const PROJECTS: Project[] = [
     slug: "cy-academy",
     category: "consulting",
     title: "CY Academy",
+    metaDescription:
+      "The client built the platform with AI assistance. We advised on project setup, connected transactional email, and walked them through course uploads.",
     subtitle: "Technical direction for an AI-built course platform",
     description:
       "The client built the platform themselves with AI assistance. We advised on how to structure and set up the project, connected a working transactional email service, and walked them through the course upload workflow and the operational pieces that AI-generated scaffolding leaves out.",
@@ -285,7 +294,7 @@ export const PROJECTS: Project[] = [
     title: "CY Udida",
     subtitle: "Portfolio site review and setup direction",
     description:
-      "A personal portfolio for the same client. We reviewed the build and gave direction on setup and deployment — a small engagement, included because not every useful piece of work is a six-month contract.",
+      "A personal portfolio for the same client. We reviewed the build and gave direction on setup and deployment. A small engagement, included because not every useful piece of work is a six-month contract.",
     coverImage: "/projects/cy-udida-portfolio.png",
     techStack: ["Review", "Deployment"],
     status: "live",

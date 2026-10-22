@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
   return buildPageMetadata({
     title: project.title,
-    description: project.description,
+    description: project.metaDescription ?? project.description,
     // The subtitle is already a one-line product tagline — ideal for a card.
     socialDescription: project.subtitle,
     path: `/studio/${project.slug}`,
