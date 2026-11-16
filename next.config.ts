@@ -32,6 +32,14 @@ function wpImagePatterns(): NonNullable<NextConfig["images"]>["remotePatterns"] 
 }
 
 const nextConfig: NextConfig = {
+  // The first redesign draft was served at /new-design before the drafts got
+  // names. Temporary, so nothing caches it; delete with the drafts.
+  async redirects() {
+    return [
+      { source: "/new-design", destination: "/paper", permanent: false },
+      { source: "/new-design/:path*", destination: "/paper/:path*", permanent: false },
+    ];
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     // Project covers are first-party SVGs in /public/projects. The CSP below
